@@ -1,0 +1,63 @@
+# Python & Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Environment Variables & Secrets
+.env
+*.pem
+*.key
+
+# Large Forensic Disk Images & Raw Captures (Preserve metadata/docs in datasets/)
+*.dd
+*.raw
+*.img
+*.E01
+*.e01
+*.vmdk
+*.vhd
+*.vhdx
+*.aff
+*.aff4
+*.bin
+*.iso
+*.pcap
+*.pcapng
+
+# Split and Compressed Archive Files
+*.7z.0*
+*.7z
+*.rar
+*.tar.gz
+*.tar.bz2
+*.zip.0*
+
+# Autopsy Case Databases, Lucene Indexes, and Working Directories
+autopsy_cases/
+*.aut
+*.db3
+*.sqlite
+*.sqlite3
+
+# Generated Analysis Outputs & Logs (Keep folder via .gitkeep)
+outputs/*
+!outputs/.gitkeep
+
+# IDE & OS Specific
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

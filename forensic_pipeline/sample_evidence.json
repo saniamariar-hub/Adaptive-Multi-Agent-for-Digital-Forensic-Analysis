@@ -1,0 +1,205 @@
+{
+  "case_id": "CASE-SYNTH-2026-001",
+  "case_name": "Synthetic Data Exfiltration & Workstation Intrusion",
+  "description": "SYNTHETIC TEST DATA - Simulated insider data exfiltration and credential misuse scenario containing deliberate timeline and authentication contradictions.",
+  "is_synthetic": true,
+  "records": [
+    {
+      "evidence_id": "EV-001",
+      "source": "Security.evtx (Event ID 4624)",
+      "artifact_type": "authentication",
+      "timestamp": "2026-03-15T09:02:14Z",
+      "timestamp_timezone": "UTC",
+      "user": "jdoe",
+      "device": "WS-FINANCE-04",
+      "action": "USER_LOGON",
+      "description": "Interactive logon successful for domain user jdoe (Logon Type 2).",
+      "resource_path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "metadata": {
+        "event_id": 4624,
+        "logon_type": 2,
+        "auth_package": "Negotiate",
+        "process_name": "C:\\Windows\\System32\\winlogon.exe"
+      },
+      "confidence": 1.0,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-002",
+      "source": "Chrome History (SQLite database)",
+      "artifact_type": "browser_history",
+      "timestamp": "2026-03-15T10:14:30Z",
+      "timestamp_timezone": "UTC",
+      "user": "jdoe",
+      "device": "WS-FINANCE-04",
+      "action": "URL_VISIT",
+      "description": "Navigated to internal corporate SharePoint financial repository.",
+      "resource_path": "https://sharepoint.corp.internal/sites/finance/q4_reports",
+      "metadata": {
+        "visit_count": 4,
+        "typed_count": 1,
+        "transition_type": "LINK"
+      },
+      "confidence": 0.95,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-003",
+      "source": "NTFS $UsnJrnl / File System",
+      "artifact_type": "file_activity",
+      "timestamp": "2026-03-15T10:20:05Z",
+      "timestamp_timezone": "UTC",
+      "user": "jdoe",
+      "device": "WS-FINANCE-04",
+      "action": "FILE_ARCHIVE_CREATED",
+      "description": "Archive file Financial_Audit_2025_Confidential.zip created in local temp folder.",
+      "resource_path": "C:\\Users\\jdoe\\AppData\\Local\\Temp\\Financial_Audit_2025_Confidential.zip",
+      "metadata": {
+        "file_size_bytes": 14857600,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "file_attributes": "ARCHIVE"
+      },
+      "confidence": 0.98,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-004",
+      "source": "Security.evtx (Event ID 4634 / 4800)",
+      "artifact_type": "authentication",
+      "timestamp": "2026-03-15T14:15:00Z",
+      "timestamp_timezone": "UTC",
+      "user": "jdoe",
+      "device": "WS-FINANCE-04",
+      "action": "WORKSTATION_LOCK_AND_LOGOFF",
+      "description": "User jdoe locked workstation and session disconnected prior to scheduled departure.",
+      "resource_path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "metadata": {
+        "event_id": 4800,
+        "session_id": 1,
+        "lock_status": "LOCKED"
+      },
+      "confidence": 1.0,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-005",
+      "source": "Chrome History (SQLite database)",
+      "artifact_type": "browser_history",
+      "timestamp": "2026-03-15T14:22:15Z",
+      "timestamp_timezone": "UTC",
+      "user": "jdoe",
+      "device": "WS-FINANCE-04",
+      "action": "FILE_UPLOAD_POST",
+      "description": "HTTP POST upload of financial archive to anonymous external file-sharing service mega-share.io while local session was recorded as locked (DELIBERATE CONTRADICTION with EV-004).",
+      "resource_path": "https://mega-share.io/upload/v2/payload",
+      "metadata": {
+        "referrer": "https://mega-share.io",
+        "post_data_size_bytes": 14857600,
+        "http_status": 200,
+        "contradiction_target": "EV-004"
+      },
+      "confidence": 0.92,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-006",
+      "source": "System.evtx (Event ID 20001 / Partition Manager)",
+      "artifact_type": "usb_activity",
+      "timestamp": "2026-03-15T14:25:10Z",
+      "timestamp_timezone": "UTC",
+      "user": null,
+      "device": "WS-FINANCE-04",
+      "action": "USB_DEVICE_ATTACHED",
+      "description": "SanDisk Ultra 64GB USB device connected and assigned drive letter E:.",
+      "resource_path": "USBSTOR\\Disk&Ven_SanDisk&Prod_Ultra&Rev_1.00\\4C530001230425112101&0",
+      "metadata": {
+        "vendor": "SanDisk",
+        "product": "Ultra",
+        "serial_number": "4C530001230425112101",
+        "assigned_drive": "E:"
+      },
+      "confidence": 1.0,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-007",
+      "source": "NTFS $UsnJrnl / Volume E:",
+      "artifact_type": "file_activity",
+      "timestamp": "2026-03-15T14:26:45Z",
+      "timestamp_timezone": "UTC",
+      "user": "SYSTEM",
+      "device": "WS-FINANCE-04",
+      "action": "FILE_COPIED_TO_REMOVABLE",
+      "description": "File Financial_Audit_2025_Confidential.zip copied from local cache to removable volume E:.",
+      "resource_path": "E:\\Backups\\Financial_Audit_2025_Confidential.zip",
+      "metadata": {
+        "source_path": "C:\\Users\\jdoe\\AppData\\Local\\Temp\\Financial_Audit_2025_Confidential.zip",
+        "destination_volume": "E:",
+        "file_size_bytes": 14857600
+      },
+      "confidence": 0.95,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-008",
+      "source": "Exchange Message Tracking / MBOX",
+      "artifact_type": "email",
+      "timestamp": "2026-03-15T14:35:00Z",
+      "timestamp_timezone": "UTC",
+      "user": "jdoe@corp.internal",
+      "device": "MAIL-SRV-01",
+      "action": "EMAIL_SENT",
+      "description": "Outgoing external email sent to competitor personal inbox subject 'Requested Documents'.",
+      "resource_path": "jdoe@corp.internal -> external_contact@protonmail.com",
+      "metadata": {
+        "sender": "jdoe@corp.internal",
+        "recipient": "external_contact@protonmail.com",
+        "subject": "Requested Documents",
+        "has_attachments": false,
+        "body_preview": "Files have been uploaded to the shared mirror link."
+      },
+      "confidence": 0.99,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-009",
+      "source": "System.evtx (Event ID 7045 - Service Control Manager)",
+      "artifact_type": "system_log",
+      "timestamp": "2026-03-15T14:40:22Z",
+      "timestamp_timezone": "UTC",
+      "user": "SYSTEM",
+      "device": "WS-FINANCE-04",
+      "action": "SERVICE_INSTALLED",
+      "description": "A new service 'WindowsLogCleaner' was installed with anomalous binary path in AppData.",
+      "resource_path": "C:\\Users\\Public\\cleaner.exe",
+      "metadata": {
+        "service_name": "WindowsLogCleaner",
+        "service_type": "user mode service",
+        "start_type": "demand start",
+        "service_account": "LocalSystem"
+      },
+      "confidence": 0.90,
+      "source_reliability": "HIGH"
+    },
+    {
+      "evidence_id": "EV-010",
+      "source": "Firewall Access Log / Splunk Export",
+      "artifact_type": "network_activity",
+      "timestamp": "2026-03-15T14:42:00Z",
+      "timestamp_timezone": "UTC",
+      "user": null,
+      "device": "FW-PERIMETER-01",
+      "action": "OUTBOUND_HTTPS_CONNECTION",
+      "description": "Outbound TLS connection established from WS-FINANCE-04 (192.168.10.45) to external C2 IP 198.51.100.77:443.",
+      "resource_path": "192.168.10.45:49821 -> 198.51.100.77:443",
+      "metadata": {
+        "bytes_sent": 84320,
+        "bytes_received": 1240,
+        "destination_country": "Unknown",
+        "threat_intel_flag": "SUSPICIOUS_IP"
+      },
+      "confidence": 0.88,
+      "source_reliability": "MEDIUM"
+    }
+  ]
+}

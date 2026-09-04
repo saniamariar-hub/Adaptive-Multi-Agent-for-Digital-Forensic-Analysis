@@ -1,0 +1,4 @@
+Dataset: NIST CFReDS Data Leakage Case
+Evidence Image: cfreds_2015_data_leakage_pc.dd
+Image Size: 21,474,836,480 bytes
+SHA-256: 026C143638295DB1FBFA598C5B35BCAC4860BA73EC5DA1CC87B67AFD598BE4E2
