@@ -1,0 +1,10 @@
+﻿# hermes_config_snippet.yaml
+# MCP server configuration snippet for Autopsy digital forensics tools.
+# Wire it into Hermes Agent by adding this block to ~/.hermes/config.yaml:
+
+mcp_servers:
+  autopsy:
+    command: "python"
+    args:
+      - "D:/Projects/Project-Sentinel/mcp_server.py"
+      - "D:/Projects/Project-Sentinel/CFReDS_DataLeakage/autopsy.db"
