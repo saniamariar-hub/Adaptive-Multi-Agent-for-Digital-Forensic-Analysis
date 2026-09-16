@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PROJECT SENTINEL // FORENSIC INVESTIGATION CHAT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070a10;
+      --bg-panel: #0d121f;
+      --bg-card: #12192b;
+      --border-color: #1e2a47;
+      --police-blue: #0284c7;
+      --police-blue-light: #38bdf8;
+      --caution-amber: #f59e0b;
+      --alert-red: #ef4444;
+      --evidence-green: #10b981;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-heading: 'Chakra Petch', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(239, 68, 68, 0.05) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    .police-tape {
+      background: repeating-linear-gradient(
+        -45deg,
+        #f59e0b,
+        #f59e0b 20px,
+        #111827 20px,
+        #111827 40px
+      );
+      height: 6px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    header {
+      background: linear-gradient(180deg, rgba(13, 18, 31, 0.98) 0%, rgba(10, 15, 26, 0.95) 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .shield-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 2px solid var(--police-blue-light);
+      border-radius: 50% 50% 50% 50% / 20% 20% 80% 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .shield-icon svg { width: 24px; height: 24px; fill: var(--police-blue-light); }
+
+    .header-title h1 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+
+    .header-title p {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-nav {
+      background: linear-gradient(180deg, #1e293b, #0f172a);
+      border: 1px solid var(--police-blue);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: #1d4ed8;
+      border-color: #3b82f6;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 24px;
+      overflow: hidden;
+    }
+
+    .quick-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .quick-chips::-webkit-scrollbar { height: 4px; }
+    .quick-chips::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+
+    .chip {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .chip:hover {
+      border-color: var(--police-blue-light);
+      color: #fff;
+      background: rgba(2, 132, 199, 0.15);
+    }
+
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .messages-area::-webkit-scrollbar { width: 6px; }
+    .messages-area::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+    .msg {
+      display: flex;
+      gap: 14px;
+      max-width: 92%;
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .msg.agent {
+      align-self: flex-start;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .msg.agent .avatar {
+      background: linear-gradient(135deg, #0284c7, #1e40af);
+      color: #fff;
+      border: 1px solid var(--police-blue-light);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+
+    .msg.user .avatar {
+      background: linear-gradient(135deg, #475569, #334155);
+      color: #fff;
+      border: 1px solid #64748b;
+    }
+
+    .msg-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bubble {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-main);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .msg.user .bubble {
+      background: #111a2e;
+      border-color: #2563eb;
+      color: #fff;
+    }
+
+    .tool-dispatch-callout {
+      background: #05080f;
+      border: 1px solid #1e293b;
+      border-left: 4px solid var(--police-blue-light);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #94a3b8;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .tool-dispatch-callout .top-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--police-blue-light);
+      font-weight: 600;
+    }
+
+    .tool-dispatch-callout code {
+      color: #38bdf8;
+      background: #0b101c;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* Markdown styling inside bubble */
+    .bubble h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+
+    .bubble p { margin-bottom: 8px; }
+    .bubble ul { margin-left: 20px; margin-bottom: 8px; }
+    .bubble li { margin-bottom: 4px; }
+    .bubble code { font-family: var(--font-mono); font-size: 0.8rem; background: #05080e; padding: 2px 6px; border-radius: 4px; color: #38bdf8; }
+
+    .bubble table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+    }
+
+    .bubble th {
+      background: #0b111e;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .bubble td {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .bubble tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+    /* Typing indicator */
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 18px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      width: fit-content;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--police-blue-light);
+    }
+
+    .typing-indicator.active { display: flex; }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--police-blue-light);
+      border-radius: 50%;
+      animation: blink 1.2s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Chat Input Bar */
+    .input-bar {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-shrink: 0;
+      margin-top: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .input-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+    }
+
+    .input-bar input::placeholder { color: var(--text-dim); }
+
+    .btn-send {
+      background: #1d4ed8;
+      border: 1px solid #3b82f6;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-send:hover {
+      background: #2563eb;
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.6);
+    }
+
+    .btn-send:disabled {
+      background: #334155;
+      border-color: #475569;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="police-tape"></div>
+
+  <header>
+    <div class="header-left">
+      <div class="shield-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.88-3.86-1.09-7-5.34-7-9.88V6.3l7-3.12zM11 7v6h2V7h-2zm0 8v2h2v-2h-2z"/>
+        </svg>
+      </div>
+      <div class="header-title">
+        <h1>PROJECT SENTINEL <span style="color:var(--police-blue-light);">// FORENSIC INVESTIGATION CHAT</span></h1>
+        <p>CASE: CFReDS_DataLeakage &bull; EXAMINER: Melwin Robinson &bull; 6,938 ARTIFACTS</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <a href="/" class="btn-nav">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="3" y1="9" x2="21" y2="9"/>
+          <line x1="9" y1="21" x2="9" y2="9"/>
+        </svg>
+        VIEW AUDIT LOGS BOARD
+      </a>
+    </div>
+  </header>
+
+  <div class="chat-container">
+    <!-- Quick prompt chips -->
+    <div class="quick-chips">
+      <div class="chip" onclick="usePrompt('What USB storage devices were connected to the PC?')">?? USB Devices Attached</div>
+      <div class="chip" onclick="usePrompt('Identify the partition information of PC image')">?? Partition Layout</div>
+      <div class="chip" onclick="usePrompt('What were the suspect's web search keywords?')">?? Search Keywords</div>
+      <div class="chip" onclick="usePrompt('Locate any resignation files or documents on Desktop')">?? Resignation File</div>
+      <div class="chip" onclick="usePrompt('What websites was the suspect accessing before termination?')">?? Web History</div>
+      <div class="chip" onclick="usePrompt('List all software applications installed by suspect')">?? Installed Programs</div>
+      <div class="chip" onclick="usePrompt('Examine suspect emails in Outlook OST')">?? Outlook Emails</div>
+    </div>
+
+    <!-- Message area -->
+    <div class="messages-area" id="messages-area">
+      <div class="msg agent">
+        <div class="avatar">AG</div>
+        <div class="msg-content">
+          <div class="bubble">
+            <h3>AGENT SENTINEL READY // DIGITAL FORENSIC DISPATCH</h3>
+            <p>I am connected directly to your processed case database (<code>CFReDS_DataLeakage/autopsy.db</code>) with 6,938 blackboard artifacts.</p>
+            <p>Whenever you submit an inquiry:</p>
+            <ul>
+              <li>The query and planned Autopsy tool command are <strong>automatically logged to <code>investigation_audit.db</code></strong>.</li>
+              <li>Your companion <strong>Audit Logs Board</strong> (at <a href="/" style="color:var(--police-blue-light); text-decoration:underline;">localhost:8080/</a>) will auto-sync with the new incident in real time.</li>
+              <li>I will execute the tool against Autopsy and return the exact forensic findings right here.</li>
+            </ul>
+            <p>Click a preset chip above or type your case question below to begin!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div class="typing-indicator" id="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <span id="typing-text" style="margin-left:6px;">ANALYZING EVIDENCE...</span>
+    </div>
+
+    <!-- Input Bar -->
+    <form class="input-bar" id="chat-form" onsubmit="handleSend(event)">
+      <input type="text" id="user-input" placeholder="Type your case inquiry (e.g. Find external USB drives or search web history)..." autocomplete="off" required />
+      <button type="submit" class="btn-send" id="send-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+        SEND QUESTION
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+      ? window.location.origin
+      : 'http://localhost:8080';
+
+    const messagesArea = document.getElementById('messages-area');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const typingIndicator = document.getElementById('typing-indicator');
+
+    function usePrompt(text) {
+      userInput.value = text;
+      userInput.focus();
+    }
+
+    async function handleSend(e) {
+      if (e) e.preventDefault();
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      appendUserMessage(text);
+      userInput.value = '';
+      sendBtn.disabled = true;
+      typingIndicator.classList.add('active');
+      scrollToBottom();
+
+      try {
+        const res = await fetch(API_BASE + '/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        if (!res.ok) throw new Error('Server returned ' + res.status);
+        const data = await res.json();
+        appendAgentMessage(data);
+      } catch (err) {
+        appendAgentErrorMessage(err.message);
+      } finally {
+        typingIndicator.classList.remove('active');
+        sendBtn.disabled = false;
+        userInput.focus();
+        scrollToBottom();
+      }
+    }
+
+    function appendUserMessage(text) {
+      const msg = document.createElement('div');
+      msg.className = 'msg user';
+      msg.innerHTML = 
+        '<div class="avatar">YOU</div>' +
+        '<div class="msg-content">' +
+          '<div class="bubble">' + escapeHtml(text) + '</div>' +
+        '</div>';
+      messagesArea.appendChild(msg);
+      scrollToBottom();
+    }
+
+    function appendAgentMessage(data) {
+      const msg = document.createElement('div');
+      msg.className = 'msg agent';
+      const formattedBody = formatMarkdown(data.response || 'No evidence returned.');
+
+      msg.innerHTML = 
+        '<div class="avatar">AG</div>' +
+        '<div class="msg-content">' +
+          '<div class="bubble">' + formattedBody + '</div>' +
+        '</div>';
+      messagesArea.appendChild(msg);
+      scrollToBottom();
+    }
+
+    function appendAgentErrorMessage(errorStr) {
+      const msg = document.createElement('div');
+      msg.className = 'msg agent';
+      msg.innerHTML = 
+        '<div class="avatar" style="background:#dc2626;">ERR</div>' +
+        '<div class="msg-content">' +
+          '<div class="bubble" style="border-color:#ef4444; color:#fca5a5;">' +
+            '<h3>DISPATCH ERROR</h3>' +
+            '<p>' + escapeHtml(errorStr) + '</p>' +
+            '<p style="font-size:0.75rem; color:#94a3b8;">Ensure server.py is running on http://localhost:8080/.</p>' +
+          '</div>' +
+        '</div>';
+      messagesArea.appendChild(msg);
+      scrollToBottom();
+    }
+
+    function scrollToBottom() {
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatInline(text) {
+      let s = escapeHtml(text);
+      s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+      return s;
+    }
+
+    function formatMarkdown(md) {
+      if (!md) return '';
+      const lines = md.split('\n');
+      let html = [];
+      let tableRows = [];
+      let inTable = false;
+
+      for (let i = 0; i < lines.length; i++) {
+        let line = lines[i].trim();
+        if (!line) {
+          if (inTable) {
+            html.push('<div style="overflow-x:auto; margin:10px 0;"><table>' + tableRows.join('') + '</table></div>');
+            tableRows = [];
+            inTable = false;
+          }
+          continue;
+        }
+
+        if (line.startsWith('|') && line.endsWith('|')) {
+          if (line.includes('---')) continue;
+          inTable = true;
+          const cells = line.split('|').slice(1, -1);
+          const isHeader = tableRows.length === 0;
+          const tag = isHeader ? 'th' : 'td';
+          const rowHtml = cells.map(function(c) {
+            return '<' + tag + '>' + formatInline(c.trim()) + '</' + tag + '>';
+          }).join('');
+          tableRows.push('<tr>' + rowHtml + '</tr>');
+          continue;
+        } else if (inTable) {
+          html.push('<div style="overflow-x:auto; margin:10px 0;"><table>' + tableRows.join('') + '</table></div>');
+          tableRows = [];
+          inTable = false;
+        }
+
+        if (line.startsWith('### ')) {
+          html.push('<h3>' + formatInline(line.slice(4)) + '</h3>');
+        } else if (line.startsWith('- ') || line.startsWith('* ')) {
+          html.push('<p style="margin-left:14px;">• ' + formatInline(line.slice(2)) + '</p>');
+        } else {
+          html.push('<p>' + formatInline(line) + '</p>');
+        }
+      }
+
+      if (inTable) {
+        html.push('<div style="overflow-x:auto; margin:10px 0;"><table>' + tableRows.join('') + '</table></div>');
+      }
+
+      return html.join('');
+    }
+  </script>
+</body>
+</html>
