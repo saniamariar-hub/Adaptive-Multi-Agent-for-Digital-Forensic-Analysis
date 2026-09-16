@@ -47,10 +47,13 @@ htmlcov/
 
 # Autopsy Case Databases, Lucene Indexes, and Working Directories
 autopsy_cases/
+CFReDS_DataLeakage/
 *.aut
+*.db
 *.db3
 *.sqlite
 *.sqlite3
+investigation_audit.db
 
 # Generated Analysis Outputs & Logs (Keep folder via .gitkeep)
 outputs/*

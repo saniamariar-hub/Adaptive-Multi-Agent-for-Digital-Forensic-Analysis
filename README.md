@@ -54,39 +54,48 @@ To maintain forensic integrity and modularity, the architecture enforces a stric
 
 ## 4. Current Development Stage
 
-* **Current Stage**: **Stage 1 - Foundational Data Models & Environment Setup**
+* **Current Stage**: **Stage 2 - Live Autopsy Case Integration & Agentic Investigation UI**
 * **Active Status**:
-  - Python virtual environment (`.venv`) configured with core validation tools.
+  - Python virtual environment configured with core validation tools.
   - Standardized Pydantic forensic evidence schema implemented (`forensic_pipeline/evidence_schema.py`).
   - Modular evidence loader implemented with strict validation rules (`forensic_pipeline/evidence_loader.py`).
-  - Synthetic forensic dataset generated with deliberate timeline contradictions (`forensic_pipeline/sample_evidence.json`).
   - Core validation and schema test suite operational (`tests/test_evidence_loader.py`).
-* **Note on Evidence**: Synthetic test evidence is currently utilized for initial prototyping and unit testing. Integration with real **CFReDS** forensic disk images and **Autopsy** extracted cases will be connected in subsequent development phases.
-* **Note on Agents & Hermes**: Agent reasoning logic, LLM routing, and Hermes integration are planned for upcoming phases and are not yet implemented.
+  - **Live Autopsy Case Database Interface** (`autopsy_tools.py`): Direct extraction of blackboard artifacts, OS info, attached devices, prefetch logs, recycle bin, web history, and raw MFT records from Autopsy case databases (`autopsy.db`).
+  - **Model Context Protocol (MCP) Server** (`mcp_server.py`): FastMCP-based bridge exposing Autopsy tools directly to Hermes and AI agent runners.
+  - **Agentic Forensic Analyst Engine** (`forensic_agent.py`): Multi-model LLM reasoning cascade with structured function calling and guaranteed synthesis.
+  - **Police Investigation Audit Dashboard & Chat UI** (`index.html`, `chat.html`, `server.py`): High-concurrency threaded dispatch server hosting live forensic chat and an automated incident audit logger.
+  - **NIST CFReDS Investigation Runner** (`run_investigation.py`, `format_results.py`): Automated evaluation suite testing all 60 NIST Data Leakage questions against forensic ground truth.
 
 ---
 
 ## 5. Directory Structure
 
 ```text
-FYP/
-├── agents/                 # Specialized forensic agent implementations (Upcoming)
-├── router/                 # Query classification and agent routing logic (Upcoming)
+├── agents/                 # Specialized forensic agent implementations
+├── router/                 # Query classification and agent routing logic
 ├── forensic_pipeline/      # Evidence schemas, parsers, and data loaders
 │   ├── __init__.py
 │   ├── evidence_schema.py  # Pydantic data models for forensic artifacts
 │   ├── evidence_loader.py  # Validation and JSON parsing utilities
 │   └── sample_evidence.json# Synthetic test case containing intentional contradictions
 ├── configs/                # System configuration and environment settings
-│   ├── __init__.py
-│   └── config.py           # Central configuration container
 ├── evaluation/             # Benchmarks, ground-truth metrics, and evaluation scripts
 ├── outputs/                # Generated reports, agent traces, and run logs
 ├── tests/                  # Pytest test suites
-│   ├── __init__.py
-│   └── test_evidence_loader.py
 ├── datasets/               # Forensic datasets (CFReDS disk images, raw artifacts)
-├── autopsy_cases/          # Autopsy case files and exports
+│
+├── autopsy_tools.py        # Direct SQLite interface for Autopsy case databases
+├── mcp_server.py           # FastMCP server exposing forensic tools to LLMs
+├── hermes_config_snippet.yaml # MCP client configuration for Hermes agent
+├── forensic_agent.py       # Autonomous LLM agent with function calling & cascade
+├── forensic_dispatcher.py  # Deterministic forensic query routing & SQL fallback
+├── case_logger.py          # Investigation audit logging & incident ID generation
+├── server.py               # Threaded HTTP server hosting audit API & web interfaces
+├── index.html              # Police Investigation Incident Audit Dashboard UI
+├── chat.html               # Real-time forensic investigator chat interface
+├── run_investigation.py    # NIST CFReDS 60-question automated evaluation runner
+├── format_results.py       # Formatter converting evaluation results to Markdown
+│
 ├── .env.example            # Environment configuration template
 ├── .gitignore              # Git ignore rules for virtualenvs, caches, and raw images
 ├── requirements.txt        # Python dependency manifest
@@ -95,14 +104,33 @@ FYP/
 
 ---
 
-## 6. Running Tests
+## 6. Running the Interactive Forensic UI
 
-To run the schema validation test suite:
+To launch the Police Investigation Audit Board and Forensic Chat Interface:
 
 ```bash
-# Activate virtual environment (Windows PowerShell)
-.\.venv\Scripts\Activate.ps1
+# Start the threaded forensic dispatch server
+python server.py
 
-# Execute pytest
+# Access the dashboards in your browser:
+# Incident Audit Log Board: http://localhost:8080/
+# Interactive Forensic Chat: http://localhost:8080/chat.html
+```
+
+---
+
+## 7. Running Tests & Evaluations
+
+### Run Schema Tests:
+```bash
 python -m pytest -v
+```
+
+### Run NIST CFReDS Automated Investigation:
+```bash
+# Run all questions or filter by specific question numbers
+python run_investigation.py --only 1 2 3 4 5 --out results.json
+
+# Format findings into a readable Markdown report
+python format_results.py results.json --out results.md
 ```
