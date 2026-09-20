@@ -23,8 +23,13 @@ Usage:
 
 import argparse
 import json
+import os
+import sys
 
-from run_agent import AIAgent
+try:
+    from run_agent import AIAgent
+except ImportError:
+    AIAgent = None
 
 QUESTIONS = [
     "What are the hash values (MD5 and SHA-1) of all images? Does the acquisition and verification hash value match?",
@@ -104,19 +109,42 @@ SYSTEM_PROMPT = (
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--out", default="results.json")
-    parser.add_argument("--model", default="openai/gpt-5.6-terra")
+    parser = argparse.ArgumentParser(description="Run investigative questions against forensic agent and evaluate.")
+    parser.add_argument("--out", default="results.json", help="Output JSON path")
+    parser.add_argument("--model", default="openai/gpt-5.6-terra", help="Model name for AIAgent")
     parser.add_argument(
         "--only", nargs="*", type=int, default=None, help="1-based question numbers to run"
     )
+    parser.add_argument(
+        "--evaluate", action="store_true", help="Run automated NIST hallucination evaluation on each response"
+    )
+    parser.add_argument(
+        "--agent-name", default="Sentinel Investigation Agent", help="Agent identifier for audit logging"
+    )
     args = parser.parse_args()
+
+    if AIAgent is None:
+        print("[WARNING] 'run_agent.AIAgent' could not be imported (hermes-agent not installed in current environment).")
+        print("          If you already have a results.json file, you can evaluate it using 'format_results.py --evaluate' or the web dashboard.")
+        sys.exit(1)
 
     agent = AIAgent(
         model=args.model,
         enabled_toolsets=["autopsy"],
         quiet_mode=True,
     )
+
+    eval_engine = None
+    save_eval = None
+    if args.evaluate:
+        try:
+            from evaluator.hybrid_engine import evaluate_response
+            from evaluator.storage import save_evaluation
+            eval_engine = evaluate_response
+            save_eval = save_evaluation
+            print("[INFO] Hallucination evaluation engine initialized.")
+        except Exception as e:
+            print(f"[WARNING] Failed to load evaluation engine: {e}")
 
     indices = args.only or range(1, len(QUESTIONS) + 1)
     results = []
@@ -127,17 +155,36 @@ def main():
             system_message=SYSTEM_PROMPT,
             task_id=f"q{i}",
         )
-        results.append(
-            {
-                "question_number": i,
-                "question": question,
-                "answer": result["final_response"],
-            }
-        )
-        print(f"[{i}/{len(QUESTIONS)}] done")
+        answer_text = result.get("final_response", "") if isinstance(result, dict) else str(result)
+        
+        item = {
+            "question_number": i,
+            "question": question,
+            "answer": answer_text,
+        }
 
-    with open(args.out, "w") as f:
-        json.dump(results, f, indent=2)
+        if eval_engine:
+            try:
+                eval_res = eval_engine(
+                    question_id=i,
+                    question_text=question,
+                    agent_response=answer_text,
+                    agent_name=args.agent_name,
+                )
+                if save_eval:
+                    save_eval(eval_res)
+                item["evaluation"] = eval_res
+                print(f"[{i}/{len(QUESTIONS)}] Q{i} Done -> Groundedness: {eval_res['groundedness_score']}% | Verdict: {eval_res['verdict']}")
+            except Exception as e:
+                print(f"[{i}/{len(QUESTIONS)}] Q{i} Done (Eval Error: {e})")
+        else:
+            print(f"[{i}/{len(QUESTIONS)}] done")
+
+        results.append(item)
+
+    with open(args.out, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    print(f"\nInvestigation complete. Saved {len(results)} responses to {args.out}")
 
 
 if __name__ == "__main__":

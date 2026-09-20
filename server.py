@@ -8,6 +8,8 @@ import os
 import case_logger
 import forensic_agent
 import forensic_dispatcher  # kept as fallback
+import evaluator.api as eval_api
+import evaluator.storage as eval_storage
 
 PORT = 8080
 BASE_DIR = Path(__file__).resolve().parent
@@ -28,6 +30,7 @@ class ForensicDispatchHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+        query_params = dict(urllib.parse.parse_qsl(parsed.query))
 
         if path in ('/', '/index.html'):
             html_file = BASE_DIR / 'index.html'
@@ -59,6 +62,21 @@ class ForensicDispatchHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_error(404, 'chat.html not found')
                 return
 
+        elif path in ('/evaluation', '/evaluation.html'):
+            html_file = BASE_DIR / 'evaluation.html'
+            if html_file.exists():
+                with open(html_file, 'rb') as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self.send_error(404, 'evaluation.html not found')
+                return
+
         elif path == '/api/logs':
             logs = case_logger.get_all_logs()
             self._send_json(logs)
@@ -74,17 +92,57 @@ class ForensicDispatchHandler(http.server.SimpleHTTPRequestHandler):
             self._send_json(case_info)
             return
 
+        # Evaluation GET Routes
+        elif path == '/api/evaluation/questions':
+            res, code = eval_api.handle_get_questions()
+            self._send_json(res, status=code)
+            return
+
+        elif path.startswith('/api/evaluation/ground-truth/'):
+            qid_str = path.split('/')[-1]
+            if qid_str.isdigit():
+                res, code = eval_api.handle_get_ground_truth(int(qid_str))
+                self._send_json(res, status=code)
+            else:
+                self._send_json({'error': 'Invalid question ID'}, status=400)
+            return
+
+        elif path == '/api/evaluation/results':
+            res, code = eval_api.handle_get_results(query_params)
+            self._send_json(res, status=code)
+            return
+
+        elif path.startswith('/api/evaluation/results/'):
+            eval_id = path.split('/')[-1]
+            res, code = eval_api.handle_get_result_by_id(eval_id)
+            self._send_json(res, status=code)
+            return
+
+        elif path == '/api/evaluation/summary':
+            res, code = eval_api.handle_get_summary()
+            self._send_json(res, status=code)
+            return
+
+        elif path == '/api/evaluation/agents':
+            res, code = eval_api.handle_get_agents()
+            self._send_json(res, status=code)
+            return
+
         else:
             # Fallback to serving static files from directory
             super().do_GET()
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
+        content_len = int(self.headers.get('Content-Length', 0))
+        post_body = self.rfile.read(content_len) if content_len > 0 else b'{}'
+        try:
+            data = json.loads(post_body.decode('utf-8')) if post_body else {}
+        except Exception:
+            data = {}
+
         if parsed.path == '/api/logs':
-            content_len = int(self.headers.get('Content-Length', 0))
-            post_body = self.rfile.read(content_len)
             try:
-                data = json.loads(post_body.decode('utf-8'))
                 query = data.get('query', 'Investigator Inquiry')
                 cmd = data.get('planned_command', 'autopsy_tools.query()')
                 cmd_type = data.get('command_type', 'MCP_TOOL_CALL')
@@ -108,20 +166,15 @@ class ForensicDispatchHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         elif parsed.path == '/api/chat':
-            content_len = int(self.headers.get('Content-Length', 0))
-            post_body = self.rfile.read(content_len)
             try:
-                data = json.loads(post_body.decode('utf-8'))
                 user_msg = data.get('message', '').strip()
                 if not user_msg:
                     self._send_json({'error': 'Message cannot be empty'}, status=400)
                     return
 
-                # Use Gemini agentic engine if API key is available
                 if forensic_agent.GEMINI_API_KEY:
                     chat_res = forensic_agent.answer(user_msg)
                 else:
-                    # Fallback: keyword dispatcher (no API key set)
                     chat_res = forensic_dispatcher.dispatch_chat_query(user_msg)
                     chat_res['response'] = (
                         "> ⚠️ **Running in keyword-match mode** — set `GEMINI_API_KEY` for full AI reasoning.\n\n"
@@ -132,6 +185,23 @@ class ForensicDispatchHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as e:
                 self._send_json({'error': str(e)}, status=500)
             return
+
+        # Evaluation POST Routes
+        elif parsed.path == '/api/evaluation/evaluate':
+            res, code = eval_api.handle_evaluate(data)
+            self._send_json(res, status=code)
+            return
+
+        elif parsed.path == '/api/evaluation/evaluate-report':
+            res, code = eval_api.handle_evaluate_report(data)
+            self._send_json(res, status=code)
+            return
+
+        elif parsed.path == '/api/evaluation/run-agent':
+            res, code = eval_api.handle_run_agent(data)
+            self._send_json(res, status=code)
+            return
+
         else:
             self.send_error(404, 'Endpoint not found')
 
@@ -180,13 +250,17 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
 def run_server(port=PORT):
     case_logger.init_db()
+    eval_storage.seed_benchmark_evaluations()
     with ThreadedTCPServer(("", port), ForensicDispatchHandler) as httpd:
         print(f"============================================================")
         print(f" [!] POLICE FORENSIC INCIDENT DISPATCH SERVER RUNNING")
-        print(f" [*] Local UI:       http://localhost:{port}/")
-        print(f" [*] REST API Logs:  http://localhost:{port}/api/logs")
-        print(f" [*] REST Case Info: http://localhost:{port}/api/case-info")
-        print(f" [*] Case Database:  {AUTOPSY_DB_PATH}")
+        print(f" [*] Local UI:           http://localhost:{port}/")
+        print(f" [*] Forensic Chat:      http://localhost:{port}/chat.html")
+        print(f" [*] Hallucination Eval: http://localhost:{port}/evaluation.html")
+        print(f" [*] REST API Logs:      http://localhost:{port}/api/logs")
+        print(f" [*] REST Case Info:     http://localhost:{port}/api/case-info")
+        print(f" [*] Evaluation API:     http://localhost:{port}/api/evaluation/summary")
+        print(f" [*] Case Database:      {AUTOPSY_DB_PATH}")
         print(f"============================================================")
         try:
             httpd.serve_forever()

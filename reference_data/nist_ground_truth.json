@@ -1,0 +1,3803 @@
+{
+  "case": "NIST CFReDS Data Leakage Case",
+  "source": "NIST",
+  "source_url": "https://cfreds-archive.nist.gov/data_leakage_case/data-leakage-case.html",
+  "answer_document": "leakage-answers.pdf",
+  "version": "1.32",
+  "total_questions": 60,
+  "questions": [
+    {
+      "question_id": 1,
+      "question": "What are the hash values (MD5 & SHA-1) of all images? Does the acquisition and verification hash value match?",
+      "ground_truth": "Does the acquisition and verification hash value match?\nClass\nHash Algo.\nHash value\nPC\nMD5\nA49D1254C873808C58E6F1BCD60B5BDE\nSHA-1\nAFE5C9AB487BD47A8A9856B1371C2384D44FD785\nRM#2\nMD5\nB4644902ACAB4583A1D0F9F1A08FAA77\nSHA-1\n048961A85CA3ECED8CC73F1517442D31D4DCA0A3\nRM#3(Type1)\nMD5\n858C7250183A44DD83EB706F3F178990\nSHA-1\n471D3EEDCA9ADD872FC0708297284E1960FF44F8\nRM#3(Type2)\nMD5\n858C7250183A44DD83EB706F3F178990\nSHA-1\n471D3EEDCA9ADD872FC0708297284E1960FF44F8\nRM#3(Type3)\nMD5\nDF914108FB3D86744EB688EBA482FBDF\nSHA-1\n7F3C2EB1F1E2DB97BE6E963625402A0E362A532C",
+      "considerations": "N/A",
+      "source_pages": [
+        16,
+        17
+      ],
+      "keywords": [
+        "hash",
+        "values",
+        "MD5",
+        "SHA-1",
+        "all",
+        "images",
+        "acquisition",
+        "verification",
+        "value",
+        "match",
+        "Class",
+        "Algo"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [
+          "048961A85CA3ECED8CC73F1517442D31D4DCA0A3",
+          "471D3EEDCA9ADD872FC0708297284E1960FF44F8",
+          "7F3C2EB1F1E2DB97BE6E963625402A0E362A532C",
+          "858C7250183A44DD83EB706F3F178990",
+          "A49D1254C873808C58E6F1BCD60B5BDE",
+          "AFE5C9AB487BD47A8A9856B1371C2384D44FD785",
+          "B4644902ACAB4583A1D0F9F1A08FAA77",
+          "DF914108FB3D86744EB688EBA482FBDF"
+        ],
+        "usernames": [],
+        "os_info": [],
+        "devices": [
+          "RM#2",
+          "RM#3"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 2,
+      "question": "Identify the partition information of PC image.",
+      "ground_truth": "No.\nBootable\nFile system\nStart Sector\nTotal Sectors\nSize\n1\nNTFS\n2,048\n204,800\n100 MB\n2\n*\nNTFS\n206,848\n41,734,144\n19.9 GB",
+      "considerations": "N/A",
+      "source_pages": [
+        12,
+        13,
+        14,
+        16,
+        23,
+        47
+      ],
+      "keywords": [
+        "partition",
+        "information",
+        "image",
+        "Bootable",
+        "File",
+        "system",
+        "Start",
+        "Sector",
+        "Total",
+        "Sectors",
+        "Size",
+        "NTFS"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 3,
+      "question": "Explain installed OS information in detail (OS name, install date, registered owner...).",
+      "ground_truth": "(OS name, install date, registered owner…)\nOS Name\nWindows 7 Ultimate\nVersion\n6.1\nBuild Number\n7601\nRegistered Owner\ninformant\nSystem Root\nC:\\\\Windows\nInstall Date\n2015-03-22 14:34:26 (GMT)",
+      "considerations": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+      "source_pages": [
+        12,
+        13,
+        14,
+        16,
+        17,
+        30,
+        31,
+        34,
+        41,
+        46
+      ],
+      "keywords": [
+        "installed",
+        "information",
+        "detail",
+        "name",
+        "install",
+        "date",
+        "registered",
+        "owner",
+        "Windows",
+        "Ultimate",
+        "Version",
+        "Build"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "C:\\\\Windows",
+          "HKLM\\SOFTWARE\\Microsoft\\Windows",
+          "\\CurrentVersion"
+        ],
+        "timestamps": [
+          "2015-03-22 14:34:26"
+        ],
+        "hashes": [],
+        "usernames": [
+          "System",
+          "informant"
+        ],
+        "os_info": [
+          "Windows 7 Ultimate"
+        ],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 4,
+      "question": "What is the timezone setting?",
+      "ground_truth": "Timezone\nEastern Time (US & Canada) (UTC-05:00)\nDaylight Time Bias\n+1",
+      "considerations": "HKLM\\SYSTEM\\ControlSet###\\Control\\TimeZoneInformation",
+      "source_pages": [
+        16,
+        20,
+        32,
+        33
+      ],
+      "keywords": [
+        "timezone",
+        "setting",
+        "Eastern",
+        "Time",
+        "Canada",
+        "UTC-05",
+        "Daylight",
+        "Bias"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SYSTEM\\ControlSet",
+          "\\Control\\TimeZoneInformation"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "SYSTEM"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 5,
+      "question": "What is the computer name?",
+      "ground_truth": "INFORMANT-PC",
+      "considerations": "HKLM\\SYSTEM\\ControlSet###\\Control\\ComputerName\\ComputerName  (value: ComputerName)\nHKLM\\SYSTEM\\ControlSet###\\Services\\Tcpip\\Parameters  (value: Hostname)\n……",
+      "source_pages": [
+        12,
+        16
+      ],
+      "keywords": [
+        "computer",
+        "name",
+        "INFORMANT-PC"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SYSTEM\\ControlSet",
+          "\\Control\\ComputerName\\ComputerName",
+          "\\Services\\Tcpip\\Parameters"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "INFORMANT",
+          "SYSTEM"
+        ],
+        "os_info": [],
+        "devices": [
+          "INFORMANT-PC"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 6,
+      "question": "List all accounts in OS except the system accounts: Administrator, Guest, systemprofile, LocalService, NetworkService (Account name, login count, last logon date...).",
+      "ground_truth": "(Timezone is applied)\nAccount\nSID\nNT Hash\nStatus\nLogin Count\nAccount Created Time\nLast Login Time\nLogin Failure Time\ninformant\n1000\n(a)\nEnabled\n10\n2015-03-22\n09:33:54\n2015-03-25\n09:45:59\n2015-03-25\n09:45:43\nadmin11\n1001\n(b)\nEnabled\n2\n2015-03-22\n10:51:54\n2015-03-22\n10:57:02\n2015-03-22\n10:53:02\nITechTeam\n1002\n(c)\nEnabled\n0\n2015-03-22\n10:52:30\n-\n-\nTemporary\n1003\n(d)\nEnabled\n1\n2015-03-22\n10:53:01\n2015-03-22\n10:55:57\n2015-03-22\n10:56:37",
+      "considerations": "- HKLM\\SAM\\~\n- SYSTEM hive is required for calculating hash values of passwords.\n- NT Hashes and user passwords (it will be useful for practicing Windows password cracking)\n(a) 9E3D31B073E60BFD7B07978D6F914D0A    Password: informant#suspect1\n(b) 21759544B2D7EFCCC978449463CF7E63    Password: djemals11\n(c) 75ED0CB7676889AB43764A3B7D3E6943    Password: dkdlxpzmxla\n(d) 1B3801B608A6BE89D21FD3C5729D30BF    Password: xpavhfkfl",
+      "source_pages": [
+        17
+      ],
+      "keywords": [
+        "all",
+        "accounts",
+        "except",
+        "system",
+        "Administrator",
+        "Guest",
+        "systemprofile",
+        "LocalService",
+        "NetworkService",
+        "Account",
+        "name",
+        "login"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SAM\\"
+        ],
+        "timestamps": [
+          "2015-03-22",
+          "2015-03-25"
+        ],
+        "hashes": [
+          "1B3801B608A6BE89D21FD3C5729D30BF",
+          "21759544B2D7EFCCC978449463CF7E63",
+          "75ED0CB7676889AB43764A3B7D3E6943",
+          "9E3D31B073E60BFD7B07978D6F914D0A"
+        ],
+        "usernames": [
+          "Administrator",
+          "LocalService",
+          "NetworkService",
+          "SYSTEM",
+          "Temporary",
+          "admin11",
+          "informant",
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 7,
+      "question": "Who was the last user to logon into PC?",
+      "ground_truth": "informant",
+      "considerations": "HKLM\\SAM\\~",
+      "source_pages": [
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        26,
+        27,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        46,
+        47,
+        49,
+        50,
+        51
+      ],
+      "keywords": [
+        "last",
+        "user",
+        "logon",
+        "informant"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SAM\\"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 8,
+      "question": "When was the last recorded shutdown date/time?",
+      "ground_truth": "2015-03-25 11:31:05 (Eastern Time + DST)",
+      "considerations": "HKLM\\SYSTEM\\ControlSet###\\Control\\Windows  (value: ShutdownTime)",
+      "source_pages": [
+        17,
+        20,
+        21
+      ],
+      "keywords": [
+        "last",
+        "recorded",
+        "shutdown",
+        "date",
+        "time",
+        "2015-03-25",
+        "Eastern",
+        "DST"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SYSTEM\\ControlSet",
+          "\\Control\\Windows"
+        ],
+        "timestamps": [
+          "2015-03-25 11:31:05"
+        ],
+        "hashes": [],
+        "usernames": [
+          "SYSTEM"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 9,
+      "question": "Explain the information of network interface(s) with an IP address assigned by DHCP.",
+      "ground_truth": "Device Name\nIntel(R) PRO/1000 MT Network Connection\nIP Address\n10.11.11.129\nSubnet Mask\n255.255.255.0\nName Server\n10.11.11.2\nDomain\nlocaldomain\nDefault Gateway\n10.11.11.2\nDHCP Usage\nYes\nDHCP Server\n10.11.11.254",
+      "considerations": "HKLM\\SYSTEM\\ControlSet###\\Services\\Tcpip\\Parameters\\Interfaces\\{GUID}",
+      "source_pages": [
+        15,
+        17,
+        32,
+        34
+      ],
+      "keywords": [
+        "information",
+        "network",
+        "interface",
+        "address",
+        "assigned",
+        "DHCP",
+        "Device",
+        "Name",
+        "Intel",
+        "PRO",
+        "Connection",
+        "Subnet"
+      ],
+      "entities": {
+        "ips": [
+          "10.11.11.129",
+          "10.11.11.2",
+          "10.11.11.254",
+          "255.255.255.0"
+        ],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SYSTEM\\ControlSet",
+          "\\Services\\Tcpip\\Parameters\\Interfaces\\"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "SYSTEM"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 10,
+      "question": "What applications were installed by the suspect after installing OS?",
+      "ground_truth": "(Timezone is applied)\nInstallation Time\nName\nVersion\nManufacturer\nInstallation Path\n2015-03-22 10:04:14\nMicrosoft Office Professional Plus 2013\n15.0.4420.1017\nMicrosoft Corporation\nC:\\Program Files\\Microsoft Office\n2015-03-22 10:11:51\nGoogle Chrome\n41.0.2272.101\nGoogle Inc.\nC:\\Program Files (x86)\\Google\\Chrome\\Application\n2015-03-22 10:16:03\nGoogle Update Helper\n1.3.26.9\nGoogle Inc.\n2015-03-23 15:00:45\nApple Application Support\n3.0.6\nApple Inc.\nC:\\Program Files (x86)\\Common Files\\Apple\\Apple Application Support\\\n2015-03-23 15:00:58\nBonjour\n3.0.0.10\nApple Inc.\nC:\\Program Files (x86)\\Bonjour\\\n2015-03-23 15:01:01\nApple Software Update\n2.1.3.127\nApple Inc.\nC:\\Program Files (x86)\\Apple Software Update\\\n2015-03-23 15:02:46\nGoogle Drive\n1.20.8672.3137\nGoogle Inc.\n2015-03-25 09:51:39\nMicrosoft .NET Framework 4\n4.0.30319\nMicrosoft Corporation\nC:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\n2015-03-25 09:57:31\nEraser\n6.2.2962\nThe Eraser Project",
+      "considerations": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\~\nHKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\~\n…",
+      "source_pages": [
+        17,
+        21
+      ],
+      "keywords": [
+        "applications",
+        "installed",
+        "suspect",
+        "after",
+        "installing",
+        "Timezone",
+        "applied",
+        "Installation",
+        "Time",
+        "Name",
+        "Version",
+        "Manufacturer"
+      ],
+      "entities": {
+        "ips": [
+          "1.3.26.9",
+          "2.1.3.127",
+          "3.0.0.10"
+        ],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "C:\\Program",
+          "C:\\Windows\\Microsoft",
+          "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\",
+          "HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\",
+          "\\Apple",
+          "\\Apple\\Apple",
+          "\\Bonjour\\",
+          "\\Common",
+          "\\Framework64\\v4",
+          "\\Google\\Chrome\\Application",
+          "\\Microsoft"
+        ],
+        "timestamps": [
+          "2015-03-22 10:04:14",
+          "2015-03-22 10:11:51",
+          "2015-03-22 10:16:03",
+          "2015-03-23 15:00:45",
+          "2015-03-23 15:00:58",
+          "2015-03-23 15:01:01",
+          "2015-03-23 15:02:46",
+          "2015-03-25 09:51:39",
+          "2015-03-25 09:57:31"
+        ],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Eraser",
+          "Google Chrome",
+          "Google Drive",
+          "Microsoft Office"
+        ]
+      }
+    },
+    {
+      "question_id": 11,
+      "question": "List application execution logs (Executable path, execution time, execution count...).",
+      "ground_truth": "(Executable path, execution time, execution count...)\n(Some Windows executables and duplicated items are excluded)\n(Timezone is applied)\nTimestamp\nExecution Path\nCount\nSource\n2015-03-22 11:11:04\nC:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe\nN/A\nShimcache\n2015-03-22 11:11:04\nC:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe\nN/A\nShimcache\n2015-03-22 11:12:32\nC:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe\n1\nUserAssist\n2015-03-23 15:56:33\nC:\\Users\\informant\\Downloads\\googledrivesync.exe\nN/A\nShimcache\n2015-03-23 15:56:33\nC:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdateSetup.exe\nN/A\nShimcache\n2015-03-23 15:56:33\nC:\\Users\\informant\\Downloads\\icloudsetup.exe\nN/A\nShimcache\n2015-03-23 16:00:59\nC:\\Windows\\Installer\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe\nN/A\nShimcache\n2015-03-23 16:02:07\nC:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdate.exe\nN/A\nShimcache\n2015-03-23 16:02:09\nC:\\Program Files (x86)\\GUMA94B.tmp\\GoogleUpdate.exe\nN/A\nShimcache\n2015-03-23 16:26:50\nC:\\PROGRAM FILES\\Microsoft Office\\Office15\\EXCEL.EXE\n1\nUserAssist\n2015-03-23 16:27:33\nC:\\PROGRAM FILES\\Microsoft Office\\Office15\\POWERPNT.EXE\n2\nUserAssist\n2015-03-24 14:29:07\nC:\\PROGRAM FILES\\MICROSOFT GAMES\\SOLITAIRE\\SOLITAIRE.EXE\n1\nPrefetch\n2015-03-24 14:31:55\nC:\\Windows\\System32\\StikyNot.exe\n2\nPrefetch\n2015-03-24 14:31:55\nMicrosoft.Windows.StickyNotes\n13\nUserAssist\n2015-03-24 17:05:38\nC:\\PROGRAM FILES (X86)\\GOOGLE\\CHROME\\APPLICATION\\CHROME.EXE\n71\nPrefetch\n2015-03-25 10:41:03\nC:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE\n1\nPrefetch\n2015-03-25 10:41:03\nC:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE\n5\nUserAssist\n2015-03-25 10:42:47\nC:\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\wmplayer.exe\n1\nPrefetch\n2015-03-25 10:42:47\nMicrosoft.Windows.MediaPlayer32\n1\nUserAssist\n2015-03-25 10:47:40\nC:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe\nN/A\nShimcache\n2015-03-25 10:48:28\nC:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe\nN/A\nShimcache\n2015-03-25 10:50:14\nC:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE\n1\nPrefetch\n2015-03-25 10:50:14\nC:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE\n1\nUserAssist\n2015-03-25 10:50:15\nC:\\Users\\INFORM~1\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe\nN/A\nShimcache\n2015-03-25 10:50:15\nC:\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\ERASERINSTALLBOOTSTRAPPER\\DOTNETFX40_FULL_SETUP.EXE\n1\nPrefetch\n2015-03-25 10:57:56\nC:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504.EXE\n1\nPrefetch\n2015-03-25 10:57:56\nC:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504.EXE\n1\nUserAssist\n2015-03-25 11:12:28\nC:\\PROGRAM FILES\\Eraser\\Eraser.exe\n1\nUserAssist\n2015-03-25 11:13:30\nC:\\PROGRAM FILES\\Eraser\\Eraser.exe\n2\nPrefetch\n2015-03-25 11:15:50\nC:\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE\n1\nUserAssist\n2015-03-25 11:15:50\nC:\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE\n2\nPrefetch\n2015-03-25 11:16:00\nC:\\PROGRAM FILES (X86)\\GOOGLE\\UPDATE\\GOOGLEUPDATE.EXE\n38\nPrefetch\n2015-03-25 11:18:29\nC:\\PROGRAM FILES\\CCLEANER\\UNINST.EXE\n1\nPrefetch\n2015-03-25 11:21:30\nC:\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE\n1\nUserAssist\n2015-03-25 11:21:31\nC:\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE\n2\nPrefetch\n2015-03-25 11:22:06\nC:\\PROGRAM FILES\\INTERNET EXPLORER\\iexplore.exe\n2\nPrefetch\n2015-03-25 11:22:07\nC:\\PROGRAM FILES (X86)\\INTERNET EXPLORER\\iexplore.exe\n14\nPrefetch\n2015-03-25 11:24:48\nC:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE\n3\nPrefetch\n2015-03-25 11:24:48\nC:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE\n4\nUserAssist\n2015-03-25 11:28:47\nC:\\Windows\\System32\\xpsrchvw.exe\n1\nPrefetch\n2015-03-25 11:28:47\nC:\\Windows\\System32\\xpsrchvw.exe\n1\nUserAssist\nN/A\nC:\\Users\\informant\\Downloads\\icloudsetup.exe\nN/A\nUserAssist\nN/A\nC:\\PROGRAM FILES (X86)\\Common Files\\Apple\\Internet Services\\iCloud.exe\nN/A\nUserAssist\nN/A\nC:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe\nN/A\nUserAssist\nMuiCache\nC:\\Program Files\\Internet Explorer\\iexplorer.exe\nMuiCache\nC:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe\nMuiCache\nC:\\Windows\\System32\\xpsrchvw.exe (XPS Viewer)",
+      "considerations": "* 'Execution Count' may not be accurate.\n* Timestamps of UserAssist and Prefetch: 'Execution Time'\n* Timestamps of Shimcache: 'Last Modified Time' from filesystem metadata\n[File] Windows Prefetch folder\n> \\Windows\\Prefetch\\*.pf\n> Executable file paths and their execution timestamps (+ execution counts)\n[File] IconCache\n> \\Users\\informant\\AppData\\Local\\IconCache.db\n> Executable file paths and their icon images\n[Reg] UserAssist\n> HKU\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\*\\Count\\\n> Executable file paths and their execution timestamps (+ execution counts)\n[Reg] Application Compatibility (Shimcache)\n> HKLM\\SYSTEM\\ControlSet###\\Control\\Session Manager\\AppCompatCache\\\n> Executable file paths and their modified timestamps\n[Reg] Application Compatibility Cache\n> HKU\\informant\\Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Compatibility Assistant\\\n> Executable file paths and their modified timestamps\n[Reg] MuiCache\n> HKU\\informant\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache\\\n> Executable file paths",
+      "source_pages": [
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        27,
+        30,
+        35,
+        36,
+        37,
+        40,
+        51
+      ],
+      "keywords": [
+        "application",
+        "execution",
+        "logs",
+        "Executable",
+        "path",
+        "time",
+        "count",
+        "Windows",
+        "executables",
+        "duplicated",
+        "items",
+        "excluded"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "6.2.0.2962.EXE",
+          "6.2.0.2962.exe",
+          "AppleSoftwareUpdateIco.exe",
+          "CCLEANER64.EXE",
+          "CCSETUP504.EXE",
+          "CHROME.EXE",
+          "DOTNETFX40_FULL_SETUP.EXE",
+          "EXCEL.EXE",
+          "Eraser.exe",
+          "GOOGLEDRIVESYNC.EXE",
+          "GOOGLEUPDATE.EXE",
+          "GoogleUpdate.exe",
+          "GoogleUpdateSetup.exe",
+          "IE11-Windows6.1-x64-en-us.exe",
+          "IconCache.db",
+          "OUTLOOK.EXE",
+          "POWERPNT.EXE",
+          "SOLITAIRE.EXE",
+          "StikyNot.exe",
+          "UNINST.EXE",
+          "WINWORD.EXE",
+          "ccsetup504.exe",
+          "dotNetFx40_Full_setup.exe",
+          "googledrivesync.exe",
+          "iCloud.exe",
+          "icloudsetup.exe",
+          "iexplore.exe",
+          "iexplorer.exe",
+          "wmplayer.exe",
+          "xpsrchvw.exe"
+        ],
+        "paths": [
+          "C:\\PROGRAM",
+          "C:\\Program",
+          "C:\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\ERASERINSTALLBOOTSTRAPPER\\DOTNETFX40_FULL_SETUP",
+          "C:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504",
+          "C:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER",
+          "C:\\Users\\INFORM",
+          "C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup",
+          "C:\\Users\\informant\\Desktop\\Download\\Eraser",
+          "C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6",
+          "C:\\Users\\informant\\Desktop\\Download\\ccsetup504",
+          "C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6",
+          "C:\\Users\\informant\\Downloads\\googledrivesync",
+          "C:\\Users\\informant\\Downloads\\icloudsetup",
+          "C:\\Windows\\Installer\\",
+          "C:\\Windows\\System32\\StikyNot",
+          "C:\\Windows\\System32\\xpsrchvw",
+          "HKLM\\SYSTEM\\ControlSet",
+          "\\AppCompatCache\\",
+          "\\AppData\\Local\\Temp\\GUMA150",
+          "\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup",
+          "\\AppleSoftwareUpdateIco",
+          "\\Apple\\Internet",
+          "\\CCLEANER\\CCLEANER64",
+          "\\CCLEANER\\UNINST",
+          "\\Common",
+          "\\Control\\Session",
+          "\\Count\\",
+          "\\CurrentVersion\\AppCompatFlags\\Compatibility",
+          "\\Eraser\\Eraser",
+          "\\GOOGLE\\CHROME\\APPLICATION\\CHROME",
+          "\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC",
+          "\\GOOGLE\\UPDATE\\GOOGLEUPDATE",
+          "\\GUMA94B",
+          "\\GoogleUpdate",
+          "\\GoogleUpdateSetup",
+          "\\INTERNET",
+          "\\Internet",
+          "\\MICROSOFT",
+          "\\Microsoft",
+          "\\OFFICE15\\OUTLOOK",
+          "\\OFFICE15\\WINWORD",
+          "\\Office15\\EXCEL",
+          "\\Office15\\POWERPNT",
+          "\\SOLITAIRE\\SOLITAIRE",
+          "\\Software\\Microsoft\\Windows\\Shell\\MuiCache\\",
+          "\\Users\\informant\\AppData\\Local\\IconCache",
+          "\\WINDOWS",
+          "\\Windows\\Prefetch\\",
+          "\\iCloud",
+          "\\iexplore",
+          "\\iexplorer",
+          "\\informant\\Software\\Classes\\Local",
+          "\\informant\\Software\\Microsoft\\Windows",
+          "\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\",
+          "\\wmplayer"
+        ],
+        "timestamps": [
+          "2015-03-22 11:11:04",
+          "2015-03-22 11:12:32",
+          "2015-03-23 15:56:33",
+          "2015-03-23 16:00:59",
+          "2015-03-23 16:02:07",
+          "2015-03-23 16:02:09",
+          "2015-03-23 16:26:50",
+          "2015-03-23 16:27:33",
+          "2015-03-24 14:29:07",
+          "2015-03-24 14:31:55",
+          "2015-03-24 17:05:38",
+          "2015-03-25 10:41:03",
+          "2015-03-25 10:42:47",
+          "2015-03-25 10:47:40",
+          "2015-03-25 10:48:28",
+          "2015-03-25 10:50:14",
+          "2015-03-25 10:50:15",
+          "2015-03-25 10:57:56",
+          "2015-03-25 11:12:28",
+          "2015-03-25 11:13:30",
+          "2015-03-25 11:15:50",
+          "2015-03-25 11:16:00",
+          "2015-03-25 11:18:29",
+          "2015-03-25 11:21:30",
+          "2015-03-25 11:21:31",
+          "2015-03-25 11:22:06",
+          "2015-03-25 11:22:07",
+          "2015-03-25 11:24:48",
+          "2015-03-25 11:28:47"
+        ],
+        "hashes": [],
+        "usernames": [
+          "INFORMANT",
+          "SYSTEM",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "CCLEANER",
+          "ERASER",
+          "EXCEL",
+          "Eraser",
+          "INTERNET EXPLORER",
+          "Internet Explorer",
+          "MICROSOFT OFFICE",
+          "Microsoft Office",
+          "OUTLOOK"
+        ]
+      }
+    },
+    {
+      "question_id": 12,
+      "question": "List all traces about the system on/off and the user logon/logoff (between 09:00 and 18:00 in the identified timezone).",
+      "ground_truth": "(It should be considered only during a time range between 09:00 and 18:00 in the timezone from Question 4.)\n(Some duplicated and meaningless items are excluded)\n(Timezone is applied)\nTime Generated\nEvent ID\nDescription\n2015-03-22 10:51:14\n4608\nStarting up\n2015-03-22 11:00:08\n4624\nLogon\n2015-03-22 11:22:54\n4624\nLogon\n2015-03-22 12:00:08\n4647\nLogoff\n2015-03-22 12:00:09\n1100\nShutdown\n2015-03-23 13:24:23\n4624\nLogon\n2015-03-23 13:24:23\n4608\nStarting up\n2015-03-23 14:36:07\n4624\nLogon\n2015-03-23 16:00:22\n4624\nLogon\n2015-03-23 16:01:02\n4624\nLogon\n2015-03-23 17:02:53\n4647\nLogoff\n2015-03-23 17:02:59\n1100\nShutdown\n2015-03-24 09:21:29\n4624\nLogon\n2015-03-24 09:21:29\n4608\nStarting up\n2015-03-24 09:23:40\n4624\nLogon\n2015-03-24 11:14:30\n4624\nLogon\n2015-03-24 11:22:39\n4624\nLogon\n2015-03-24 11:46:14\n4624\nLogon\n2015-03-24 14:28:38\n4624\nLogon\n2015-03-24 16:58:52\n4624\nLogon\n2015-03-24 17:07:25\n4647\nLogoff\n2015-03-24 17:07:26\n1100\nShutdown\n2015-03-25 09:05:41\n4624\nLogon\n2015-03-25 09:05:41\n4608\nStarting up\n2015-03-25 09:07:49\n4624\nLogon\n2015-03-25 09:23:59\n4624\nLogon\n2015-03-25 10:31:53\n4624\nLogon\n2015-03-25 10:45:59\n4637\nLogoff\n2015-03-25 10:50:28\n4624\nLogon\n2015-03-25 10:50:30\n4624\nLogon\n2015-03-25 10:50:50\n4624\nLogon\n2015-03-25 10:56:55\n4624\nLogon\n2015-03-25 10:57:18\n4624\nLogon\n2015-03-25 11:18:54\n4624\nLogon\n2015-03-25 11:30:57\n4647\nLogoff\n2015-03-25 11:31:00\n1100\nShutdown",
+      "considerations": "- Security event logs\n- Event IDs for Windows Vista or higher\n: 4608 (Windows is starting up), 1100 (service shutdown)\n: 4624 (successful logon), 4634 (logoff), 4625 (logon failure), 4647 (a user initiated the logoff process)...\n* Some events may not be accurate.",
+      "source_pages": [
+        20,
+        30,
+        41,
+        47
+      ],
+      "keywords": [
+        "all",
+        "traces",
+        "system",
+        "off",
+        "user",
+        "logon",
+        "logoff",
+        "between",
+        "identified",
+        "timezone",
+        "considered",
+        "during"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [
+          "2015-03-22 10:51:14",
+          "2015-03-22 11:00:08",
+          "2015-03-22 11:22:54",
+          "2015-03-22 12:00:08",
+          "2015-03-22 12:00:09",
+          "2015-03-23 13:24:23",
+          "2015-03-23 14:36:07",
+          "2015-03-23 16:00:22",
+          "2015-03-23 16:01:02",
+          "2015-03-23 17:02:53",
+          "2015-03-23 17:02:59",
+          "2015-03-24 09:21:29",
+          "2015-03-24 09:23:40",
+          "2015-03-24 11:14:30",
+          "2015-03-24 11:22:39",
+          "2015-03-24 11:46:14",
+          "2015-03-24 14:28:38",
+          "2015-03-24 16:58:52",
+          "2015-03-24 17:07:25",
+          "2015-03-24 17:07:26",
+          "2015-03-25 09:05:41",
+          "2015-03-25 09:07:49",
+          "2015-03-25 09:23:59",
+          "2015-03-25 10:31:53",
+          "2015-03-25 10:45:59",
+          "2015-03-25 10:50:28",
+          "2015-03-25 10:50:30",
+          "2015-03-25 10:50:50",
+          "2015-03-25 10:56:55",
+          "2015-03-25 10:57:18",
+          "2015-03-25 11:18:54",
+          "2015-03-25 11:30:57",
+          "2015-03-25 11:31:00"
+        ],
+        "hashes": [],
+        "usernames": [
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 13,
+      "question": "What web browsers were used?",
+      "ground_truth": "- Microsoft Internet Explorer v11.0.9600.17691\n(Microsoft Internet Explorer 9 or lower  updated to IE 11 version)\n- Google Chrome v41.0.2272.101",
+      "considerations": "HKLM\\SOFTWARE\\Microsoft\\Internet Explorer (value: svcVersion)\nHKU\\informant\\Software\\Google\\Chrome\\BLBeacon (value: version)",
+      "source_pages": [
+        21
+      ],
+      "keywords": [
+        "web",
+        "browsers",
+        "used",
+        "Microsoft",
+        "Internet",
+        "Explorer",
+        "v11",
+        "lower",
+        "updated",
+        "version",
+        "Google",
+        "Chrome"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SOFTWARE\\Microsoft\\Internet",
+          "\\informant\\Software\\Google\\Chrome\\BLBeacon"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Chrome",
+          "Internet Explorer"
+        ]
+      }
+    },
+    {
+      "question_id": 14,
+      "question": "Identify directory/file paths related to the web browser history.",
+      "ground_truth": "MS IE\n(9 or lower)\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History\\\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\\nC:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\\nMS IE 11\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat\nChrome\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Application Cache\\\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Media Cache\\\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies\\\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Cookies\nC:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\\n……",
+      "considerations": "- History, Cache, Cookie…\n- Windows Search database (related to Question 42 ~ 46)\n> C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb",
+      "source_pages": [
+        15,
+        21,
+        24,
+        30,
+        38,
+        41
+      ],
+      "keywords": [
+        "directory",
+        "file",
+        "paths",
+        "related",
+        "web",
+        "browser",
+        "history",
+        "lower",
+        "Users",
+        "informant",
+        "AppData",
+        "Local"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "WebCacheV01.dat"
+        ],
+        "paths": [
+          "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows",
+          "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History\\",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01",
+          "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\",
+          "\\Default\\Application",
+          "\\Default\\Cookies\\",
+          "\\Default\\Extension",
+          "\\Default\\Extensions\\",
+          "\\Default\\GPUCache\\",
+          "\\Default\\History",
+          "\\Default\\Media"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "Temporary",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 15,
+      "question": "What websites were the suspect accessing? (Timestamp, URL...).",
+      "ground_truth": "(Some duplicated and meaningless items are excluded)\n(Timezone is applied)\nTimestamp\nURL\nBrowser\n2015-03-22  11:09:01\nhttp://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome\nIE 8\n2015-03-22  11:09:47\nhttps://www.google.com/\nIE 8\n2015-03-22  11:10:50\nhttp://windows.microsoft.com/en-us/internet-explorer/download-ie\nIE 8\n2015-03-22  11:11:04\nhttp://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe\nIE 8\n2015-03-22  11:11:06\nhttps://dl.google.com/update2/1.3.26.9/GoogleInstaller_en.application?appguid%3D%7B8A69D345-D564-463C-AFF1-\nIE 8\n2015-03-22  11:11:58\nhttps://www.google.com/intl/en/chrome/browser/welcome.html\nChrome\n2015-03-22  11:27:59\nhttps://www.google.com/#q=outlook+2013+settings\nChrome\n2015-03-23  13:26:58\nhttp://www.bing.com/\nChrome\n2015-03-23  13:26:58\nhttps://www.google.com/webhp?hl=en\nChrome\n2015-03-23 13:27:36\nhttp://go.microsoft.com/fwlink/?LinkId=69157\nIE 11\n2015-03-23 13:27:49\nhttp://www.microsoft.com/en-us/ie-firstrun/win-7/ie-11/vie\nIE 11\n2015-03-23 14:02:09\nhttps://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods\nChrome\n2015-03-23 14:02:18\nhttp://www.sans.org/reading-room/whitepapers/awareness/data-leakage-threats-mitigation_1931\nChrome\n2015-03-23 14:02:44\nhttps://www.google.com/webhp?hl=en#hl=en&q=leaking+confidential+information\nChrome\n2015-03-23 14:03:40\nhttps://www.google.com/webhp?hl=en#hl=en&q=information+leakage+cases\nChrome\n2015-03-23 14:04:54\nhttp://www.emirates247.com/business/technology/top-5-sources-leaking-personal-data-2015-03-\nChrome\n2015-03-23 14:05:48\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=intellectual+property+theft\nChrome\n2015-03-23 14:05:55\nhttp://www.fbi.gov/about-us/investigate/white_collar/ipr/ipr\nChrome\n2015-03-23 14:06:01\nhttp://en.wikipedia.org/wiki/Intellectual_property\nChrome\n2015-03-23 14:06:27\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+leak+a+secret\nChrome\n2015-03-23 14:06:53\nhttp://research.microsoft.com/en-us/um/people/yael/publications/2001-leak_secret.pdf\nChrome\n2015-03-23 14:07:58\nhttp://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6\nIE 11\n2015-03-23 14:08:18\nhttp://sysinfotools.com/blog/tethering-internet-files-sharing/\nIE 11\n2015-03-23 14:08:31\nhttp://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=0\nIE 11\n2015-03-23 14:08:54\nhttp://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1\nIE 11\n2015-03-23 14:10:03\nhttp://www.bing.com/search?q=Forensic+Email+Investigation&FORM=QSRE1&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=3\nIE 11\n2015-03-23 14:10:27\nhttp://www.bing.com/search?q=what%20is%20windows%20system%20artifacts&qs=n&form=QBRE&pq=what%20is%20windows%20system%20artifacts&sc=0-27&sp=-1&sk=&cvid=1ef4ace146854d97acf263b53bf97b8c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=4\nIE 11\n2015-03-23 14:11:12\nhttp://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/\nIE 11\n2015-03-23 14:11:50\nhttp://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5\nIE 11\n2015-03-23 14:12:07\nhttps://technet.microsoft.com/en-us/library/cc162846.aspx\nIE 11\n2015-03-23 14:12:35\nhttp://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6\nIE 11\n2015-03-23 14:12:45\nhttps://support.microsoft.com/en-us/kb/308427\nIE 11\n2015-03-23 14:12:52\nhttp://en.wikipedia.org/wiki/Event_Viewer\nIE 11\n2015-03-23 14:13:20\nhttp://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7\nIE 11\n2015-03-23 14:13:37\nhttp://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8\nIE 11\n2015-03-23 14:13:57\nhttps://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx\nIE 11\n2015-03-23 14:14:11\nhttp://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9\nIE 11\n2015-03-23 14:14:24\nhttp://www.forensicswiki.org/wiki/USB_History_Viewing\nIE 11\n2015-03-23 14:14:50\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=cloud+storage\nChrome\n2015-03-23 14:15:09\nhttp://en.wikipedia.org/wiki/Cloud_storage\nChrome\n2015-03-23 14:15:32\nhttp://www.pcadvisor.co.uk/test-centre/internet/3506734/best-cloud-storage-dropbox-google-drive-onedrive-icloud/\nChrome\n2015-03-23 14:15:44\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics\nChrome\n2015-03-23 14:15:49\nhttp://en.wikipedia.org/wiki/Digital_forensics\nChrome\n2015-03-23 14:16:06\nhttp://nij.gov/topics/forensics/evidence/digital/pages/welcome.aspx\nChrome\n2015-03-23 14:16:55\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data\nChrome\n2015-03-23 14:17:14\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=anti-forensics\nChrome\n2015-03-23 14:17:19\nhttp://forensicswiki.org/wiki/Anti-forensic_techniques\nChrome\n2015-03-23 14:18:00\nhttps://defcon.org/images/defcon-20/dc-20-presentations/Perklin/DEFCON-20-Perklin-AntiForensics.pdf\nChrome\n2015-03-23 14:18:10\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=system+cleaner\nChrome\n2015-03-23 14:18:30\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data\nChrome\n2015-03-23 14:19:03\nhttps://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools\nChrome\n2015-03-23 14:19:17\nhttp://en.wikipedia.org/wiki/List_of_data_recovery_software\nChrome\n2015-03-23 14:19:21\nhttp://www.forensicswiki.org/wiki/Tools:Data_Recovery\nChrome\n2015-03-23 15:55:09\nhttps://www.google.com/webhp?hl=en#hl=en&q=apple+icloud\nChrome\n2015-03-23 15:55:28\nhttps://www.apple.com/icloud/setup/pc.html\nChrome\n2015-03-23 15:56:04\nhttps://www.google.com/webhp?hl=en#hl=en&q=google+drive\nChrome\n2015-03-23 15:56:15\nhttps://www.google.com/drive/download/\nChrome\n2015-03-23 16:43:52\nhttp://www.bing.com/news?FORM=Z9LH3\nIE 11\n2015-03-23 16:45:30\nhttp://www.bing.com/news?q=Soccer+News&FORM=NSBABR\nIE 11\n2015-03-23 16:53:46\nhttp://www.bing.com/news?q=top+stories&FORM=NWRFSH\nIE 11\n2015-03-23 16:55:10\nhttp://www.bing.com/news?q=world+news&FORM=NSBABR\nIE 11\n2015-03-23 16:55:18\nhttp://www.bing.com/news?q=entertainment+news&FORM=NSBABR\nIE 11\n2015-03-23 16:55:54\nhttp://www.bing.com/news?q=business+news&FORM=NSBABR\nIE 11\n2015-03-24 11:22:46\nhttps://news.google.com/news/section?pz=1&cf=all&ned=us&topic=w&siidp=0b2226a6a5dab3b27ee85fc5e8d21f28f01e\nChrome\n2015-03-24 11:23:16\nhttps://news.google.com/news/section?pz=1&cf=all&ned=us&topic=tc&siidp=e6116f8175cb189b8dd7fd58ef6bc922ec04&ar=1427212899\nChrome\n2015-03-24 14:59:52\nhttps://news.google.com/news?pz=1&cf=all&ned=us&siidp=0c33ef04190b3734a22c5bae18801ff1041e\nChrome\n2015-03-24 15:00:27\nhttps://news.google.com/news/section?pz=1&cf=all&ned=us&topic=w&siidp=538c61c825aba06be7485be747a619778015\nChrome\n2015-03-24 17:06:50\nhttps://www.google.com/#q=security+checkpoint+cd-r\nChrome\n2015-03-25 10:46:44\nhttp://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3\nIE 11\n2015-03-25 10:46:54\nhttp://www.bing.com/search?q=eraser&qs=n&form=QBRE&pq=eraser&sc=8-6&sp=-1&sk=&cvid=e3b983fe889944179093ff5199b2eac4&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=0\nIE 11\n2015-03-25 10:46:59\nhttp://eraser.heidi.ie/\nIE 11\n2015-03-25 10:47:34\nhttp://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe\nIE 11\n2015-03-25 10:47:51\nhttp://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1\nIE 11\n2015-03-25 10:48:12\nhttp://www.piriform.com/ccleaner/download\nIE 11",
+      "considerations": "- History, Cache, Cookie…",
+      "source_pages": [
+        21,
+        27,
+        36,
+        39
+      ],
+      "keywords": [
+        "websites",
+        "suspect",
+        "accessing",
+        "Timestamp",
+        "URL",
+        "duplicated",
+        "meaningless",
+        "items",
+        "excluded",
+        "Timezone",
+        "applied",
+        "Browser"
+      ],
+      "entities": {
+        "ips": [
+          "1.3.26.9"
+        ],
+        "emails": [],
+        "filenames": [
+          "2001-leak_secret.pdf",
+          "206.2.0.2962.exe",
+          "DEFCON-20-Perklin-AntiForensics.pdf",
+          "IE11-Windows6.1-x64-en-us.exe"
+        ],
+        "paths": [],
+        "timestamps": [
+          "2015-03-22",
+          "2015-03-23",
+          "2015-03-23 13:27:36",
+          "2015-03-23 13:27:49",
+          "2015-03-23 14:02:09",
+          "2015-03-23 14:02:18",
+          "2015-03-23 14:02:44",
+          "2015-03-23 14:03:40",
+          "2015-03-23 14:04:54",
+          "2015-03-23 14:05:48",
+          "2015-03-23 14:05:55",
+          "2015-03-23 14:06:01",
+          "2015-03-23 14:06:27",
+          "2015-03-23 14:06:53",
+          "2015-03-23 14:07:58",
+          "2015-03-23 14:08:18",
+          "2015-03-23 14:08:31",
+          "2015-03-23 14:08:54",
+          "2015-03-23 14:10:03",
+          "2015-03-23 14:10:27",
+          "2015-03-23 14:11:12",
+          "2015-03-23 14:11:50",
+          "2015-03-23 14:12:07",
+          "2015-03-23 14:12:35",
+          "2015-03-23 14:12:45",
+          "2015-03-23 14:12:52",
+          "2015-03-23 14:13:20",
+          "2015-03-23 14:13:37",
+          "2015-03-23 14:13:57",
+          "2015-03-23 14:14:11",
+          "2015-03-23 14:14:24",
+          "2015-03-23 14:14:50",
+          "2015-03-23 14:15:09",
+          "2015-03-23 14:15:32",
+          "2015-03-23 14:15:44",
+          "2015-03-23 14:15:49",
+          "2015-03-23 14:16:06",
+          "2015-03-23 14:16:55",
+          "2015-03-23 14:17:14",
+          "2015-03-23 14:17:19",
+          "2015-03-23 14:18:00",
+          "2015-03-23 14:18:10",
+          "2015-03-23 14:18:30",
+          "2015-03-23 14:19:03",
+          "2015-03-23 14:19:17",
+          "2015-03-23 14:19:21",
+          "2015-03-23 15:55:09",
+          "2015-03-23 15:55:28",
+          "2015-03-23 15:56:04",
+          "2015-03-23 15:56:15",
+          "2015-03-23 16:43:52",
+          "2015-03-23 16:45:30",
+          "2015-03-23 16:53:46",
+          "2015-03-23 16:55:10",
+          "2015-03-23 16:55:18",
+          "2015-03-23 16:55:54",
+          "2015-03-24 11:22:46",
+          "2015-03-24 11:23:16",
+          "2015-03-24 14:59:52",
+          "2015-03-24 15:00:27",
+          "2015-03-24 17:06:50",
+          "2015-03-25 10:46:44",
+          "2015-03-25 10:46:54",
+          "2015-03-25 10:46:59",
+          "2015-03-25 10:47:34",
+          "2015-03-25 10:47:51",
+          "2015-03-25 10:48:12"
+        ],
+        "hashes": [
+          "1ef4ace146854d97acf263b53bf97b8c",
+          "36b33ac5151246398f7dc1ca79de069c",
+          "6e206ee8751e4ad89f882ed52daf3aea",
+          "BE5E388F8757406CAA32E58334719A20",
+          "C7E8F3776E804120B57C623F21EF33C4",
+          "acec9b1dcb8146c58258ad65c770d76e",
+          "b7dbe6fb67424c578172ba57330a0894",
+          "c30c4b1f36114b1c9bc683838c69823a",
+          "d434736d4e514ad497f68734a6779104",
+          "e3b983fe889944179093ff5199b2eac4",
+          "e799e715fa2244a5a7967675bdcca9d3",
+          "eb73de7f523c48769d56201379f55e67",
+          "fe1c3738d8c7471284731724166959af"
+        ],
+        "usernames": [
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Eraser",
+          "ccleaner",
+          "dropbox",
+          "eraser",
+          "outlook"
+        ]
+      }
+    },
+    {
+      "question_id": 16,
+      "question": "List all search keywords using web browsers (Timestamp, URL, keyword...).",
+      "ground_truth": "(Some duplicated and meaningless items are excluded)\n(Timezone is applied)\nTimestamp\nKeyword (URL)\nBrowser\n2015-03-23 14:02:09\ndata leakage method\n(https://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods)\nChrome\n2015-03-23 14:02:44\nleaking confidential information\n(https://www.google.com/webhp?hl=en#hl=en&q=leaking+confidential+information)\nChrome\n2015-03-23 14:03:40\ninformation leakage cases\n(https://www.google.com/webhp?hl=en#hl=en&q=information+leakage+cases)\nChrome\n2015-03-23 14:05:48\nintellectual property theft\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=intellectual+property+theft)\nChrome\n2015-03-23 14:06:27\nhow to leak a secret\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+leak+a+secret)\nChrome\n2015-03-23 14:07:58\nfile sharing and tethering\n(http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6)\nIE 11\n2015-03-23 14:08:31\nDLP DRM\n(http://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F87574\n06CAA32E58334719A20&format=jsonv2&jsoncbid=0)\nIE 11\n2015-03-23 14:08:54\ne-mail investigation\n(http://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1)\nIE 11\n2015-03-23 14:10:03\nForensic Email Investigation\n(http://www.bing.com/search?q=Forensic+Email+Investigation&FORM=QSRE1&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=3)\nIE 11\n2015-03-23 14:10:27\nwhat is windows system artifacts\n(http://www.bing.com/search?q=what%20is%20windows%20system%20artifacts&qs=n&form=QBRE&pq=what%20is%20windows%20system%20artifacts&sc=0-27&sp=-1&sk=&cvid=1ef4ace146854d97acf263b53bf97b8c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=4)\nIE 11\n2015-03-23 14:11:50\ninvestigation on windows machine\n(http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5)\nIE 11\n2015-03-23 14:12:35\nwindows event logs\n(http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6)\nIE 11\n2015-03-23 14:13:20\ncd burning method\n(http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7)\nIE 11\n2015-03-23 14:13:37\ncd burning method in windows\n(http://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8)\nIE 11\n2015-03-23 14:14:11\nexternal device and forensics\n(http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9)\nIE 11\n2015-03-23 14:14:50\ncloud storage\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=cloud+storage)\nChrome\n2015-03-23 14:15:44\ndigital forensics\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics)\nChrome\n2015-03-23 14:16:55\nhow to delete data\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data)\nChrome\n2015-03-23 14:17:14\nanti-forensics\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=anti-forensics)\nChrome\n2015-03-23 14:18:10\nsystem cleaner\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=system+cleaner)\nChrome\n2015-03-23 14:18:30\nhow to recover data\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data)\nChrome\n2015-03-23 14:19:03\ndata recovery tools\n(https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools)\nChrome\n2015-03-23 15:55:09\napple icloud\n(https://www.google.com/webhp?hl=en#hl=en&q=apple+icloud)\nChrome\n2015-03-23 15:56:04\ngoogle drive\n(https://www.google.com/webhp?hl=en#hl=en&q=google+drive)\nChrome\n2015-03-24 17:06:50\nsecurity checkpoint cd-r\n(https://www.google.com/#q=security+checkpoint+cd-r)\nChrome\n2015-03-25 10:46:44\nanti-forensic tools\n(http://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3)\nIE 11\n2015-03-25 10:46:54\neraser\n(http://www.bing.com/search?q=eraser&qs=n&form=QBRE&pq=eraser&sc=8-6&sp=-1&sk=&cvid=e3b983fe889944179093ff5199b2eac4&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=0)\nIE 11\n2015-03-25 10:47:51\nccleaner\n(http://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1)\nIE 11",
+      "considerations": "- Web browser logs",
+      "source_pages": [
+        15,
+        21,
+        24,
+        26,
+        27,
+        30,
+        40,
+        43,
+        50
+      ],
+      "keywords": [
+        "all",
+        "search",
+        "keywords",
+        "using",
+        "web",
+        "browsers",
+        "Timestamp",
+        "URL",
+        "keyword",
+        "duplicated",
+        "meaningless",
+        "items"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [
+          "2015-03-23 14:02:09",
+          "2015-03-23 14:02:44",
+          "2015-03-23 14:03:40",
+          "2015-03-23 14:05:48",
+          "2015-03-23 14:06:27",
+          "2015-03-23 14:07:58",
+          "2015-03-23 14:08:31",
+          "2015-03-23 14:08:54",
+          "2015-03-23 14:10:03",
+          "2015-03-23 14:10:27",
+          "2015-03-23 14:11:50",
+          "2015-03-23 14:12:35",
+          "2015-03-23 14:13:20",
+          "2015-03-23 14:13:37",
+          "2015-03-23 14:14:11",
+          "2015-03-23 14:14:50",
+          "2015-03-23 14:15:44",
+          "2015-03-23 14:16:55",
+          "2015-03-23 14:17:14",
+          "2015-03-23 14:18:10",
+          "2015-03-23 14:18:30",
+          "2015-03-23 14:19:03",
+          "2015-03-23 15:55:09",
+          "2015-03-23 15:56:04",
+          "2015-03-24 17:06:50",
+          "2015-03-25 10:46:44",
+          "2015-03-25 10:46:54",
+          "2015-03-25 10:47:51"
+        ],
+        "hashes": [
+          "1ef4ace146854d97acf263b53bf97b8c",
+          "36b33ac5151246398f7dc1ca79de069c",
+          "6e206ee8751e4ad89f882ed52daf3aea",
+          "BE5E388F8757406CAA32E58334719A20",
+          "C7E8F3776E804120B57C623F21EF33C4",
+          "acec9b1dcb8146c58258ad65c770d76e",
+          "b7dbe6fb67424c578172ba57330a0894",
+          "c30c4b1f36114b1c9bc683838c69823a",
+          "d434736d4e514ad497f68734a6779104",
+          "e3b983fe889944179093ff5199b2eac4",
+          "e799e715fa2244a5a7967675bdcca9d3",
+          "eb73de7f523c48769d56201379f55e67",
+          "fe1c3738d8c7471284731724166959af"
+        ],
+        "usernames": [
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "ccleaner",
+          "eraser",
+          "google drive"
+        ]
+      }
+    },
+    {
+      "question_id": 17,
+      "question": "List all user keywords at the search bar in Windows Explorer (Timestamp, Keyword).",
+      "ground_truth": "Timestamp (Timezone is applied)\nSearch Keyword\n2015-03-23  14:40:17\nsecret",
+      "considerations": "HKU\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery\\\n- 'Timestamp' can be inferred from a timestamp of the parent key ('WordWheelQuery').\n- 'Timestamp' may not be accurate because it depends on the update mechanism of Windows Explorer.",
+      "source_pages": [
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        46,
+        47,
+        49,
+        50
+      ],
+      "keywords": [
+        "all",
+        "user",
+        "keywords",
+        "search",
+        "bar",
+        "Windows",
+        "Explorer",
+        "Timestamp",
+        "Keyword",
+        "Timezone",
+        "applied",
+        "2015-03-23"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery\\"
+        ],
+        "timestamps": [
+          "2015-03-23"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 18,
+      "question": "What application was used for e-mail communication?",
+      "ground_truth": "Microsoft Outlook 2013",
+      "considerations": "HKLM\\SOFTWARE\\Classes\\mailto\\shell\\open\\command  (Microsoft Outlook)\nHKLM\\SOFTWARE\\Clients\\Mail  (Microsoft Outlook)\nHKU\\informant\\Software\\Microsoft\\Office\\15.0\\Outlook\n…",
+      "source_pages": [
+        15,
+        21,
+        27,
+        29,
+        36,
+        43,
+        51
+      ],
+      "keywords": [
+        "application",
+        "used",
+        "e-mail",
+        "communication",
+        "Microsoft",
+        "Outlook"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SOFTWARE\\Classes\\mailto\\shell\\open\\command",
+          "HKLM\\SOFTWARE\\Clients\\Mail",
+          "\\Outlook",
+          "\\informant\\Software\\Microsoft\\Office\\15"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Outlook"
+        ]
+      }
+    },
+    {
+      "question_id": 19,
+      "question": "Where is the e-mail file located?",
+      "ground_truth": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Office\\iaman.informant@nist.gov.ost",
+      "considerations": "- Microsoft Outlook 2013\n- Microsoft OST file format\nHKEY_USERS\\informant\\Software\\Microsoft\\Office\\15.0\\Outlook\\Search\n(value: C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost)\nHKEY_USERS\\informant\\Software\\Microsoft\\Office\\15.0\\Outlook\\PST\n(value: LastCorruptStore)",
+      "source_pages": [
+        27
+      ],
+      "keywords": [
+        "e-mail",
+        "file",
+        "located",
+        "Users",
+        "informant",
+        "AppData",
+        "Local",
+        "Microsoft",
+        "Office",
+        "iaman",
+        "nist",
+        "gov"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [
+          "iaman.informant@nist.gov.ost"
+        ],
+        "filenames": [
+          "nist.gov.ost"
+        ],
+        "paths": [
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Office\\iaman",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman",
+          "\\Outlook\\PST",
+          "\\Outlook\\Search",
+          "\\informant\\Software\\Microsoft\\Office\\15"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Outlook"
+        ]
+      }
+    },
+    {
+      "question_id": 20,
+      "question": "What was the e-mail account used by the suspect?",
+      "ground_truth": "iaman.informant@nist.gov",
+      "considerations": "- See Question 19.",
+      "source_pages": [
+        15,
+        17,
+        21,
+        27,
+        29,
+        35,
+        36
+      ],
+      "keywords": [
+        "e-mail",
+        "account",
+        "used",
+        "suspect",
+        "iaman",
+        "informant",
+        "nist",
+        "gov"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [
+          "iaman.informant@nist.gov"
+        ],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 21,
+      "question": "List all e-mails of the suspect. If possible, identify deleted e-mails (Timestamp, From, To, Subject, Body, Attachment). Examine the OST file only.",
+      "ground_truth": "(You can identify the following items: Timestamp, From, To, Subject, Body, and Attachment)\n[Hint: just examine the OST file only.]\n(Timezone is applied)\nTimestamp\nE-Mail Communication\n2015-03-23 13:29:27\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nHello, Iaman\nBody\nHow are you doing?\n2015-03-23 14:44:31\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Hello, Iaman\nBody\nSuccessfully secured.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 1:29 PM\nTo: iaman\nSubject: Hello, Iaman\nHow are you doing?\n2015-03-23 15:14:58\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nGood job, buddy.\nBody\nGood, job.\nI need a more detailed data about this business.\n2015-03-23 15:20:41\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nRE: Good job, buddy.\nBody\nOkay, I got it.\nI'll be in touch.\n---------------------------\nFrom: iaman\nSent: Monday, March 23, 2015 3:19 PM\nTo: spy\nSubject: RE: Good job, buddy.\nThis is a sample.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 3:15 PM\nTo: iaman\nSubject: Good job, buddy.\nGood, job.\nI need a more detailed data about this business.\n2015-03-23 15:26:22\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nImportant request\nBody\nI confirmed it.\nBut, I need a more data.\nDo your best.\n2015-03-23 15:27:05\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Important request\nBody\nUmm….. I need time to think.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 3:26 PM\nTo: iaman\nSubject: Important request\nI confirmed it.\nBut, I need a more data.\nDo your best.\n2015-03-23 16:38:47\nSource\nRecovered Item from unused area of OST file\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nIt's me\nBody\nUse links below,\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaVl8yVU5mWHlGbWc/view?usp=sharing\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaakx6d3R3c0JmM1U/view?usp=sharing\n2015-03-23 16:41:19\nSource\n[Deleted Items]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nRE: It's me\nBody\nI got it.\n---------------------------\nFrom: iaman\nSent: Monday, March 23, 2015 4:39 PM\nTo: spy\nSubject: It's me\nUse links below,\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaVl8yVU5mWHlGbWc/view?usp=sharing\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaakx6d3R3c0JmM1U/view?usp=sharing\n2015-03-24 09:25:57\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nLast request\nBody\nThis is the last request.\nI want to get the remaining data.\n2015-03-24 09:35:10\nSource\n[Deleted Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Last request\nBody\nThis is the last time..\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 9:34 AM\nTo: iaman\nSubject: RE: Last request\nNo problem.\nU can directly deliver storage devices that stored it.\n---------------------------\nFrom: iaman\nSent: Tuesday, March 24, 2015 9:30 AM\nTo: spy\nSubject: RE: Last request\nStop it!\nIt is very hard to transfer all data over the internet!\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 9:26 AM\nTo: iaman\nSubject: Last request\nThis is the last request.\nI want to get the remaining data.\n2015-03-24 15:34:02\nSource\n[Deleted Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Watch out!\nBody\nI am trying.\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 3:33 PM\nTo: iaman\nSubject: Watch out!\nUSB device may be easily detected.\nSo, try another method.\n2015-03-24 17:05:09\nSource\n[Deleted Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nDone\nBody\nIt's done.  See you tomorrow.",
+      "considerations": "- Fortunately, a suspected OST file was not protected and encrypted with a password.\n- OST file parsing  Inbox, Deleted Items, Contact, and Calendar…\n- Deleted e-mail recovery from unused area of OST file.",
+      "source_pages": [
+        15,
+        27,
+        29,
+        37,
+        43,
+        46,
+        49,
+        51
+      ],
+      "keywords": [
+        "all",
+        "e-mails",
+        "suspect",
+        "deleted",
+        "Timestamp",
+        "Subject",
+        "Body",
+        "Attachment",
+        "Examine",
+        "OST",
+        "file",
+        "You"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [
+          "iaman.informant@nist.gov",
+          "spy.conspirator@nist.gov"
+        ],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [
+          "2015-03-23 13:29:27",
+          "2015-03-23 14:44:31",
+          "2015-03-23 15:14:58",
+          "2015-03-23 15:20:41",
+          "2015-03-23 15:26:22",
+          "2015-03-23 15:27:05",
+          "2015-03-23 16:38:47",
+          "2015-03-23 16:41:19",
+          "2015-03-24 09:25:57",
+          "2015-03-24 09:35:10",
+          "2015-03-24 15:34:02",
+          "2015-03-24 17:05:09"
+        ],
+        "hashes": [],
+        "usernames": [
+          "conspirator",
+          "informant",
+          "spy"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 22,
+      "question": "List external storage devices attached to PC.",
+      "ground_truth": "Device Name\nVolume Name\nSerial No.\nFirst Connected Time\nConnected Time After Reboot\nSanDisk Cruzer Fit USB Device\n4C530012450531101593\n2015-03-23  14:31:10  Mon\n2015-03-24 09:38:00  Tue\nSanDisk Cruzer Fit USB Device\nIAMAN $_@\n4C530012550531106501\n2015-03-24 09:58:32  Tue\n2015-03-24 09:58:33  Tue",
+      "considerations": "- 'First Connected Time' can be identified from SetupAPI Log.  ( C:\\Windows\\inf\\setupapi.dev.log)\nHKLM\\SYSTEM\\MountedDevices\\\nHKLM\\SYSTEM\\ControlSet###\\Enum\\USBSTOR\\\nHKLM\\SYSTEM\\ControlSet###\\Control\\DeviceClasses\\{a5dcbf10-6530-11d2-901f-00c04fb951ed}\\\nHKLM\\SYSTEM\\ControlSet###\\Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}\\\n……\nHKU\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\\nHKLM\\SOFTWARE\\Microsoft\\Windows Search\\VolumeInfoCache\\E:\n> timestamp: 2015-03-24 09:58:34  Tue\n> value: VolumeLabel\n> data:  'IAMAN $_@'\n\\Windows\\System32\\winevt\\Logs\\System.evtx (Event ID: 20001, 20003…)\n……",
+      "source_pages": [
+        15,
+        23,
+        25,
+        29,
+        30,
+        32,
+        39,
+        45
+      ],
+      "keywords": [
+        "external",
+        "storage",
+        "devices",
+        "attached",
+        "Device",
+        "Name",
+        "Volume",
+        "Serial",
+        "First",
+        "Connected",
+        "Time",
+        "After"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "System.evtx"
+        ],
+        "paths": [
+          "C:\\Windows\\inf\\setupapi",
+          "HKLM\\SOFTWARE\\Microsoft\\Windows",
+          "HKLM\\SYSTEM\\ControlSet",
+          "HKLM\\SYSTEM\\MountedDevices\\",
+          "\\Control\\DeviceClasses\\",
+          "\\Enum\\USBSTOR\\",
+          "\\VolumeInfoCache\\E",
+          "\\Windows\\System32\\winevt\\Logs\\System",
+          "\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\"
+        ],
+        "timestamps": [
+          "2015-03-23",
+          "2015-03-24 09:38:00",
+          "2015-03-24 09:58:32",
+          "2015-03-24 09:58:33",
+          "2015-03-24 09:58:34"
+        ],
+        "hashes": [],
+        "usernames": [
+          "SYSTEM",
+          "System",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [
+          "4C530012450531101593",
+          "4C530012550531106501",
+          "Cruzer Fit",
+          "SanDisk",
+          "USBSTOR"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 23,
+      "question": "Identify all traces related to 'renaming' of files in Windows Desktop (date range between 2015-03-23 and 2015-03-24).",
+      "ground_truth": "(It should be considered only during a date range between 2015-03-23 and 2015-03-24.)\n[Hint: the parent directories of renamed files were deleted and their MFT entries were also overwritten. Therefore, you may not be able to find their full paths.]\n(Timezone is applied)\nTimestamp\nUSN\nPath (Of course, just file names are OK)\nEvent\n2015-03-23 14:41:40\n56306184\n\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx\nRenamed Old\n56306328\n\\Users\\informant\\Desktop\\S data\\landscape.png\nRenamed New\n2015-03-23 14:41:55\n56307712\n\\Users\\informant\\Desktop\\S data\\[secret_project]_design_concept.ppt\nRenamed Old\n56307848\n\\Users\\informant\\Desktop\\S data\\space_and_earth.mp4\nRenamed New\n2015-03-23 16:30:44\n58506640\n\\Users\\informant\\Desktop\\S data\\(secret_project)_pricing_decision.xlsx\nRenamed Old\n58506776\n\\Users\\informant\\Desktop\\S data\\happy_holiday.jpg\nRenamed New\n2015-03-23 16:31:02\n58510288\n\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx\nRenamed Old\n58510424\n\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3\nRenamed New\n2015-03-24 09:49:51\n59801680\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\\n[secret_project]_detailed_design.pptx\nRenamed Old\n59801816\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\\nwinter_whether_advisory.zip\nRenamed New\n2015-03-24 09:50:08\n59802408\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\\n[secret_project]_revised_points.ppt\nRenamed Old\n59802544\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\\nwinter_storm.amr\nRenamed New\n2015-03-24 09:50:49\n59803456\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\\n[secret_project]_design_concept.ppt\nRenamed Old\n59803592\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\\nspace_and_earth.mp4\nRenamed New\n2015-03-24 09:52:35\n59814352\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\\n[secret_project]_final_meeting.pptx\nRenamed Old\n59814488\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\\ndo_u_wanna_build_a_snow_man.mp3\nRenamed New\n2015-03-24 09:52:56\n59814904\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\n(secret_project)_market_analysis.xlsx\nRenamed Old\n59815040\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\nnew_years_day.jpg\nRenamed New\n2015-03-24 09:53:08\n59815232\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\n(secret_project)_market_shares.xls\nRenamed Old\n59815360\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\nsuper_bowl.avi\nRenamed New\n2015-03-24 09:53:38\n59815536\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\n(secret_project)_price_analysis_#1.xlsx\nRenamed Old\n59815680\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\nmy_favorite_movies.7z\nRenamed New\n2015-03-24 09:53:52\n59815968\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\n(secret_project)_price_analysis_#2.xls\nRenamed Old\n59816104\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\nmy_favorite_cars.db\nRenamed New\n2015-03-24 09:54:05\n59816312\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\n(secret_project)_pricing_decision.xlsx\nRenamed Old\n59816448\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\\nhappy_holiday.jpg\nRenamed New\n2015-03-24 09:54:23\n59816880\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\\n[secret_project]_progress_#1.docx\nRenamed Old\n59817008\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\\nmy_smartphone.png\nRenamed New\n2015-03-24 09:54:43\n59817984\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\\n[secret_project]_progress_#2.docx\nRenamed Old\n59818112\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\\nnew_year_calendar.one\nRenamed New\n2015-03-24 09:54:52\n59818320\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\\n[secret_project]_progress_#3.doc\nRenamed Old\n59818448\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\\nmy_friends.svg\nRenamed New\n2015-03-24 09:55:08\n59818624\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\\n[secret_project]_detailed_proposal.docx\nRenamed Old\n59818768\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\\na_gift_from_you.gif\nRenamed New\n2015-03-24 09:55:17\n59818976\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\\n[secret_project]_proposal.docx\nRenamed Old\n59819096\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\\nlandscape.png\nRenamed New\n2015-03-24 09:55:32\n59819272\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\n[secret_project]_technical_review_#1.docx\nRenamed Old\n59819416\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\ndiary_#1d.txt\nRenamed New\n2015-03-24 09:55:42\n59819592\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\n[secret_project]_technical_review_#1.pptx\nRenamed Old\n59819736\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\ndiary_#1p.txt\nRenamed New\n2015-03-24 09:55:53\n59819912\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\n[secret_project]_technical_review_#2.docx\nRenamed Old\n59820056\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\ndiary_#2d.txt\nRenamed New\n2015-03-24 09:56:09\n59823280\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\n[secret_project]_technical_review_#2.ppt\nRenamed Old\n59823424\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\ndiary_#2p.txt\nRenamed New\n2015-03-24 09:56:14\n59823600\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\n[secret_project]_technical_review_#3.doc\nRenamed Old\n59823744\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\ndiary_#3d.txt\nRenamed New\n2015-03-24 09:56:20\n59823920\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\n[secret_project]_technical_review_#3.ppt\nRenamed Old\n59824064\n\\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\\ndiary_#3p.txt\nRenamed New",
+      "considerations": "- NTFS journal file analysis ( $UsnJrnl)\n- \\$Extend\\$UsnJrnl·$J   (+ $MFT for identifying full paths of files)\n- With NTFS journal file only, it may be hard to find full paths.\n- You can consider the Registry ShellBags for further information.\n- You can also consider the Windows Search database. (See Questions 46)",
+      "source_pages": [
+        15,
+        18,
+        19,
+        20,
+        21,
+        26,
+        30,
+        31,
+        32,
+        34,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        46,
+        47,
+        49,
+        50
+      ],
+      "keywords": [
+        "all",
+        "traces",
+        "related",
+        "renaming",
+        "files",
+        "Windows",
+        "Desktop",
+        "date",
+        "range",
+        "between",
+        "2015-03-23",
+        "2015-03-24"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "_detailed_proposal.docx",
+          "_progress_#1.docx",
+          "_progress_#2.docx",
+          "_progress_#3.doc",
+          "_proposal.docx",
+          "_technical_review_#1.docx",
+          "_technical_review_#2.docx",
+          "_technical_review_#3.doc",
+          "diary_#1d.txt",
+          "diary_#1p.txt",
+          "diary_#2d.txt",
+          "diary_#2p.txt",
+          "diary_#3d.txt",
+          "diary_#3p.txt",
+          "happy_holiday.jpg",
+          "landscape.png",
+          "my_favorite_cars.db",
+          "my_favorite_movies.7z",
+          "my_smartphone.png",
+          "new_years_day.jpg",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "\\$Extend\\$UsnJrnl",
+          "\\Secret",
+          "\\Users\\informant\\Desktop\\S",
+          "\\design\\",
+          "\\do_u_wanna_build_a_snow_man",
+          "\\final\\",
+          "\\happy_holiday",
+          "\\landscape",
+          "\\pricing",
+          "\\progress\\",
+          "\\proposal\\",
+          "\\space_and_earth",
+          "\\technical"
+        ],
+        "timestamps": [
+          "2015-03-23",
+          "2015-03-23 14:41:40",
+          "2015-03-23 14:41:55",
+          "2015-03-23 16:30:44",
+          "2015-03-23 16:31:02",
+          "2015-03-24",
+          "2015-03-24 09:49:51",
+          "2015-03-24 09:50:08",
+          "2015-03-24 09:50:49",
+          "2015-03-24 09:52:35",
+          "2015-03-24 09:52:56",
+          "2015-03-24 09:53:08",
+          "2015-03-24 09:53:38",
+          "2015-03-24 09:53:52",
+          "2015-03-24 09:54:05",
+          "2015-03-24 09:54:23",
+          "2015-03-24 09:54:43",
+          "2015-03-24 09:54:52",
+          "2015-03-24 09:55:08",
+          "2015-03-24 09:55:17",
+          "2015-03-24 09:55:32",
+          "2015-03-24 09:55:42",
+          "2015-03-24 09:55:53",
+          "2015-03-24 09:56:09",
+          "2015-03-24 09:56:14",
+          "2015-03-24 09:56:20"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 24,
+      "question": "What is the IP address of company's shared network drive?",
+      "ground_truth": "10.11.11.128",
+      "considerations": "HKU\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU\\\n> timestamp: 2015-03-23  16:23:28  Mon\n> value: b\n> data:  '\\\\10.11.11.128\\secured_drive'\nHKU\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Map Network Drive MRU\\\n> timestamp: 2015-03-23  16:26:04  Mon\n> value: a\n> data:  '\\\\10.11.11.128\\secured_drive'\nHKU\\informant\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\\n……",
+      "source_pages": [
+        15,
+        17,
+        32,
+        33,
+        34,
+        46,
+        48
+      ],
+      "keywords": [
+        "address",
+        "company",
+        "shared",
+        "network",
+        "drive"
+      ],
+      "entities": {
+        "ips": [
+          "10.11.11.128"
+        ],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\",
+          "\\\\10",
+          "\\informant\\Software\\Classes\\Local",
+          "\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Map",
+          "\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU\\",
+          "\\secured_drive"
+        ],
+        "timestamps": [
+          "2015-03-23"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 25,
+      "question": "List all directories that were traversed in 'RM#2'.",
+      "ground_truth": "(Timezone is applied)\nTimestamp\nDirectory Path\nSource\n2015-03-24  10:00:19\nE:\\Secret Project Data\\\nShellBag\n(created)\n2015-03-24 10:01:11\nE:\\Secret Project Data\\technical review\\\nShellBag\n(created)\n2015-03-24  10:01:14\nE:\\Secret Project Data\\proposal\\\nShellBag\n(created)\n2015-03-24  10:01:15\nE:\\Secret Project Data\\progress\\\nShellBag\n(created)\n2015-03-24  10:01:17\nE:\\Secret Project Data\\pricing decision\\\nShellBag\n(created)\n2015-03-24  10:01:29\nE:\\Secret Project Data\\design\\\nShellBag\n(last accessed)\n2015-03-24  16:54:07\nE:\\Secret Project Data\\\nShellBag\n(last accessed)\n2015-03-24  16:54:07\nE:\\Secret Project Data\\progress\\\nShellBag\n(last accessed)",
+      "considerations": "- 'Timestamp' may not be accurate.\n- E:\\ can be inferred from external storage devices attached to PC in Question 22.\n- You can consider a created timestamp and a last accessed timestamp of each ShellBag entry.\nHKU\\informant\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1~\n……",
+      "source_pages": [
+        32,
+        33
+      ],
+      "keywords": [
+        "all",
+        "directories",
+        "traversed",
+        "RM#2",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "Directory",
+        "Path",
+        "Source",
+        "2015-03-24",
+        "Secret"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "E:\\Secret",
+          "\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1",
+          "\\design\\",
+          "\\informant\\Software\\Classes\\Local",
+          "\\pricing",
+          "\\progress\\",
+          "\\proposal\\",
+          "\\technical"
+        ],
+        "timestamps": [
+          "2015-03-24",
+          "2015-03-24 10:01:11"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [
+          "RM#2"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 26,
+      "question": "List all files that were opened in 'RM#2'.",
+      "ground_truth": "(Timezone is applied)\nTimestamp\nDirectory Path\nSource\n2015-03-2410:01:23\nE:\\Secret Project Data\\design\\winter_whether_advisory.zip\\\nJumpList\n2015-03-2410:01:29\nE:\\Secret Project Data\\design\\winter_whether_advisory.zip\\ppt\\\nJumpList\n2015-03-2410:01:29\nE:\\Secret Project Data\\design\\winter_whether_advisory.zip\\\nShellBag\n(created)",
+      "considerations": "- Actually, above list shows directories opened in 'RM#2'.\n- We can infer that a file 'winter_whether_advisory.zip' was opened and traversed in Windows Explorer.\n- 'Timestamp' may not be accurate.\n- E:\\ can be inferred from external storage devices attached to PC in Question 22.\nHKU\\informant\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1~\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations\n……",
+      "source_pages": [
+        15,
+        32,
+        34,
+        38
+      ],
+      "keywords": [
+        "all",
+        "files",
+        "opened",
+        "RM#2",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "Directory",
+        "Path",
+        "Source",
+        "2015-03-2410",
+        "Secret"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "E:\\Secret",
+          "\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations",
+          "\\design\\winter_whether_advisory",
+          "\\informant\\Software\\Classes\\Local",
+          "\\ppt\\"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [
+          "RM#2"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 27,
+      "question": "List all directories that were traversed in the company's network drive.",
+      "ground_truth": "(Timezone is applied)\nTimestamp\nDirectory Path\nSource\n2015-03-23 16:24:01\n\\\\10.11.11.128\\secured_drive\\Common Data\\\nShellBag\n(created)\n2015-03-23  16:24:08\n\\\\10.11.11.128\\secured_drive\\Past Projects\\\nShellBag\n(created)\n2015-03-23  16:24:12\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\design\\\nShellBag\n(created)\n2015-03-23  16:24:15\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\\nShellBag\n(created)\n2015-03-23  16:24:16\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\final\\\nShellBag\n(created)\n2015-03-23  16:24:18\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\technical review\\\nShellBag\n(created)\n2015-03-23  16:24:20\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\proposal\\\nShellBag\n(created)\n2015-03-23  16:24:27\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\progress\\\nShellBag\n(created)\n2015-03-23 16:26:53\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\\nJumpList\n2015-03-23  16:26:54\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\\n.LNK(Windows)\n2015-03-23  16:27:24\nV:\\Secret Project Data\\\nShellBag\n(created)\n2015-03-23  16:27:29\nV:\\Secret Project Data\\final\\\nShellBag\n(created)\n2015-03-23  16:27:33\nV:\\Secret Project Data\\final\\\nJumpList\n2015-03-23  16:27:33\nV:\\Secret Project Data\\final\\\n.LNK(Windows)\n2015-03-23  16:28:17\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\\nShellBag\n(last accessed)\n2015-03-23  16:28:17\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\\nShellBag\n(last accessed)\n2015-03-24  09:47:54\n\\\\10.11.11.128\\secured_drive\\\nShellBag\n(last accessed)\n2015-03-24  09:47:54\n\\\\10.11.11.128\\secured_drive\\Past Projects\\\nShellBag\n(last accessed)",
+      "considerations": "- 'Timestamp' may not be accurate.\n- V:\\ is mapped on \\\\10.11.11.128\nHKU\\informant\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\~\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\*.lnk\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\*.lnk\n……",
+      "source_pages": [
+        15,
+        32,
+        33,
+        34,
+        46,
+        50
+      ],
+      "keywords": [
+        "all",
+        "directories",
+        "traversed",
+        "company",
+        "network",
+        "drive",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "Directory",
+        "Path",
+        "Source"
+      ],
+      "entities": {
+        "ips": [
+          "10.11.11.128"
+        ],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "V:\\Secret",
+          "\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations",
+          "\\\\10",
+          "\\design\\",
+          "\\final\\",
+          "\\informant\\Software\\Classes\\Local",
+          "\\pricing",
+          "\\progress\\",
+          "\\proposal\\",
+          "\\secured_drive\\",
+          "\\secured_drive\\Common",
+          "\\secured_drive\\Past",
+          "\\secured_drive\\Secret",
+          "\\technical"
+        ],
+        "timestamps": [
+          "2015-03-23",
+          "2015-03-23 16:24:01",
+          "2015-03-23 16:26:53",
+          "2015-03-24"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 28,
+      "question": "List all files that were opened in the company's network drive.",
+      "ground_truth": "(Timezone is applied)\nTimestamp\nDirectory Path\nSource\n2015-03-23  16:26:53\n\\\\10.11.11.128\\SECURED_DRIVE\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx\nJumpList\n2015-03-23  16:26:53\n\\\\10.11.11.128\\SECURED_DRIVE\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx\n.LNK(Windows)\n2015-03-23  16:26:53\n\\\\10.11.11.128\\SECURED_DRIVE\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx\n.LNK(Office)\n2015-03-23  16:26:56\n\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx\nRegistry(Office)\n2015-03-23  16:27:33\nV:\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx\nJumpList\n2015-03-23  16:27:33\nV:\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx\n.LNK(Windows)\n2015-03-23  16:27:37\nV:\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx\n.LNK(Office)\n2015-03-23  16:27:37\nV:\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx\nRegistry(Office)",
+      "considerations": "- V: is mapped on \\\\10.11.11.128\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\*.lnk\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\*.lnk\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations\nHKU\\informant\\Software\\Microsoft\\Office\\15.0\\Excel\\File MRU\nHKU\\informant\\Software\\Microsoft\\Office\\15.0\\PowerPoint\\File MRU\n……",
+      "source_pages": [
+        15,
+        17,
+        18,
+        19,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        46,
+        48,
+        50,
+        51
+      ],
+      "keywords": [
+        "all",
+        "files",
+        "opened",
+        "company",
+        "network",
+        "drive",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "Directory",
+        "Path",
+        "Source"
+      ],
+      "entities": {
+        "ips": [
+          "10.11.11.128"
+        ],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "V:\\Secret",
+          "\\Excel\\File",
+          "\\PowerPoint\\File",
+          "\\SECURED_DRIVE\\Secret",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations",
+          "\\\\10",
+          "\\final\\",
+          "\\informant\\Software\\Microsoft\\Office\\15",
+          "\\pricing",
+          "\\secured_drive\\Secret"
+        ],
+        "timestamps": [
+          "2015-03-23"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Excel",
+          "PowerPoint"
+        ]
+      }
+    },
+    {
+      "question_id": 29,
+      "question": "Find traces related to cloud services on PC (Service name, log files...).",
+      "ground_truth": "(Service name, log files...)\nCloud Service\nType\nTraces\nGoogle Drive\nFile/Dir\n\\Program Files (x86)\\Google\\Drive\\\nGoogle Drive\nFile/Dir\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\\n> sync_config.db (deleted)\n> snapshot.db       (deleted)\n> sync_log.log\n…\nGoogle Drive\nFile/Dir\n\\User\\informant\\Downloads\\googledrivesync.exe\nGoogle Drive\nRegistry\nHKU\\informant\\Software\\Google\\Drive\nGoogle Drive\nRegistry\nHKU\\informant\\Software\\Classes\\GoogleDrive.*\nApple iCloud\nFile/Dir\n\\User\\informant\\Downloads\\icloudsetup.exe",
+      "considerations": "- Installation directory\n- Registry (Configuration, Uninstall Information, Autoruns, UserAssist, Classes…)",
+      "source_pages": [
+        15,
+        16,
+        17,
+        19,
+        21,
+        30,
+        31,
+        34,
+        37,
+        38,
+        39,
+        40,
+        41,
+        46,
+        47,
+        48,
+        49,
+        51
+      ],
+      "keywords": [
+        "Find",
+        "traces",
+        "related",
+        "cloud",
+        "services",
+        "Service",
+        "name",
+        "log",
+        "files",
+        "Type",
+        "Google",
+        "Drive"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "googledrivesync.exe",
+          "icloudsetup.exe",
+          "snapshot.db",
+          "sync_config.db"
+        ],
+        "paths": [
+          "\\Google\\Drive\\",
+          "\\Program",
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\",
+          "\\User\\informant\\Downloads\\googledrivesync",
+          "\\User\\informant\\Downloads\\icloudsetup",
+          "\\informant\\Software\\Classes\\GoogleDrive",
+          "\\informant\\Software\\Google\\Drive"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Drive"
+        ]
+      }
+    },
+    {
+      "question_id": 30,
+      "question": "What files were deleted from Google Drive? Find the filename and modified timestamp (Find a transaction log file of Google Drive).",
+      "ground_truth": "Find the filename and modified timestamp of the file.\n[Hint: Find a transaction log file of Google Drive.]\n(Timezone is applied)\nTimestamp\nFile name\nModified Time (UTC-05)\n2015-03-23 16:42:17\nhappy_holiday.jpg\n2015-01-30 11:49:20\n2015-03-23 16:42:17\ndo_u_wanna_build_a_snow_man.mp3\n2015-01-29 15:35:14",
+      "considerations": "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log.log\n> 2015-03-23 16:32:35,072 -0400 INFO pid=2576 4004:LocalWatcher    common.aggregator:114 --------> Received event RawEvent(CREATE, path=u'\\\\\\\\?\\\\C:\\\\Users\\\\informant\\\\Google Drive\\\\happy_holiday.jpg', time=1427142755.056, is_dir=False, ino=4503599627374809L, size=440517L, mtime=1422563714.5256062, parent_ino=844424930207017L, is_cancelled=<RawEventIsCancelledFlag.FALSE: 0>, backup=<Backup.NO_BACKUP_CONTENT: (False, False)>) None\n> 2015-03-23 16:32:35,086 -0400 INFO pid=2576 4004:LocalWatcher    common.aggregator:114 --------> Received event RawEvent(CREATE, path=u'\\\\\\\\?\\\\C:\\\\Users\\\\informant\\\\Google Drive\\\\do_u_wanna_build_a_snow_man.mp3', time=1427142755.072, is_dir=False, ino=1125899906846942L, size=6844294L, mtime=1422636560.5520115, parent_ino=844424930207017L, is_cancelled=<RawEventIsCancelledFlag.FALSE: 0>, backup=<Backup.NO_BACKUP_CONTENT: (False, False)>) None\n> 2015-03-23 16:42:17,026 -0400 INFO pid=2576 4004:LocalWatcher    common.aggregator:114 --------> Received event RawEvent(DELETE, path=u'\\\\\\\\?\\\\C:\\\\Users\\\\informant\\\\Google Drive\\\\happy_holiday.jpg', time=1427143336.964, ino=4503599627374809L, parent_ino=844424930207017L, affects_gdoc=False, is_cancelled=<RawEventIsCancelledFlag.FALSE: 0>, backup=<Backup.NO_BACKUP_CONTENT: (False, False)>) None\n> 2015-03-23 16:42:17,026 -0400 INFO pid=2576 4004:LocalWatcher    common.aggregator:114 --------> Received event RawEvent(DELETE, path=u'\\\\\\\\?\\\\C:\\\\Users\\\\informant\\\\Google Drive\\\\do_u_wanna_build_a_snow_man.mp3', time=1427143336.964, ino=1125899906846942L, parent_ino=844424930207017L, affects_gdoc=False, is_cancelled=<RawEventIsCancelledFlag.FALSE: 0>, backup=<Backup.NO_BACKUP_CONTENT: (False, False)>) None\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot.db\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot.db-wal\n> These files are deleted because of the logoff activity.\n> Need to recover records from unused area of SQLite file.\n> If 'sync_log.log' file is missing, deleted SQLite record recovery should be considered.\n…",
+      "source_pages": [
+        15,
+        18,
+        19,
+        21,
+        23,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        44,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "keywords": [
+        "files",
+        "deleted",
+        "Google",
+        "Drive",
+        "Find",
+        "filename",
+        "modified",
+        "timestamp",
+        "transaction",
+        "log",
+        "file",
+        "Hint"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "happy_holiday.jpg",
+          "snapshot.db"
+        ],
+        "paths": [
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot",
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log",
+          "\\\\C",
+          "\\\\Users\\\\informant\\\\Google",
+          "\\\\\\\\",
+          "\\\\do_u_wanna_build_a_snow_man",
+          "\\\\happy_holiday"
+        ],
+        "timestamps": [
+          "2015-01-29 15:35:14",
+          "2015-01-30 11:49:20",
+          "2015-03-23 16:32:35",
+          "2015-03-23 16:42:17"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Drive"
+        ]
+      }
+    },
+    {
+      "question_id": 31,
+      "question": "Identify account information for synchronizing Google Drive.",
+      "ground_truth": "(Timezone is applied)\nLogon Time (from sync_log.log)\nAccount\n2015-03-23  16:05:32\niaman.informant.personal@gmail.com",
+      "considerations": "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log.log\n> 2015-03-23 16:05:32,279 -0400 INFO pid=2576 2828:LaunchThreads   common.service.user:64 Initializing User instance with new credentials. iaman.informant.personal@gmail.com\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config.db\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config.db-wal\n> These files are deleted because of the logoff activity.\n> Need to recover records from unused area of SQLite file.\n> If 'sync_log.log' file is missing, deleted SQLite record recovery should be considered.\n…",
+      "source_pages": [
+        15,
+        17,
+        18,
+        19,
+        22,
+        23,
+        24,
+        25,
+        26,
+        28,
+        34,
+        35,
+        44,
+        46,
+        47,
+        48,
+        50,
+        51
+      ],
+      "keywords": [
+        "account",
+        "information",
+        "synchronizing",
+        "Google",
+        "Drive",
+        "Timezone",
+        "applied",
+        "Logon",
+        "Time",
+        "sync_log",
+        "log",
+        "2015-03-23"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [
+          "iaman.informant.personal@gmail.com"
+        ],
+        "filenames": [
+          "sync_config.db"
+        ],
+        "paths": [
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config",
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log"
+        ],
+        "timestamps": [
+          "2015-03-23",
+          "2015-03-23 16:05:32"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Drive"
+        ]
+      }
+    },
+    {
+      "question_id": 32,
+      "question": "What method (or software) was used for burning CD-R?",
+      "ground_truth": "What a method (or software) was used for burning CD-R?\nWindows default CD/DVD burning feature\n( No 3rd party application was used for burning CD-R)",
+      "considerations": "- http://windows.microsoft.com/en-us/windows-vista/burn-a-cd-or-dvd\n> Burning Type 1: Like a USB flash drive\n> Burning Type 2: With a CD/DVD/ player (Mastered)\n- System event logs (for burning type 2 only)\n> Event IDs for Windows Vista or higher: 113 (cdrom)\n- Default burning directory (for burning type 2 only)\n> \\User\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\n- NTFS journal file analysis (for burning type 2 only)\n> \\$LogFile\n> \\$Extend\\$UsnJrnl·$J   (+ $MFT for identifying full paths of files)\n> DAT#####.tmp, DAT#####.tmp, FIL#####.tmp, POST#####.tmp\n……",
+      "source_pages": [
+        15,
+        21,
+        23,
+        25,
+        27,
+        29,
+        36,
+        37
+      ],
+      "keywords": [
+        "method",
+        "software",
+        "used",
+        "burning",
+        "CD-R",
+        "Windows",
+        "default",
+        "DVD",
+        "feature",
+        "3rd",
+        "party",
+        "application"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "\\$Extend\\$UsnJrnl",
+          "\\$LogFile",
+          "\\User\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "System",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 33,
+      "question": "When did the suspect burn CD-R? (It may be one or more times).",
+      "ground_truth": "[Hint: It may be one or more times.]\n(Timezone is applied)\nTimestamp\nSource\nDescription\n2015-03-2415:47:47\n$UsnJrnl\nBurning Type 2: With a CD/DVD/ player (Mastered)\n--------------------\n> DAT67383.tmp, DAT34216.tmp\n> FIL39751.tmp,   POST39751.tmp\n2015-03-2415:47:47\nEvent Log(System)\nBurning Type 2: With a CD/DVD/ player (Mastered)\n2015-03-2415:56:01\n$UsnJrnl\nBurning Type 2: With a CD/DVD/ player (Mastered)\n--------------------\n> DAT32224.tmp, DAT08538.tmp\n> FIL66692.tmp,   POST66692.tmp\n2015-03-2415:56:11\nEvent Log(System)\nBurning Type 2: With a CD/DVD/ player (Mastered)\n2015-03-2416:24:19\n$UsnJrnl\nBurning Type 2: With a CD/DVD/ player (Mastered)\n--------------------\n> DAT67829.tmp, DAT74017.tmp\n> FIL51898.tmp,   POST51898.tmp\n2015-03-2416:24:46\nEvent Log(System)\nBurning Type 2: With a CD/DVD/ player (Mastered)\n2015-03-2416:41:21\nEvent Log(System)\nBurning Type 2: With a CD/DVD/ player (Mastered)\n--------------------\n> DAT85234.tmp, DAT11399.tmp\n> FIL61821.tmp,   POST61821.tmp\n2015-03-2416:41:21\nEvent Log(System)\nBurning Type 2: With a CD/DVD/ player (Mastered)\n2015-03-2416:53:16\nRegistry(Burning Option)\nSelecting the method 'Type 1: Like a USB flash drive'\n--------------------\n> A registry key was updated because the suspect selected a new method for burning CD-R\n> It can be inferred from timestamps of RM#3 image\n2015-03-2416:53:17\nRM#3 image\nFormatting Type 1: Like a USB flash drive\n2015-03-2416:54 ~ 16:58\nRM#3 image\nBurning Type 1: Like a USB flash drive\n--------------------\n> Creating 17 confidential files\n> Renaming files\n> Creating 3 meaningless files\n> Deleting 17 confidential files",
+      "considerations": "- http://windows.microsoft.com/en-us/windows-vista/burn-a-cd-or-dvd\n> Burning Type 1: Like a USB flash drive\n> Burning Type 2: With a CD/DVD/ player (Mastered) System event logs, burning directory, journal logs…\n- System event logs (for burning type 2 only)\n> Event IDs for Windows Vista or higher: 113 (cdrom)\n- Default burning directory (for burning type 2 only)\n> \\User\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\n> NTFS Journal Logs\n> Deleted MFT entry\n> Registry ShellBag\n> NFTS INDX slack\n- NTFS journal file analysis (for burning type 2 only)\n> \\$LogFile\n> \\$Extend\\$UsnJrnl·$J   (+ $MFT for identifying full paths of files)\n> DAT#####.tmp, DAT#####.tmp, FIL#####.tmp, POST#####.tmp\n- CD Burning Options\n> HKU\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CD Burning\\\n> If the last selection is burning type 1, 'DefaultToMastered' value will be 0.\n> If the last selection is burning type 2, 'DefaultToMastered' value will be 1.\n- Traces of mounting a CD volume for both burning types\n> Windows .LNK\n> Jumplist\n> …\n- How to find more traces of burning type 1 on PC?\n> Is there a solution? It's up to you!\n- UDF (Universal Disk Format, http://www.osta.org/specs/pdf/udf260.pdf)\n> Timestamps stored in descriptors of UDF (ECMA 167 1/7.3)\n> ex) file offset 0x1017A of RM#3\n> DF 07 (2015), 03 (03), 18 (24), 10 (16), 35 (53), 11 (17)…\n> 2015-03-24 16:53:17 - Format time of UDF\n……",
+      "source_pages": [
+        15,
+        21,
+        27,
+        36,
+        37,
+        38,
+        39,
+        43,
+        49,
+        50
+      ],
+      "keywords": [
+        "suspect",
+        "burn",
+        "CD-R",
+        "may",
+        "one",
+        "more",
+        "times",
+        "Hint",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "Source"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "udf260.pdf"
+        ],
+        "paths": [
+          "\\$Extend\\$UsnJrnl",
+          "\\$LogFile",
+          "\\User\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn",
+          "\\informant\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CD"
+        ],
+        "timestamps": [
+          "2015-03-24 16:53:17"
+        ],
+        "hashes": [],
+        "usernames": [
+          "System",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [
+          "RM#3"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 34,
+      "question": "What files were copied from PC to CD-R? (Examine file system transaction logs).",
+      "ground_truth": "[Hint: Just use PC image only. You can examine transaction logs of the file system for this task.]\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\de\\\n> winter_storm.amr\n> winter_whether_advisory.zip\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\\\n> my_favorite_cars.db\n> my_favorite_movies.7z\n> new_years_day.jpg\n> super_bowl.avi\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog\\\n> my_friends.svg\n> my_smartphone.png\n> new_year_calendar.one\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop\\\n> a_gift_from_you.gif\n> landscape.png\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\\n> diary_#1d.txt\n> diary_#1p.txt\n> diary_#2d.txt\n> diary_#2p.txt\n> diary_#3d.txt\n> diary_#3p.txt\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\\n> Penguins.jpg\n> Koala.jpg\n> Tulips.jpg",
+      "considerations": "- It can be inferred from traces of burning type 2 and Question 35.\n- Traces related to a burning directory (for burning type 2 only)\n> \\User\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\n- NTFS journal file analysis (for burning type 2 only)\n> \\$Extend\\$UsnJrnl·$J   (+ $MFT for identifying full paths of files)",
+      "source_pages": [
+        15,
+        17,
+        18,
+        19,
+        21,
+        22,
+        25,
+        26,
+        30,
+        34,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        46,
+        48,
+        49,
+        51
+      ],
+      "keywords": [
+        "files",
+        "copied",
+        "CD-R",
+        "Examine",
+        "file",
+        "system",
+        "transaction",
+        "logs",
+        "Hint",
+        "Just",
+        "use",
+        "image"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "Koala.jpg",
+          "Penguins.jpg",
+          "Tulips.jpg",
+          "diary_#1d.txt",
+          "diary_#1p.txt",
+          "diary_#2d.txt",
+          "diary_#2p.txt",
+          "diary_#3d.txt",
+          "diary_#3p.txt",
+          "landscape.png",
+          "my_favorite_cars.db",
+          "my_favorite_movies.7z",
+          "my_smartphone.png",
+          "new_years_day.jpg",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "\\$Extend\\$UsnJrnl",
+          "\\User\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\de\\",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\\",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog\\",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop\\",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant",
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 35,
+      "question": "What files were opened from CD-R?",
+      "ground_truth": "(Timezone is applied)\nTimestamp\nFile (or Directory) Path\nSource\n2015-03-24 16:44:13\nD:\\de\\winter_whether_advisory.zip\\\nJumpList\n2015-03-24 16:44:14\nD:\\de\\winter_whether_advisory.zip\\ppt\\\nJumpList\n2015-03-24 16:44:16\nD:\\de\\winter_whether_advisory.zip\\ppt\\slides\\\nJumpList\n2015-03-24 16:44:18\nD:\\de\\winter_whether_advisory.zip\\ppt\\slideMasters\\\nJumpList\n2015-03-24 16:44:18\nD:\\de\\winter_whether_advisory.zip\n.LNK(Windows)\n2015-03-24 17:01:10\nD:\\Penguins.jpg\n.LNK(Windows)\n2015-03-24 17:01:12\nD:\\Koala.jpg\n.LNK(Windows)\n2015-03-24 17:01:14\nD:\\Tulips.jpg\n.LNK(Windows)",
+      "considerations": "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\n\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\*.lnk\n……",
+      "source_pages": [
+        15,
+        32,
+        34,
+        38
+      ],
+      "keywords": [
+        "files",
+        "opened",
+        "CD-R",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "File",
+        "Directory",
+        "Path",
+        "Source",
+        "2015-03-24",
+        "winter_whether_advisory"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "Koala.jpg",
+          "Penguins.jpg",
+          "Tulips.jpg",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "D:\\Koala",
+          "D:\\Penguins",
+          "D:\\Tulips",
+          "D:\\de\\winter_whether_advisory",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\",
+          "\\User\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations",
+          "\\ppt\\",
+          "\\ppt\\slideMasters\\",
+          "\\ppt\\slides\\"
+        ],
+        "timestamps": [
+          "2015-03-24 16:44:13",
+          "2015-03-24 16:44:14",
+          "2015-03-24 16:44:16",
+          "2015-03-24 16:44:18",
+          "2015-03-24 17:01:10",
+          "2015-03-24 17:01:12",
+          "2015-03-24 17:01:14"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 36,
+      "question": "Identify all timestamps related to a resignation file in Windows Desktop (DOCX file in NTFS file system).",
+      "ground_truth": "[Hint: the resignation file is a DOCX file in NTFS file system.]\n(Timezone is applied)\nTimestamp\nType\nSource\n2015-03-24  14:48:40\nFile Created\nNTFS MFT Entry$STANDARD_INFORMATION attribute\n2015-03-24  14:59:30\nFile Modified\n2015-03-24  14:59:30\nLast Accessed\n2015-03-24  14:59:30\nEntry Modified\n2015-03-24  14:48:40\nFile Created\nNTFS MFT Entry$FILE_NAME attribute\n2015-03-24  14:59:30\nFile Modified\n2015-03-24  14:59:30\nLast Accessed\n2015-03-24  14:59:30\nEntry Modified\n2015-03-24  14:32:00\nFile Created\nOOXML\n\\docProps\\core.xml\n2015-03-24  14:59:00\nFile Modified",
+      "considerations": "- External timestamps ( NTFS File system)\n- Internal timestamps  ( OOXML)",
+      "source_pages": [
+        15,
+        16,
+        18,
+        19,
+        20,
+        23,
+        30,
+        31,
+        36,
+        37,
+        38,
+        39,
+        40,
+        42,
+        46,
+        47,
+        49
+      ],
+      "keywords": [
+        "all",
+        "timestamps",
+        "related",
+        "resignation",
+        "file",
+        "Windows",
+        "Desktop",
+        "DOCX",
+        "NTFS",
+        "system",
+        "Hint",
+        "Timezone"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "\\docProps\\core"
+        ],
+        "timestamps": [
+          "2015-03-24"
+        ],
+        "hashes": [],
+        "usernames": [
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 37,
+      "question": "How and when did the suspect print a resignation file?",
+      "ground_truth": "(Timezone is applied)\nType\nDescription\nHow\nPrinted to XPS format\nWhen\n2015-03-25  11:28:34\nWhere\n\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "considerations": "- There are no real printer devices.\n- A XPS file can be found in Windows Desktop.\nHKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Print\\Printers\\\n> Fax\n> Microsoft XPS Document Writer\n…",
+      "source_pages": [
+        39
+      ],
+      "keywords": [
+        "suspect",
+        "print",
+        "resignation",
+        "file",
+        "Timezone",
+        "applied",
+        "Type",
+        "Description",
+        "Printed",
+        "XPS",
+        "format",
+        "2015-03-25"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\SOFTWARE\\Microsoft\\Windows",
+          "\\CurrentVersion\\Print\\Printers\\",
+          "\\Users\\informant\\Desktop\\Resignation_Letter_"
+        ],
+        "timestamps": [
+          "2015-03-25"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 38,
+      "question": "Where are 'Thumbcache' files located?",
+      "ground_truth": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_64.db\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db\n\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db",
+      "considerations": "thumbcache_32.db : BMP files for less than or equal to 32x32\nthumbcache_64.db : BMP files for less than or equal to 64x64\nthumbcache_256.db : JPG or PNG files for less than or equal to 256x256",
+      "source_pages": [
+        39,
+        40
+      ],
+      "keywords": [
+        "Thumbcache",
+        "files",
+        "located",
+        "Users",
+        "informant",
+        "AppData",
+        "Local",
+        "Microsoft",
+        "Windows",
+        "Explorer",
+        "thumbcache_32",
+        "thumbcache_64"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "thumbcache_256.db",
+          "thumbcache_32.db",
+          "thumbcache_64.db",
+          "thumbcache_idx.db"
+        ],
+        "paths": [
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_64",
+          "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 39,
+      "question": "Identify traces related to confidential files stored in Thumbcache (Include '256' only).",
+      "ground_truth": "Identify traces related to confidential files stored in Thumbcache. (Include '256' only)\nPossible Answer\nConsiderations\n- thumbcache_256.db\n- Thumbnail images of the first pages in MS PowerPoint files.",
+      "considerations": "- thumbcache_256.db\n- Thumbnail images of the first pages in MS PowerPoint files.",
+      "source_pages": [
+        15,
+        21,
+        22,
+        30,
+        34,
+        37,
+        38,
+        39,
+        40,
+        41,
+        46,
+        47,
+        51
+      ],
+      "keywords": [
+        "traces",
+        "related",
+        "confidential",
+        "files",
+        "stored",
+        "Thumbcache",
+        "Include",
+        "thumbcache_256",
+        "Thumbnail",
+        "images",
+        "first",
+        "pages"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "thumbcache_256.db"
+        ],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "PowerPoint"
+        ]
+      }
+    },
+    {
+      "question_id": 40,
+      "question": "Where are Sticky Note files located?",
+      "ground_truth": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Sticky Notes\\StickyNotes.snt",
+      "considerations": "- Microsoft Compound File Binary File Format\n> https://msdn.microsoft.com/en-us/library/dd942138.aspx",
+      "source_pages": [
+        15,
+        18,
+        39,
+        40,
+        41
+      ],
+      "keywords": [
+        "Sticky",
+        "Note",
+        "files",
+        "located",
+        "Users",
+        "informant",
+        "AppData",
+        "Roaming",
+        "Microsoft",
+        "Notes",
+        "StickyNotes",
+        "snt"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "\\StickyNotes",
+          "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Sticky"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 41,
+      "question": "Identify notes stored in the Sticky Note file.",
+      "ground_truth": "Timestamp (File Modified)\nContent\n2015-03-24  14:31:59\nTomorrow…\nEverything will be OK…",
+      "considerations": "* Timestamp may not be accurate.",
+      "source_pages": [
+        18,
+        40,
+        41
+      ],
+      "keywords": [
+        "notes",
+        "stored",
+        "Sticky",
+        "Note",
+        "file",
+        "Timestamp",
+        "Modified",
+        "Content",
+        "2015-03-24",
+        "Tomorrow",
+        "Everything"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [
+          "2015-03-24"
+        ],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 42,
+      "question": "Was the 'Windows Search and Indexing' function enabled? How can you identify it? What is the file path of the database?",
+      "ground_truth": "If it was enabled, what is a file path of the 'Windows Search' index database?\nSearch & Indexing\nEnabled\nDB File path\nC:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb",
+      "considerations": "HKLM\\SOFTWARE\\Microsoft\\Windows Search\\\nHKLM\\SOFTWARE\\Microsoft\\Windows Search\\Databases\\Windows  (value: FileName)\nHKU\\informant\\Software\\Microsoft\\Windows Search\\\nHKLM\\SYSTEM\\ControlSet001\\services\\WSearch\\   (SearchIndexer service  Start up automatically)\n…...",
+      "source_pages": [
+        15,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        38,
+        40,
+        41,
+        42,
+        43,
+        46,
+        47,
+        49,
+        50
+      ],
+      "keywords": [
+        "Windows",
+        "Search",
+        "Indexing",
+        "function",
+        "enabled",
+        "can",
+        "you",
+        "file",
+        "path",
+        "database",
+        "index",
+        "ProgramData"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows",
+          "HKLM\\SOFTWARE\\Microsoft\\Windows",
+          "HKLM\\SYSTEM\\ControlSet001\\services\\WSearch\\",
+          "\\Databases\\Windows",
+          "\\informant\\Software\\Microsoft\\Windows"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "SYSTEM",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 43,
+      "question": "What kinds of data were stored in Windows Search database?",
+      "ground_truth": "- Internet Explorer History\n- Microsoft Outlook\n- Files in %UserProfile% (Excluding 'AppData' directory)\n- Start Menu (/ProgramData/Microsoft/Windows/Start Menu/)\n- Sticky Note",
+      "considerations": "- Microsoft ESE (Extensible Storage Engine) database format\n- Windows.edb\n> 'System_ItemFolderPathDisplay' column\n> 'System_ItemPathDisplay' column\n> 'System_Search_Store' column ( file, iehistory, mapi15, StickyNotes…)\n> 'System_ItemNameDisplay' column\n> 'System_ItemName' column\n> …",
+      "source_pages": [
+        15,
+        21,
+        22,
+        23,
+        25,
+        26,
+        30,
+        31,
+        37,
+        40,
+        41,
+        42,
+        43,
+        45,
+        46,
+        47,
+        50
+      ],
+      "keywords": [
+        "kinds",
+        "data",
+        "stored",
+        "Windows",
+        "Search",
+        "database",
+        "Internet",
+        "Explorer",
+        "History",
+        "Microsoft",
+        "Outlook",
+        "Files"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Internet Explorer",
+          "Outlook"
+        ]
+      }
+    },
+    {
+      "question_id": 44,
+      "question": "Find traces of Internet Explorer usage stored in Windows Search database (2015-03-22 to 2015-03-23).",
+      "ground_truth": "(It should be considered only during a date range between 2015-03-22 and 2015-03-23.)\n(Timezone is applied)\nDate Modified\nMicrosoft IE TargetUrl\n2015-03-22 11:09:22\nhttp://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome\n2015-03-22 11:09:23\nhttp://www.msn.com/?ocid=iehp\n2015-03-22 11:09:40\nhttps://www.google.com/?gws_rd=ssl\n2015-03-22 11:09:50\nhttps://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w\n2015-03-22 11:09:52\nhttp://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A\n2015-03-22 11:09:54\nhttp://windows.microsoft.com/en-us/internet-explorer/download-ie\n2015-03-22 11:09:56\nhttp://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw\n2015-03-22 11:10:24\nhttp://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages\n2015-03-22 11:10:54\nhttps://www.google.com/webhp?hl=en\n2015-03-22 11:10:58\nhttps://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en\n2015-03-22 11:11:06\nhttp://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe\n2015-03-22 11:11:16\nhttps://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1\n2015-03-23 13:26:33\nhttps://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0\n2015-03-23 13:27:49\nhttp://www.microsoft.com/en-us/ie-firstrun/win-7/ie-11/vie\n2015-03-23 13:27:49\nhttp://www.bing.com/search\n2015-03-23 13:27:49\nhttp://go.microsoft.com/fwlink/?LinkId=69157\n2015-03-23 13:28:19\nhttp://www.bing.com/\n2015-03-23 14:07:52\nhttp://www.bing.com/news/search?q=Top Stories&FORM=NSBABR\n2015-03-23 14:07:55\nhttp://www.bing.com/search?q=Top+Stories&FORM=HDRSC1\n2015-03-23 14:07:58\nhttp://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6\n2015-03-23 14:08:00\nhttp://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1\n2015-03-23 14:08:18\nhttp://sysinfotools.com/blog/tethering-internet-files-sharing/\n2015-03-23 14:11:13\nhttp://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/\n2015-03-23 14:12:08\nhttps://technet.microsoft.com/en-us/library/cc162846.aspx\n2015-03-23 14:12:45\nhttps://support.microsoft.com/en-us/kb/308427\n2015-03-23 14:12:52\nhttp://en.wikipedia.org/wiki/Event_Viewer\n2015-03-23 14:13:58\nhttps://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx\n2015-03-23 14:14:25\nhttp://www.forensicswiki.org/wiki/USB_History_Viewing\n2015-03-23 16:43:48\nhttp://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a\n2015-03-23 16:43:50\nhttp://www.bing.com/?FORM=Z9FD1\n2015-03-23 16:43:52\nhttp://www.bing.com/news?FORM=Z9LH3\n2015-03-23 16:44:58\nhttp://www.bing.com/news?q=science+technology+news&FORM=NWBTCB\n2015-03-23 16:45:22\nhttp://www.wired.com/?p=1756538\n2015-03-23 16:45:30\nhttp://www.bing.com/news?q=Soccer+News&FORM=NSBABR\n2015-03-23 16:53:47\nhttp://www.bing.com/news?q=top+stories&FORM=NWRFSH\n2015-03-23 16:55:09\nhttp://www.bing.com/news?q=us+news&FORM=NSBABR\n2015-03-23 16:55:10\nhttp://www.bing.com/news?q=world+news&FORM=NSBABR\n2015-03-23 16:55:17\nhttp://www.bing.com/news?q=local&FORM=NSBABR\n2015-03-23 16:55:18\nhttp://www.bing.com/news?q=entertainment+news&FORM=NSBABR\n2015-03-23 16:55:29\nhttp://www.bing.com/news?q=science+technology+news&FORM=NSBABR\n2015-03-23 16:55:55\nhttp://www.bing.com/news?q=business+news&FORM=NSBABR\n2015-03-23 16:55:56\nhttp://www.bing.com/news?q=political+news&FORM=NSBABR\n2015-03-23 16:55:57\nhttp://www.bing.com/news?q=sports+news&FORM=NSBABR\n2015-03-23 16:55:59\nhttp://www.bing.com/news?q=health+news&FORM=NSBABR\n2015-03-23 16:56:09\nhttp://www.bing.com/news?q=top+stories&FORM=NSBABR\n2015-03-23 16:56:33\nhttp://www.wired.com/2015/03/stealing-data-computers-using-heat/",
+      "considerations": "- Microsoft ESE (Extensible Storage Engine) database format\n- Windows.edb\n> 'System_DateModified' column\n> 'Microsoft_IE_TargetUrl' column",
+      "source_pages": [
+        15,
+        20,
+        21,
+        22,
+        23,
+        26,
+        30,
+        31,
+        34,
+        37,
+        40,
+        41,
+        42,
+        43,
+        46,
+        47
+      ],
+      "keywords": [
+        "Find",
+        "traces",
+        "Internet",
+        "Explorer",
+        "usage",
+        "stored",
+        "Windows",
+        "Search",
+        "database",
+        "2015-03-22",
+        "2015-03-23",
+        "considered"
+      ],
+      "entities": {
+        "ips": [
+          "20.13.0.7"
+        ],
+        "emails": [],
+        "filenames": [
+          "IE11-Windows6.1-x64-en-us.exe"
+        ],
+        "paths": [],
+        "timestamps": [
+          "2015-03-22",
+          "2015-03-22 11:09:22",
+          "2015-03-22 11:09:23",
+          "2015-03-22 11:09:40",
+          "2015-03-22 11:09:50",
+          "2015-03-22 11:09:52",
+          "2015-03-22 11:09:54",
+          "2015-03-22 11:09:56",
+          "2015-03-22 11:10:24",
+          "2015-03-22 11:10:54",
+          "2015-03-22 11:10:58",
+          "2015-03-22 11:11:06",
+          "2015-03-22 11:11:16",
+          "2015-03-23",
+          "2015-03-23 13:26:33",
+          "2015-03-23 13:27:49",
+          "2015-03-23 13:28:19",
+          "2015-03-23 14:07:52",
+          "2015-03-23 14:07:55",
+          "2015-03-23 14:07:58",
+          "2015-03-23 14:08:00",
+          "2015-03-23 14:08:18",
+          "2015-03-23 14:11:13",
+          "2015-03-23 14:12:08",
+          "2015-03-23 14:12:45",
+          "2015-03-23 14:12:52",
+          "2015-03-23 14:13:58",
+          "2015-03-23 14:14:25",
+          "2015-03-23 16:43:48",
+          "2015-03-23 16:43:50",
+          "2015-03-23 16:43:52",
+          "2015-03-23 16:44:58",
+          "2015-03-23 16:45:22",
+          "2015-03-23 16:45:30",
+          "2015-03-23 16:53:47",
+          "2015-03-23 16:55:09",
+          "2015-03-23 16:55:10",
+          "2015-03-23 16:55:17",
+          "2015-03-23 16:55:18",
+          "2015-03-23 16:55:29",
+          "2015-03-23 16:55:55",
+          "2015-03-23 16:55:56",
+          "2015-03-23 16:55:57",
+          "2015-03-23 16:55:59",
+          "2015-03-23 16:56:09",
+          "2015-03-23 16:56:33"
+        ],
+        "hashes": [
+          "171b77e4ffd54b2a92c4e97abf995fe1",
+          "c30c4b1f36114b1c9bc683838c69823a"
+        ],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Internet Explorer"
+        ]
+      }
+    },
+    {
+      "question_id": 45,
+      "question": "List the e-mail communication stored in Windows Search database (2015-03-23 to 2015-03-24).",
+      "ground_truth": "(It should be considered only during a date range between 2015-03-23 and 2015-03-24.)\n(Timezone is applied)\nTimestamp\nE-Mail Communication\n2015-03-23 13:29:29\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nHello, Iaman\nBody\nHow are you doing?\n2015-03-23  14:44:32\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Hello, Iaman\nBody\nSuccessfully secured.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 1:29 PM\nTo: iaman\nSubject: Hello, Iaman\nHow are you doing?\n2015-03-23  15:14:58\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nGood job, buddy.\nBody\nGood, job.\nI need a more detailed data about this business.\n2015-03-23  15:19:22\n(Windows.edb only)\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nGood job, buddy.\nAttachment\nspace_and_earth.mp4\nBody\nThis is a sample.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 3:15 PM\nTo: iaman\nSubject: Good job, buddy.\nGood, job.\nI need a more detailed data about this business.\n2015-03-23  15:20:41\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nRE: Good job, buddy.\nBody\nOkay, I got it.\nI'll be in touch.\n---------------------------\nFrom: iaman\nSent: Monday, March 23, 2015 3:19 PM\nTo: spy\nSubject: RE: Good job, buddy.\nThis is a sample.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 3:15 PM\nTo: iaman\nSubject: Good job, buddy.\nGood, job.\nI need a more detailed data about this business.\n2015-03-23  15:26:22\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nImportant request\nBody\nI confirmed it.\nBut, I need a more data.\nDo your best.\n2015-03-23   15:27:05\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Important request\nBody\nUmm….. I need time to think.\n---------------------------\nFrom: spy\nSent: Monday, March 23, 2015 3:26 PM\nTo: iaman\nSubject: Important request\nI confirmed it.\nBut, I need a more data.\nDo your best.\n2015-03-23   16:38:48\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nIt's me\nBody\nUse links below,\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaVl8yVU5mWHlGbWc/view?usp=sharing\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaakx6d3R3c0JmM1U/view?usp=sharing\n2015-03-23 16:41:19\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nRE: It's me\nBody\nI got it.\n---------------------------\nFrom: iaman\nSent: Monday, March 23, 2015 4:39 PM\nTo: spy\nSubject: It's me\nUse links below,\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaVl8yVU5mWHlGbWc/view?usp=sharing\nhttps://drive.google.com/file/d/0Bz0ye6gXtiZaakx6d3R3c0JmM1U/view?usp=sharing\n2015-03-24 09:25:57\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nLast request\nBody\nThis is the last request.\nI want to get the remaining data.\n2015-03-24  09:30:11\n(Windows.edb only)\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Last request\nBody\nStop it!\nIt is very hard to transfer all data over the internet!\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 9:26 AM\nTo: iaman\nSubject: Last request\nThis is the last request.\nI want to get the remaining data.\n2015-03-24  09:33:45\n(Windows.edb only)\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nRE: Last request\nBody\nNo problem.\nU can directly deliver storage devices that stored it.\n---------------------------\nFrom: iaman\nSent: Tuesday, March 24, 2015 9:30 AM\nTo: spy\nSubject: RE: Last request\nStop it!\nIt is very hard to transfer all data over the internet!\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 9:26 AM\nTo: iaman\nSubject: Last request\nThis is the last request.\nI want to get the remaining data.\n2015-03-24  09:35:10\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Last request\nBody\nThis is the last time..\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 9:34 AM\nTo: iaman\nSubject: RE: Last request\nNo problem.\nU can directly deliver storage devices that stored it.\n---------------------------\nFrom: iaman\nSent: Tuesday, March 24, 2015 9:30 AM\nTo: spy\nSubject: RE: Last request\nStop it!\nIt is very hard to transfer all data over the internet!\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 9:26 AM\nTo: iaman\nSubject: Last request\nThis is the last request.\nI want to get the remaining data.\n2015-03-24  15:32:42\n(Windows.edb only)\nSource\n[Inbox]\nFrom  To\nspy.conspirator@nist.gov  iaman.informant@nist.gov\nSubject\nWatch out!\nBody\nUSB device may be easily detected.\nSo, try another method.\n2015-03-24  15:34:02\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nRE: Watch out!\nBody\nI am trying.\n---------------------------\nFrom: spy\nSent: Tuesday, March 24, 2015 3:33 PM\nTo: iaman\nSubject: Watch out!\nUSB device may be easily detected.\nSo, try another method.\n2015-03-24 17:05:10\nSource\n[Sent Items]\nFrom  To\niaman.informant@nist.gov  spy.conspirator@nist.gov\nSubject\nDone\nBody\nIt's done.  See you tomorrow.",
+      "considerations": "- Microsoft ESE (Extensible Storage Engine) database format\n- Windows.edb\n> 'System_ItemPathDisplay' column\n> 'System_Message_FromName' column\n> 'System_Message_ToAddress' column\n> 'System_Message_ToName' column\n> 'System_Message_DateSent' column\n> 'System_Message_DateReceived' column\n> 'System_Message_AttachmentNames' column\n> 'System_Search_AutoSummary' column\n> 'System_Search_AutoSummary' column\n…\n- Some e-mail items can be found only in Windows Search database.",
+      "source_pages": [
+        15,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        37,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50
+      ],
+      "keywords": [
+        "e-mail",
+        "communication",
+        "stored",
+        "Windows",
+        "Search",
+        "database",
+        "2015-03-23",
+        "2015-03-24",
+        "considered",
+        "during",
+        "date",
+        "range"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [
+          "iaman.informant@nist.gov",
+          "spy.conspirator@nist.gov"
+        ],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [
+          "2015-03-23",
+          "2015-03-23 13:29:29",
+          "2015-03-23 16:41:19",
+          "2015-03-24",
+          "2015-03-24 09:25:57",
+          "2015-03-24 17:05:10"
+        ],
+        "hashes": [],
+        "usernames": [
+          "conspirator",
+          "informant",
+          "spy"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 46,
+      "question": "List files and directories related to Windows Desktop stored in Windows Search database (\\Users\\informant\\Desktop\\).",
+      "ground_truth": "(Windows Desktop directory: \\Users\\informant\\Desktop\\)\n(Timezone is applied)\nDate Created\nFull Path\n2015-03-23 16:05:33\nC:\\\\Users\\\\informant\\\\Desktop\\\\Google Drive.lnk\n2015-03-24 09:40:09\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\space_and_earth.mp4\n2015-03-24 09:40:09\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\winter_whether_advisory.zip\n2015-03-24 09:40:10\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\winter_storm.amr\n2015-03-24 09:40:11\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\proposal\\\\[secret_project]_detailed_proposal.docx\n2015-03-24 09:40:13\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\proposal\\\\[secret_project]_proposal.docx\n2015-03-24 09:47:58\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\[secret_project]_detailed_design.pptx\n2015-03-24 09:47:58\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\final\\\\[secret_project]_final_meeting.pptx\n2015-03-24 09:47:58\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\pricing decision\\\\(secret_project)_market_analysis.xlsx\n2015-03-24 09:47:58\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\pricing decision\\\\(secret_project)_market_shares.xls\n2015-03-24 09:47:58\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\pricing decision\\\\(secret_project)_price_analysis_#1.xlsx\n2015-03-24 09:47:59\nC:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\proposal\n2015-03-24 14:48:41\nC:\\\\Users\\\\informant\\\\Desktop\\\\Resignation_Letter_(Iaman_Informant).docx\n2015-03-24 15:52:06\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\n2015-03-24 15:52:36\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\IE11-Windows6.1-x64-en-us.exe\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Chrysanthemum.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Hydrangeas.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Desert.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Lighthouse.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Koala.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Jellyfish.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Tulips.jpg\n2015-03-24 15:52:47\nC:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Penguins.jpg",
+      "considerations": "- Microsoft ESE (Extensible Storage Engine) database format\n- Windows.edb\n> 'System_DateCreated' column\n> 'System_ItemDate' column\n> 'System_ItemPathDisplay' column\n> 'System_Search_AutoSummary' column\n…",
+      "source_pages": [
+        15,
+        18,
+        19,
+        21,
+        22,
+        23,
+        25,
+        30,
+        31,
+        32,
+        34,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        46,
+        47,
+        49,
+        50
+      ],
+      "keywords": [
+        "files",
+        "directories",
+        "related",
+        "Windows",
+        "Desktop",
+        "stored",
+        "Search",
+        "database",
+        "Users",
+        "informant",
+        "directory",
+        "Timezone"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "Chrysanthemum.jpg",
+          "Desert.jpg",
+          "Drive.lnk",
+          "Hydrangeas.jpg",
+          "IE11-Windows6.1-x64-en-us.exe",
+          "Jellyfish.jpg",
+          "Koala.jpg",
+          "Lighthouse.jpg",
+          "Penguins.jpg",
+          "Tulips.jpg",
+          "_detailed_proposal.docx",
+          "_proposal.docx",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\Google",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\Resignation_Letter_",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\S",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Chrysanthemum",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Desert",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Hydrangeas",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\IE11-Windows6",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Jellyfish",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Koala",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Lighthouse",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Penguins",
+          "C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Tulips",
+          "\\Users\\informant\\Desktop\\",
+          "\\\\",
+          "\\\\Secret",
+          "\\\\design\\\\",
+          "\\\\design\\\\space_and_earth",
+          "\\\\design\\\\winter_storm",
+          "\\\\design\\\\winter_whether_advisory",
+          "\\\\final\\\\",
+          "\\\\pricing",
+          "\\\\proposal",
+          "\\\\proposal\\\\"
+        ],
+        "timestamps": [
+          "2015-03-23 16:05:33",
+          "2015-03-24 09:40:09",
+          "2015-03-24 09:40:10",
+          "2015-03-24 09:40:11",
+          "2015-03-24 09:40:13",
+          "2015-03-24 09:47:58",
+          "2015-03-24 09:47:59",
+          "2015-03-24 14:48:41",
+          "2015-03-24 15:52:06",
+          "2015-03-24 15:52:36",
+          "2015-03-24 15:52:47"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Drive"
+        ]
+      }
+    },
+    {
+      "question_id": 47,
+      "question": "Where are Volume Shadow Copies stored? When were they created?",
+      "ground_truth": "There is a Volume Shadow Copy in '\\System Volume Information\\' directory\n\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{Global GUID}\n> Created Time: 2015-03-25 10:57:27 AM  (Timezone is applied)\n> File size: 320 MB (335,544,320 bytes)",
+      "considerations": "- \\System Volume Information\\{Random GUID for a VSC}{VSS identifier - Common GUID for VSCs}\n- VSS identifier stored at file offset 0 for 16 bytes\n> {3808876b-c176-4e48-b7ae-04046e6cc752}\n> Global GUID for VSS\n- Shadow Copy ID stored at file offset 144 for 16 bytes\n> {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}\n- Shadow Copy set ID stored at file offset 160 for 16 bytes\n> {56e43eb5-ac18-4f06-a521-1e17712b7ced}\n…",
+      "source_pages": [
+        15,
+        37,
+        46,
+        47,
+        48,
+        49
+      ],
+      "keywords": [
+        "Volume",
+        "Shadow",
+        "Copies",
+        "stored",
+        "they",
+        "created",
+        "There",
+        "Copy",
+        "System",
+        "Information",
+        "directory",
+        "9b365826-d2ef-11e4-b734-000c29ff2429"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "\\System"
+        ],
+        "timestamps": [
+          "2015-03-25 10:57:27"
+        ],
+        "hashes": [],
+        "usernames": [
+          "System"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 48,
+      "question": "Find traces related to Google Drive service in Volume Shadow Copy. What are the differences between current system image and its VSC?",
+      "ground_truth": "(Timezone is applied)\nDate Created\nDate Modified\nPath\nSize\nFormat\n2015-03-23\n16:02:51\n2015-03-23\n16:47:55\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot.db\n20 KB\nSQLite\n2015-03-23\n16:02:51\n2015-03-23\n16:47:55\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config.db\n11 KB\nSQLite\n2015-03-23\n16:02:51\n2015-03-23\n16:47:56\n\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log.log\n341 KB\nTEXT\n[ Current system image vs. VSC ]\n- The last log inside sync_log.log from VSC was added at 2015-03-23 16:47:56.\n- Two SQLite files (snapshot.db and sync_config.db) exist in VSC.\n- These files were deleted because of the logoff activity in 2015-03-25.\n- In other words, VSC was created before the logoff activity.",
+      "considerations": "- Creation time of a Volume Shadow Copy\n> 2015-03-25 10:57:27 AM",
+      "source_pages": [
+        15,
+        20,
+        30,
+        34,
+        37,
+        40,
+        41,
+        47,
+        48,
+        49
+      ],
+      "keywords": [
+        "Find",
+        "traces",
+        "related",
+        "Google",
+        "Drive",
+        "service",
+        "Volume",
+        "Shadow",
+        "Copy",
+        "differences",
+        "between",
+        "current"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "snapshot.db",
+          "sync_config.db"
+        ],
+        "paths": [
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot",
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config",
+          "\\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log"
+        ],
+        "timestamps": [
+          "2015-03-23",
+          "2015-03-23 16:47:56",
+          "2015-03-25",
+          "2015-03-25 10:57:27"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant",
+          "system"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Drive"
+        ]
+      }
+    },
+    {
+      "question_id": 49,
+      "question": "What files were deleted from Google Drive? Find deleted records of cloud_entry table inside snapshot.db from VSC.",
+      "ground_truth": "Find deleted records of cloud_entry table inside snapshot.db from VSC.\n(Just examine the SQLite database only. Let us suppose that a text based log file was wiped.)\n[Hint: DDL of cloud_entry table is as follows.]\nCREATE TABLE cloud_entry\n(doc_id TEXT, filename TEXT, modified INTEGER, created INTEGER, acl_role INTEGER, doc_type INTEGER, removed INTEGER, size INTEGER, checksum TEXT, shared INTEGER, resource_type TEXT, PRIMARY KEY (doc_id));\nRecord Info\nColumn\nSize (bytes)\nData\n[File offset 0x702]\nRecordSize: 0x76\nRowID: 0x03\nHeaderSize: 0x0C\ndoc_id\n(69-13)/2 = 28\n0Bz0ye6gXtiZaVl8yVU5mWHlGbWc\nFilename\n(75-13)/2 = 31\ndo_u_wanna_build_a_snow_man.mp3\nmodified\n4\n0x54CBB610 (1422636560)\n2015-01-30 11:49:20 (UTC-05)\ncreated\n4\n0x5510786D (1427142765)\n2015-03-23 16:32:45 (UTC-04)\nacl_role\n0\n0\ndoc_type\n0\n1\nremoved\n0\n0\nsize\n3\n0x686F86 (6844294)\n6,844,294 bytes\nchecksum\n(77-13)/2 = 32\n2c4553f99533d85adb104b3a5c38521a\nshared\n0\n1\nresource_type\n(21-13)/2 = 4\nfile\n[File offset 0x77A]\nFirst 4 bytes are overwritten\nRecordSize: N/A\nRowID: N/A\nHeaderSize: N/A\ndoc_id\nfixed size (28)\n0Bz0ye6gXtiZaakx6d3R3c0JmM1U\nFilename\n(47-13)/2 = 17\nhappy_holiday.jpg\nmodified\n4\n0x54CA9982 (1422563714)\n2015-01-29 15:35:14 (UTC-05)\ncreated\n4\n0x5510786A (1427142762)\n2015-03-23 16:32:42 (UTC-04)\nacl_role\n0\n0\ndoc_type\n0\n1\nremoved\n0\n0\nsize\n3\n0x6B8C5 (440517)\n440,517 bytes\nchecksum\n(77-13)/2 = 32\n0c77d6a2704155dbfdf29817769b7478\nshared\n0\n1\nresource_type\n(21-13)/2 = 4\nfile",
+      "considerations": "- Deleted SQLite record recovery\n> http://www.sqlite.org/fileformat2.html\n> …\n- (Deleted record #1) File offset 0x702 of snapshot.db from VSC\n- (Deleted record #2) File offset 0x77A of snapshot.db from VSC",
+      "source_pages": [
+        15,
+        18,
+        23,
+        26,
+        28,
+        30,
+        34,
+        35,
+        37,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "keywords": [
+        "files",
+        "deleted",
+        "Google",
+        "Drive",
+        "Find",
+        "records",
+        "cloud_entry",
+        "inside",
+        "snapshot",
+        "VSC",
+        "Just",
+        "examine"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "happy_holiday.jpg",
+          "snapshot.db",
+          "www.sqlite"
+        ],
+        "paths": [],
+        "timestamps": [
+          "2015-01-29 15:35:14",
+          "2015-01-30 11:49:20",
+          "2015-03-23 16:32:42",
+          "2015-03-23 16:32:45"
+        ],
+        "hashes": [
+          "0c77d6a2704155dbfdf29817769b7478",
+          "2c4553f99533d85adb104b3a5c38521a"
+        ],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Google Drive"
+        ]
+      }
+    },
+    {
+      "question_id": 50,
+      "question": "Why can't we find Outlook's e-mail data in Volume Shadow Copy?",
+      "ground_truth": "Outlook OST files were excluded by the following snapshot configuration.\nHKLM\\System\\CurrentControlSet\\Control\\BackupRestore\\FilesNotToSnapshot\\\n> OutlookOST: $UserProfile$\\AppData\\Local\\Microsoft\\Outlook\\*.ost",
+      "considerations": "- Excluding Files from Shadow Copies\n> https://msdn.microsoft.com/en-us/library/windows/desktop/aa819132(v=vs.85).aspx",
+      "source_pages": [
+        15,
+        27,
+        30,
+        37,
+        41,
+        47,
+        48,
+        49
+      ],
+      "keywords": [
+        "can",
+        "find",
+        "Outlook",
+        "e-mail",
+        "data",
+        "Volume",
+        "Shadow",
+        "Copy",
+        "OST",
+        "files",
+        "excluded",
+        "following"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [
+          "HKLM\\System\\CurrentControlSet\\Control\\BackupRestore\\FilesNotToSnapshot\\",
+          "\\AppData\\Local\\Microsoft\\Outlook\\"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "System"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "Outlook"
+        ]
+      }
+    },
+    {
+      "question_id": 51,
+      "question": "Examine 'Recycle Bin' data in PC.",
+      "ground_truth": "(Timezone is applied)\n$I Name\nTimestamp Deleted\nOriginal File (or Directory) Path\n$I40295N\n2015-03-24 15:51:47\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop\n$IXWGVWC\n2015-03-24 15:51:47\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog\n$I55Z163\n2015-03-24 15:51:47\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\n$I9M7UMY\n2015-03-24 15:51:47\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\n$I508CBB.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Hydrangeas.jpg\n$I8YP3XK.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg\n$IDOI3HE.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg\n$IFVCH5V.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg\n$II3FM2A.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg\n$IIQGWTT.ini\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini\n$IJEMT64.exe\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\IE11-Windows6.1-x64-en-us.exe\n$IKXD1U3.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg\n$IU3FKWI.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg\n$IX538VH.jpg\n2015-03-24 16:11:42\nC:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg",
+      "considerations": "- The SID of 'informant' account is 1000.\n> \\$Recycle.Bin\\S-1-5-21-2425377081-3129163575-2985601102-1000\\*\n- Windows 7 Recycle Bin\n> pairs of $I[random].extension & $R[random].extension\n- Although Recycle Bin was emptied in this scenario, the deleted files can be recovered by metadata based data recovery.",
+      "source_pages": [
+        49
+      ],
+      "keywords": [
+        "Examine",
+        "Recycle",
+        "Bin",
+        "data",
+        "Timezone",
+        "applied",
+        "Name",
+        "Timestamp",
+        "Deleted",
+        "Original",
+        "File",
+        "Directory"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "Chrysanthemum.jpg",
+          "Desert.jpg",
+          "Hydrangeas.jpg",
+          "I508CBB.jpg",
+          "I8YP3XK.jpg",
+          "IDOI3HE.jpg",
+          "IE11-Windows6.1-x64-en-us.exe",
+          "IFVCH5V.jpg",
+          "II3FM2A.jpg",
+          "IJEMT64.exe",
+          "IKXD1U3.jpg",
+          "IU3FKWI.jpg",
+          "IX538VH.jpg",
+          "Jellyfish.jpg",
+          "Koala.jpg",
+          "Lighthouse.jpg",
+          "Penguins.jpg",
+          "Tulips.jpg"
+        ],
+        "paths": [
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Hydrangeas",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\IE11-Windows6",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop",
+          "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr",
+          "\\$Recycle",
+          "\\S-1-5-21-2425377081-3129163575-2985601102-1000\\"
+        ],
+        "timestamps": [
+          "2015-03-24 15:51:47",
+          "2015-03-24 16:11:42"
+        ],
+        "hashes": [],
+        "usernames": [
+          "informant"
+        ],
+        "os_info": [
+          "Windows 7"
+        ],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 52,
+      "question": "What actions were performed for anti-forensics on PC at the last day '2015-03-25'?",
+      "ground_truth": "(Timezone is applied)\nTimestamp\nBehavior\nDescription\n2015-03-25 10:46:44\nSearch anti-forensic methods\nanti-forensic tools\n2015-03-25 10:46:54\nSearch anti-forensic methods\neraser\n2015-03-25 10:47:34\nDownload anti-forensic tools\nhttp://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe\n2015-03-25\n10:47:51\nSearch anti-forensic methods\nccleaner\n2015-03-25 10:48:12\nDownload anti-forensic tools\nhttp://www.piriform.com/ccleaner/download\n2015-03-25 10:50:14\nInstallanti-forensic tools\n\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE\n2015-03-25 10:57:56\nInstallanti-forensic tools\n\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504.EXE\n2015-03-25 11:13:30\nRun\nanti-forensic tools\n\\PROGRAM FILES\\Eraser\\Eraser.exe\n2015-03-25 11:13:39\n~ 11:14:44\nWiping files & directoriesusing Eraser\n\\User\\Informant\\Desktop\\Temp\\Chrysanthemum.jpg\n\\User\\Informant\\Desktop\\Temp\\Desert.jpg\n\\User\\Informant\\Desktop\\Temp\\Hydrangeas.jpg\n\\User\\Informant\\Desktop\\Temp\\IE11-Windows6.1-x64-en-us.exe\n\\User\\Informant\\Desktop\\Temp\\Jellyfish.jpg\n\\User\\Informant\\Desktop\\Temp\\Koala.jpg\n\\User\\Informant\\Desktop\\Temp\\Lighthouse.jpg\n\\User\\Informant\\Desktop\\Temp\\Penguins.jpg\n\\User\\Informant\\Desktop\\Temp\\Tulips.jpg\n\\User\\Informant\\Desktop\\Temp\\Tulips.jpg\n\\User\\Informant\\Desktop\\Temp\\\n(See below)\n2015-03-25 11:15:45\nDelete files\n[Shift] + [Delete]\n\\Users\\informant\\Desktop\\Download\\ccsetup504.exe\n\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe\n2015-03-25 11:15:50\nRun\nanti-forensic tools\n\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE\n2015-03-25 11:18:29\nUninstall\nanti-forensic tools\n\\PROGRAM FILES\\CCLEANER\\UNINST.EXE\n2015-03-25 11:22:47\nDisconnecting\nGoogle drive account\nsync_log.log\n> 2015-03-25 11:22:47,053 -0400 INFO pid=3164 1528:MainThread      common.sync_app:1630 Signing Out\n> 2015-03-25 11:22:48,878 -0400 INFO pid=3164 1528:MainThread      common.sync_app:1741 Deleting file: C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\sync_config.db\n> 2015-03-25 11:22:48,878 -0400 INFO pid=3164 1528:MainThread      common.sync_app:1741 Deleting file: C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\snapshot.db\nN/A\nDelete some e-mails in Outlook\nSee Question 21 and Question 45.\n(1) It's me\n(2) RE: It's me\n(3) Good job, buddy.\n(4) RE: Last request\n(5) Watch out!\n(6) RE: Watch out!\n(7) Done",
+      "considerations": "[Wiping traces of Eraser in $UsnJrnl]\n- Eraser renames the target file as random bytes, and fills random data.\n> Current Eraser settings: erasure method (US DoD 5220.22-M  7 Passes)\n> (0) Chrysanthemum.jpg ( target file)\n> (1) S9(wQm9ff_gd/hZ~c(Renamed file for Step 1)\n> (2) KclInDLFM3YdDX}t1(Renamed file for Step 2)\n> (3) C0jAF)No] VBZJoxE(Renamed file for Step 3)\n> (4) +a]Zd+UuQ88qn/K9J(Renamed file for Step 4)\n> (5) 2O8josN{78q7Ju7dx(Renamed file for Step 5)\n> (6) v1hNH f]1bDJc2'(I(Renamed file for Step 6)\n> (7) 8BkLKk2 cBfQ7`SvH(Renamed file for Step 7)\n> (8) Delete the last file\n- See Question 10 and 11 for identifying application usage logs.\n- See Question 15, 16 and 44 for identifying web history.\n- See Question 30 and 49 for identifying cloud storage drive history.\n……",
+      "source_pages": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        23,
+        24,
+        26,
+        39,
+        47,
+        48,
+        50,
+        51
+      ],
+      "keywords": [
+        "actions",
+        "performed",
+        "anti-forensics",
+        "last",
+        "day",
+        "2015-03-25",
+        "Timezone",
+        "applied",
+        "Timestamp",
+        "Behavior",
+        "Description",
+        "Search"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "206.2.0.2962.exe",
+          "6.2.0.2962.EXE",
+          "6.2.0.2962.exe",
+          "CCLEANER64.EXE",
+          "CCSETUP504.EXE",
+          "Chrysanthemum.jpg",
+          "Desert.jpg",
+          "Eraser.exe",
+          "Hydrangeas.jpg",
+          "IE11-Windows6.1-x64-en-us.exe",
+          "Jellyfish.jpg",
+          "Koala.jpg",
+          "Lighthouse.jpg",
+          "Penguins.jpg",
+          "Tulips.jpg",
+          "UNINST.EXE",
+          "ccsetup504.exe",
+          "snapshot.db",
+          "sync_config.db"
+        ],
+        "paths": [
+          "C:\\Users\\INFORM",
+          "\\AppData\\Local\\Google\\Drive\\user_default\\snapshot",
+          "\\AppData\\Local\\Google\\Drive\\user_default\\sync_config",
+          "\\CCLEANER\\CCLEANER64",
+          "\\CCLEANER\\UNINST",
+          "\\Eraser\\Eraser",
+          "\\PROGRAM",
+          "\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504",
+          "\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER",
+          "\\User\\Informant\\Desktop\\Temp\\",
+          "\\User\\Informant\\Desktop\\Temp\\Chrysanthemum",
+          "\\User\\Informant\\Desktop\\Temp\\Desert",
+          "\\User\\Informant\\Desktop\\Temp\\Hydrangeas",
+          "\\User\\Informant\\Desktop\\Temp\\IE11-Windows6",
+          "\\User\\Informant\\Desktop\\Temp\\Jellyfish",
+          "\\User\\Informant\\Desktop\\Temp\\Koala",
+          "\\User\\Informant\\Desktop\\Temp\\Lighthouse",
+          "\\User\\Informant\\Desktop\\Temp\\Penguins",
+          "\\User\\Informant\\Desktop\\Temp\\Tulips",
+          "\\Users\\informant\\Desktop\\Download\\Eraser",
+          "\\Users\\informant\\Desktop\\Download\\ccsetup504"
+        ],
+        "timestamps": [
+          "2015-03-25",
+          "2015-03-25 10:46:44",
+          "2015-03-25 10:46:54",
+          "2015-03-25 10:47:34",
+          "2015-03-25 10:48:12",
+          "2015-03-25 10:50:14",
+          "2015-03-25 10:57:56",
+          "2015-03-25 11:13:30",
+          "2015-03-25 11:13:39",
+          "2015-03-25 11:15:45",
+          "2015-03-25 11:15:50",
+          "2015-03-25 11:18:29",
+          "2015-03-25 11:22:47",
+          "2015-03-25 11:22:48"
+        ],
+        "hashes": [],
+        "usernames": [
+          "INFORMANT",
+          "Informant",
+          "informant"
+        ],
+        "os_info": [],
+        "devices": [],
+        "applications": [
+          "CCLEANER",
+          "ERASER",
+          "Eraser",
+          "Google drive",
+          "Outlook",
+          "ccleaner",
+          "eraser"
+        ]
+      }
+    },
+    {
+      "question_id": 53,
+      "question": "Recover deleted files from USB drive 'RM#2'.",
+      "ground_truth": "Recovery Type\nFilename (Path)\nFormat\nFilesize\nViewable\nMetadata\n(FAT Directory Entry)\n\\DESIGN\\winter_storm.amr\nPPT\n13.8 MB\nO\n\\DESIGN\\winter_whether_advisory.zip\nPPTX\n15.6 MB\nO\n\\pricing decision\\my_favorite_cars.db\nXLS\n1.20 MB\nO\n\\pricing decision\\my_favorite_movies.7z\nXLSX\n97.7 KB\nO\n\\pricing decision\\new_years_day.jpg\nXLSX\n9.76 MB\nO\n\\pricing decision\\super_bowl.avi\nXLS\n9.81 MB\nO\n\\PROGRESS\\my_friends.svg\nDOC\n57.0 KB\nO\n\\PROGRESS\\my_smartphone.png\nDOCX\n4.23 MB\nO\n\\PROGRESS\\new_year_calendar.one\nDOCX\n26.7 KB\nO\n\\PROPOSAL\\a_gift_from_you.gif\nDOCX\n33.5 MB\nO\n\\PROPOSAL\\landscape.png\nDOCX\n6.18 MB\nO\n\\technical review\\diary_#1d.txt\nDOCX\n118 KB\nO\n\\technical review\\diary_#1p.txt\nPPTX\n447 KB\nO\n\\technical review\\diary_#2d.txt\nDOCX\n643 KB\nO\n\\technical review\\diary_#2p.txt\nPPT\n1.10 MB\nO\n\\technical review\\diary_#3d.txt\nDOC\n2.25 MB\nO\n\\technical review\\diary_#3p.txt\nPPT\n317 KB\nO\nCarving\n- All other files do not have a relationship with this scenario.\n- Results from TestData (PhotoRec)\n> OGG, 3GP, GIF, JPG, XLS, DOC, MOV, MP4, MPG, PNG, TIF, WMA, WMV, XML…",
+      "considerations": "- Metadata based data recovery\n> Directory Entries of FAT file system.\n> This task may be enough for 'RM#2' image.\n- Contents (signatures) based data carving\n> This task is optional.",
+      "source_pages": [
+        15,
+        18,
+        19,
+        23,
+        26,
+        28,
+        29,
+        30,
+        32,
+        34,
+        35,
+        36,
+        37,
+        46,
+        48,
+        49,
+        50,
+        51
+      ],
+      "keywords": [
+        "Recover",
+        "deleted",
+        "files",
+        "USB",
+        "drive",
+        "RM#2",
+        "Recovery",
+        "Type",
+        "Filename",
+        "Path",
+        "Format",
+        "Filesize"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "diary_#1d.txt",
+          "diary_#1p.txt",
+          "diary_#2d.txt",
+          "diary_#2p.txt",
+          "diary_#3d.txt",
+          "diary_#3p.txt",
+          "landscape.png",
+          "my_favorite_cars.db",
+          "my_favorite_movies.7z",
+          "my_smartphone.png",
+          "new_years_day.jpg",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "\\DESIGN\\winter_storm",
+          "\\DESIGN\\winter_whether_advisory",
+          "\\PROGRESS\\my_friends",
+          "\\PROGRESS\\my_smartphone",
+          "\\PROGRESS\\new_year_calendar",
+          "\\PROPOSAL\\a_gift_from_you",
+          "\\PROPOSAL\\landscape",
+          "\\diary_",
+          "\\my_favorite_cars",
+          "\\my_favorite_movies",
+          "\\new_years_day",
+          "\\pricing",
+          "\\super_bowl",
+          "\\technical"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [
+          "system"
+        ],
+        "os_info": [],
+        "devices": [
+          "RM#2"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 54,
+      "question": "What actions were performed for anti-forensics on USB drive 'RM#2'?",
+      "ground_truth": "[Hint: this can be inferred from the results of Question 53.]\nQuick format for deleting data",
+      "considerations": "- Inference from data recovery results.\n- Some directory entries prior to the quick format do exist in unallocated areas.",
+      "source_pages": [
+        23,
+        26,
+        50
+      ],
+      "keywords": [
+        "actions",
+        "performed",
+        "anti-forensics",
+        "USB",
+        "drive",
+        "RM#2",
+        "Hint",
+        "can",
+        "inferred",
+        "results",
+        "Question",
+        "Quick"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [
+          "RM#2"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 55,
+      "question": "What files were copied from PC to USB drive 'RM#2'?",
+      "ground_truth": "(Timezone is applied)\nFilename\nFormat\nFilesize\nJumpList and ShellBag entry in PC\nwinter_storm.amr\nPPT\n13.8 MB\nNone\nwinter_whether_advisory.zip\nPPTX\n15.6 MB\nE:\\Secret Project Data\\design\\winter_whether_advisory.zip\nmy_favorite_cars.db\nXLS\n1.20 MB\nNone\nmy_favorite_movies.7z\nXLSX\n97.7 KB\nNone\nnew_years_day.jpg\nXLSX\n9.76 MB\nNone\nsuper_bowl.avi\nXLS\n9.81 MB\nNone\nmy_friends.svg\nDOC\n57.0 KB\nNone\nmy_smartphone.png\nDOCX\n4.23 MB\nNone\nnew_year_calendar.one\nDOCX\n26.7 KB\nNone\na_gift_from_you.gif\nDOCX\n33.5 MB\nNone\nlandscape.png\nDOCX\n6.18 MB\nNone\ndiary_#1d.txt\nDOCX\n118 KB\nNone\ndiary_#1p.txt\nPPTX\n447 KB\nNone\ndiary_#2d.txt\nDOCX\n643 KB\nNone\ndiary_#2p.txt\nPPT\n1.10 MB\nNone\ndiary_#3d.txt\nDOC\n2.25 MB\nNone\ndiary_#3p.txt\nPPT\n317 KB\nNone",
+      "considerations": "- Inference from the results of deleted data recovery in Question 53.\n- Inference from the results of traversed files/directories in Question 25 and 26.",
+      "source_pages": [
+        15,
+        18,
+        19,
+        32,
+        34,
+        35,
+        36,
+        37,
+        46,
+        48,
+        50,
+        51
+      ],
+      "keywords": [
+        "files",
+        "copied",
+        "USB",
+        "drive",
+        "RM#2",
+        "Timezone",
+        "applied",
+        "Filename",
+        "Format",
+        "Filesize",
+        "JumpList",
+        "ShellBag"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "diary_#1d.txt",
+          "diary_#1p.txt",
+          "diary_#2d.txt",
+          "diary_#2p.txt",
+          "diary_#3d.txt",
+          "diary_#3p.txt",
+          "landscape.png",
+          "my_favorite_cars.db",
+          "my_favorite_movies.7z",
+          "my_smartphone.png",
+          "new_years_day.jpg",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [
+          "E:\\Secret",
+          "\\design\\winter_whether_advisory"
+        ],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [
+          "RM#2"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 56,
+      "question": "Recover hidden files from the CD-R 'RM#3'. How to determine proper filenames of original files prior to renaming?",
+      "ground_truth": "How to determine proper filenames of the original files prior to renaming tasks?\nRecovery Type\nFilename inferred from the First Page & its storage format\nFormat\nFilesize\nViewable\nData\nCarving\n[secret_project]_revised_points.ppt\nPPT\n13.8 MB\nO\n[secret_project]_detailed_design.pptx\nPPTX\n15.6 MB\nO\n[secret_project]_price_analysis_#1.xlsx\nXLSX\n97.7 KB\nO\n[secret_project]_price_analysis_#2.xls\nXLS\n1.20 MB\nO\n[secret_project]_market_analysis.xlsx\nXLSX\n9.76 MB\nO\n[secret_project]_market_shares.xls\nXLS\n9.81 MB\nO\n[secret_project]_progress_#1.docx\nDOCX\n4.23 MB\nO\n[secret_project]_progress_#2.docx\nDOCX\n26.7 KB\nO\n[secret_project]_progress_#3.doc\nDOC\n56.0 KB\nO\n[secret_project]_detailed_proposal.docx\nDOCX\n-\nPartial\n[secret_project]_proposal.docx\nDOCX\n6.18 MB\nO\n[secret_project]_technical_review_#1.docx\nDOCX\n118 KB\nO\n[secret_project]_technical_review_#1.pptx\nPPTX\n447 KB\nO\n[secret_project]_technical_review_#2.docx\nDOCX\n643 KB\nO\n[secret_project]_technical_review_#2.ppt\nPPT\n1.10 MB\nO\n[secret_project]_technical_review_#3.doc\nDOC\n2.25 MB\nO\n[secret_project]_technical_review_#3.ppt\nPPT\n317 KB\nO",
+      "considerations": "- Contents (signatures) based data carving\n> This task is useful for 'RM#3' image.\n> Filename can be inferred from the first page and its storage format.\n- Metadata based data recovery\n> If this task is possible, it may be good for analyst.\n> With this method, we may be able to identify renamed filenames.\n> So, additional process is needed for determining original filenames.\n- All other files (some JPEG files) do not have a relationship with this scenario.",
+      "source_pages": [
+        49
+      ],
+      "keywords": [
+        "Recover",
+        "hidden",
+        "files",
+        "CD-R",
+        "RM#3",
+        "determine",
+        "proper",
+        "filenames",
+        "original",
+        "prior",
+        "renaming",
+        "tasks"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "_detailed_proposal.docx",
+          "_progress_#1.docx",
+          "_progress_#2.docx",
+          "_progress_#3.doc",
+          "_proposal.docx",
+          "_technical_review_#1.docx",
+          "_technical_review_#2.docx",
+          "_technical_review_#3.doc"
+        ],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [
+          "RM#3"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 57,
+      "question": "What actions were performed for anti-forensics on CD-R 'RM#3'?",
+      "ground_truth": "(1) Formatting CD-R (Burning Type 1: Like a USB flash drive)\n(2) Copying confidential files and some meaningless files to CD-R\n(3) Deleting confidential files from CD-R for hiding them",
+      "considerations": "- This can be inferred from CD-R image examination.",
+      "source_pages": [
+        50
+      ],
+      "keywords": [
+        "actions",
+        "performed",
+        "anti-forensics",
+        "CD-R",
+        "RM#3",
+        "Formatting",
+        "Burning",
+        "Type",
+        "Like",
+        "USB",
+        "flash",
+        "drive"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [
+          "RM#3"
+        ],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 58,
+      "question": "Create a detailed timeline of data leakage processes.",
+      "ground_truth": "See Section 3",
+      "considerations": "- Behavior of the suspect\n> 2015-03-22: Normal business works (installation and configuration of apps)\n> 2015-03-23: Transferring sample confidential data through the internet\n> 2015-03-24: Copying confidential data to storage devices\n> 2015-03-25: Trying to do anti-forensics and take storage devices out\n- Some traces may be hard to be exactly identified from the images.",
+      "source_pages": [
+        12,
+        13,
+        14,
+        15,
+        17,
+        27,
+        28,
+        30,
+        31,
+        32,
+        33,
+        35,
+        39,
+        43,
+        44,
+        46,
+        47,
+        48
+      ],
+      "keywords": [
+        "Create",
+        "detailed",
+        "timeline",
+        "data",
+        "leakage",
+        "processes",
+        "See",
+        "Section"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [
+          "2015-03-22",
+          "2015-03-23",
+          "2015-03-24",
+          "2015-03-25"
+        ],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 59,
+      "question": "List and explain methodologies of data leakage performed by the suspect.",
+      "ground_truth": "(1) Network Transmission\n- E-mail\n> 2015-03-23 15:19 - space_and_earth.mp4\n> 2015-03-23 16:38 - links of shared files in cloud storage service\n- Cloud storage services\n> 2015-03-23 16:32 - happy_holiday.jpg, do_u_wanna_build_a_snow_man.mp3\n(2) Storage Device\n- USB flash drive\n> 2015-03-24 09:58 ~ 10:00 - winter_whether_advisory.zip and so on\n> The suspect formatted the partition, but copied files exist in unused area\n- CD-R\n> 2015-03-24 16:54 ~ 16:58 - 17 files (e.g., winter_whether_advisory.zip and so on)\n> The suspect deleted the confidential files, but the files exist in unused area",
+      "considerations": "- See Section 5.\n- See Question 45 related to the e-mail communication.\n- See Question 30 and 49 related to the cloud storage service.\n- See Question 22, 25, 26, 54 and 55 related to USB flash drive.\n- See Question 34 and 56 related to CD-R.",
+      "source_pages": [
+        17,
+        21,
+        27,
+        29,
+        36,
+        39,
+        50
+      ],
+      "keywords": [
+        "methodologies",
+        "data",
+        "leakage",
+        "performed",
+        "suspect",
+        "Network",
+        "Transmission",
+        "E-mail",
+        "2015-03-23",
+        "space_and_earth",
+        "mp4",
+        "links"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [
+          "happy_holiday.jpg",
+          "winter_whether_advisory.zip"
+        ],
+        "paths": [],
+        "timestamps": [
+          "2015-03-23 15:19",
+          "2015-03-23 16:32",
+          "2015-03-23 16:38",
+          "2015-03-24 09:58",
+          "2015-03-24 16:54"
+        ],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    },
+    {
+      "question_id": 60,
+      "question": "Create a visual diagram for a summary of results.",
+      "ground_truth": "- See Section 3 (Graphical Timeline of the Data Leakage Scenario)",
+      "considerations": "- A visual diagram of Section 3 is a simple example to better understanding.\n- You can create your own visual diagram for explaining the results of digital forensic analysis.",
+      "source_pages": [
+        15,
+        46,
+        47
+      ],
+      "keywords": [
+        "Create",
+        "visual",
+        "diagram",
+        "summary",
+        "results",
+        "See",
+        "Section",
+        "Graphical",
+        "Timeline",
+        "Data",
+        "Leakage",
+        "Scenario"
+      ],
+      "entities": {
+        "ips": [],
+        "emails": [],
+        "filenames": [],
+        "paths": [],
+        "timestamps": [],
+        "hashes": [],
+        "usernames": [],
+        "os_info": [],
+        "devices": [],
+        "applications": []
+      }
+    }
+  ]
+}
