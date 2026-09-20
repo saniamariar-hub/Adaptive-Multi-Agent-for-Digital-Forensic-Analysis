@@ -3,1408 +3,1095 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PROJECT SENTINEL // NIST CFReDS HALLUCINATION EVALUATOR</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Digital Forensics Investigation System — NIST CFReDS Hallucination Evaluation</title>
+  <link rel="stylesheet" href="/portal.css" />
   <style>
-    :root {
-      --bg-dark: #070a10;
-      --bg-panel: #0d121f;
-      --bg-card: #12192b;
-      --bg-card-hover: #19233c;
-      --border-color: #1e2a47;
-      --border-accent: #2563eb;
-      --police-blue: #0284c7;
-      --police-blue-light: #38bdf8;
-      --caution-amber: #f59e0b;
-      --caution-gold: #fbbf24;
-      --alert-red: #ef4444;
-      --evidence-green: #10b981;
-      --purple-accent: #8b5cf6;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --font-mono: 'JetBrains Mono', monospace;
-      --font-heading: 'Chakra Petch', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(239, 68, 68, 0.05) 0%, transparent 40%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
-    }
-
-    .police-tape {
-      background: repeating-linear-gradient(
-        -45deg,
-        #f59e0b,
-        #f59e0b 20px,
-        #111827 20px,
-        #111827 40px
-      );
-      height: 8px;
-      width: 100%;
-      border-bottom: 1px solid rgba(0,0,0,0.5);
-    }
-
-    .container {
-      max-width: 1680px;
-      margin: 0 auto;
-      padding: 20px 28px;
-    }
-
-    /* Header */
-    header {
-      background: linear-gradient(180deg, rgba(13, 18, 31, 0.95) 0%, rgba(10, 15, 26, 0.9) 100%);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 18px 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    /* Workspace Tabs */
+    .tab-navigation {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .badge-mark {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .shield-icon {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border: 2px solid var(--police-blue-light);
-      border-radius: 50% 50% 50% 50% / 20% 20% 80% 80%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-    }
-
-    .shield-icon svg { width: 28px; height: 28px; fill: var(--police-blue-light); }
-
-    .department-info h1 {
-      font-family: var(--font-heading);
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #fff;
-    }
-
-    .department-info h1 span.highlight {
-      color: var(--police-blue-light);
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
-    }
-
-    .department-info p {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-      margin-top: 2px;
-    }
-
-    .header-telemetry {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .live-status-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--evidence-green);
-    }
-
-    .radar-pulse {
-      width: 8px;
-      height: 8px;
-      background-color: var(--evidence-green);
-      border-radius: 50%;
-      position: relative;
-    }
-
-    .radar-pulse::after {
-      content: '';
-      position: absolute;
-      top: -3px; left: -3px; right: -3px; bottom: -3px;
-      border-radius: 50%;
-      border: 2px solid var(--evidence-green);
-      animation: pulse-ring 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-    }
-
-    @keyframes pulse-ring {
-      0% { transform: scale(0.6); opacity: 1; }
-      100% { transform: scale(2.2); opacity: 0; }
-    }
-
-    .btn-action {
-      background: linear-gradient(180deg, #1e293b, #0f172a);
-      border: 1px solid var(--police-blue);
-      color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-action:hover {
-      background: #1d4ed8;
-      border-color: #3b82f6;
-      color: #fff;
-      box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
-    }
-
-    /* HUD Summary Cards */
-    .dossier-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
+      gap: 2px;
+      border-bottom: 2px solid var(--border-color);
       margin-bottom: 20px;
     }
 
-    .dossier-card {
-      background: var(--bg-panel);
+    .tab-item {
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 14px 18px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .dossier-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: var(--police-blue);
-    }
-    .dossier-card.grounded::before { background: var(--evidence-green); }
-    .dossier-card.hallucinated::before { background: var(--purple-accent); }
-    .dossier-card.contradicted::before { background: var(--alert-red); }
-    .dossier-card.score::before { background: var(--caution-amber); }
-
-    .card-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .card-value {
-      font-family: var(--font-heading);
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 6px 0 2px 0;
-    }
-
-    .card-subtext {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-dim);
-    }
-
-    /* Main Evaluation Workspace */
-    .eval-tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 8px;
-    }
-
-    .tab-btn {
-      background: #090e1a;
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 9px 18px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
+      border-bottom: none;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
       font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .tab-btn:hover, .tab-btn.active {
-      background: #1e293b;
-      border-color: var(--police-blue-light);
-      color: #fff;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
-    }
-
-    .control-panel {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      display: grid;
-      grid-template-columns: 2fr 1.5fr 1.5fr auto auto;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .control-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .control-group label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .control-group select, .control-group input, .control-group textarea {
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 9px 12px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      outline: none;
-    }
-
-    .control-group select:focus, .control-group input:focus, .control-group textarea:focus {
-      border-color: var(--police-blue-light);
-    }
-
-    .btn-run {
-      background: linear-gradient(180deg, #2563eb, #1d4ed8);
-      border: 1px solid #3b82f6;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-family: var(--font-heading);
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      padding: 10px 18px;
+      border-radius: 4px 4px 0 0;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s;
-      height: 40px;
-      align-self: flex-end;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
     }
 
-    .btn-run:hover {
-      background: #1d4ed8;
-      box-shadow: 0 0 15px rgba(37, 99, 235, 0.6);
-      transform: translateY(-1px);
+    .tab-item:hover {
+      background: var(--bg-subtle);
+      color: var(--primary);
     }
 
-    /* Dual Pane Comparison View */
-    .dual-pane {
+    .tab-item.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Dual-Pane Evidence Comparison */
+    .evidence-comparison-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 16px;
       margin-bottom: 20px;
     }
 
-    .pane-card {
-      background: var(--bg-panel);
+    @media (max-width: 1024px) {
+      .evidence-comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .evidence-pane {
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 16px 20px;
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
-      height: 420px;
+      height: 480px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
     }
 
-    .pane-header {
+    .evidence-pane-header {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-color);
     }
 
-    .pane-header h3 {
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      letter-spacing: 1px;
-      color: #fff;
+    .evidence-pane-header h3 {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .tag-source {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--police-blue-light);
-    }
-
-    .pane-scroll {
+    .evidence-pane-content {
       flex: 1;
       overflow-y: auto;
-      padding-right: 6px;
-      font-size: 0.85rem;
-      line-height: 1.5;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .pane-scroll pre {
-      white-space: pre-wrap;
+    .evidence-pane-content pre {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 10px 12px;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: #e2e8f0;
-      background: #05080e;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #1e293b;
+      font-size: 0.78rem;
+      color: #0f172a;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.45;
     }
 
-    .entities-wrap {
+    .entity-tag-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid #1e293b;
-    }
-
-    .entity-pill {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: rgba(148, 163, 184, 0.1);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      color: var(--text-muted);
-    }
-
-    /* Claim Breakdown Section */
-    .section-card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 18px 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      letter-spacing: 1px;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .table-responsive {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    table.claim-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.82rem;
-    }
-
-    table.claim-table th {
-      background: #090e1a;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      padding: 10px 14px;
-      border-bottom: 2px solid var(--border-color);
-      text-align: left;
-    }
-
-    table.claim-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border-color);
-      vertical-align: top;
-    }
-
-    table.claim-table tr:hover {
-      background-color: var(--bg-card-hover);
-    }
-
-    /* Classification Pills */
-    .status-badge {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 9px;
-      border-radius: 4px;
-      display: inline-block;
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-    }
-
-    .badge-supported {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: var(--evidence-green);
-    }
-
-    .badge-partially-supported {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: var(--caution-amber);
-    }
-
-    .badge-unsupported {
-      background: rgba(139, 92, 246, 0.15);
-      border: 1px solid rgba(139, 92, 246, 0.4);
-      color: var(--purple-accent);
-    }
-
-    .badge-contradicted {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: var(--alert-red);
-    }
-
-    .badge-undetermined {
-      background: rgba(100, 116, 139, 0.15);
-      border: 1px solid rgba(100, 116, 139, 0.4);
-      color: var(--text-dim);
-    }
-
-    .evidence-quote {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: #38bdf8;
-      background: #05080e;
-      border-left: 3px solid var(--police-blue);
-      padding: 6px 10px;
-      border-radius: 0 4px 4px 0;
-      margin-top: 4px;
-      display: block;
-    }
-
-    .layer-tag {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      display: block;
+      gap: 4px;
       margin-top: 4px;
     }
 
-    /* Heatmap / NIST Question Grid */
-    .nist-grid {
+    .entity-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(23, 54, 93, 0.2);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* 60 Question Reference Matrix Grid */
+    .matrix-grid {
       display: grid;
-      grid-template-columns: repeat(15, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
       gap: 6px;
       margin-top: 10px;
     }
 
-    .q-box {
-      background: #090e1a;
-      border: 1px solid #1e293b;
+    .matrix-cell {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
       border-radius: 4px;
       padding: 6px 2px;
       text-align: center;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.15s ease;
     }
 
-    .q-box:hover {
-      border-color: var(--police-blue-light);
-      background: #1e293b;
-      transform: scale(1.05);
+    .matrix-cell:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
-    .q-box.active {
-      border-color: #38bdf8;
-      background: #1d4ed8;
-      color: #fff;
-      font-weight: 700;
+    .matrix-cell.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
     }
 
-    /* Benchmark Leaderboard */
-    .benchmark-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
+    /* Claim Table Specifics */
+    .claim-text-col {
+      font-weight: 500;
+      color: var(--text-main);
     }
 
-    /* Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active { display: flex; }
-
-    .modal-content {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      width: 100%;
-      max-width: 900px;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-      position: relative;
-    }
-
-    .modal-header {
-      background: #090e1a;
-      border-bottom: 1px solid var(--border-color);
-      padding: 16px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-header h2 {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      color: #fff;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    .modal-close:hover { color: #fff; }
-
-    .modal-body { padding: 22px; }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding: 20px 0;
-      text-align: center;
+    .claim-evidence-text {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 30px;
+      font-size: 0.76rem;
+      color: #0f172a;
+      background: #f8fafc;
+      border-left: 3px solid var(--secondary);
+      padding: 4px 8px;
+      margin-top: 4px;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .claim-layer-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 3px;
     }
   </style>
 </head>
 <body>
-  <div class="police-tape"></div>
 
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <div class="badge-mark">
-        <div class="shield-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.88-3.86-1.09-7-5.34-7-9.88V6.3l7-3.12zM11 7v6h2V7h-2zm0 8v2h2v-2h-2z"/>
+  <!-- Top Metadata Ribbon -->
+  <div class="gov-top-bar">
+    <span>DIGITAL FORENSICS INVESTIGATION FRAMEWORK &bull; NIST GROUND TRUTH VERIFICATION ENGINE</span>
+    <span>BENCHMARK: NIST CFREDS DATA LEAKAGE CASE (60 QUESTIONS) &bull; VERSION 1.32</span>
+  </div>
+
+  <!-- Primary Global Header -->
+  <header class="portal-header">
+    <div class="portal-header-inner">
+      <div class="portal-brand">
+        <div class="portal-emblem">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <div class="department-info">
-          <h1>PROJECT SENTINEL <span class="highlight">// HALLUCINATION EVALUATOR</span></h1>
-          <p>NIST CFREDS DATA LEAKAGE GROUND TRUTH EVALUATION SUITE &bull; 60 QUESTIONS BENCHMARK</p>
+        <div class="portal-titles">
+          <h1>DIGITAL FORENSICS INVESTIGATION SYSTEM</h1>
+          <p>NIST CFReDS Hallucination & Ground-Truth Evidence Evaluation Portal</p>
         </div>
       </div>
 
-      <div class="header-telemetry">
-        <div class="live-status-pill">
-          <div class="radar-pulse"></div>
-          <span>GROUND TRUTH v1.32 : VERIFIED</span>
+      <!-- Navigation Links -->
+      <nav class="portal-nav">
+        <a href="/">Dashboard</a>
+        <a href="/chat.html">Forensic Investigation</a>
+        <a href="/evaluation.html" class="active">Hallucination Evaluation</a>
+      </nav>
+
+      <!-- Action -->
+      <div class="portal-header-actions">
+        <div class="status-indicator-pill">
+          <span class="indicator-dot"></span>
+          <span>NIST GROUND TRUTH: ACTIVE</span>
         </div>
-        <a href="/" class="btn-action">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <button class="btn btn-secondary btn-sm" onclick="fetchSummaryAndHistory()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
           </svg>
-          DISPATCH BOARD
-        </a>
-        <a href="/chat.html" class="btn-action">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-          FORENSIC CHAT
-        </a>
-        <button class="btn-action" onclick="fetchSummaryAndHistory()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M23 4v6h-6M1 20v-6h6"/>
-            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-          </svg>
-          SYNC
+          Sync Evaluation
         </button>
       </div>
-    </header>
-
-    <!-- HUD Telemetry Cards -->
-    <div class="dossier-grid">
-      <div class="dossier-card">
-        <div class="card-label">NIST QUESTIONS <span>TOTAL</span></div>
-        <div class="card-value" id="hud-total-q">60</div>
-        <div class="card-subtext">CFReDS Data Leakage Case</div>
-      </div>
-      <div class="dossier-card score">
-        <div class="card-label">OVERALL GROUNDEDNESS <span>BENCHMARK</span></div>
-        <div class="card-value" id="hud-groundedness">100.0%</div>
-        <div class="card-subtext" id="hud-eval-count">12 Total Evaluations</div>
-      </div>
-      <div class="dossier-card grounded">
-        <div class="card-label">GROUNDED CLAIMS <span>SUPPORTED</span></div>
-        <div class="card-value" id="hud-supported-claims">0</div>
-        <div class="card-subtext" id="hud-total-claims">Across All Claims</div>
-      </div>
-      <div class="dossier-card hallucinated">
-        <div class="card-label">HALLUCINATED CLAIMS <span>UNSUPPORTED</span></div>
-        <div class="card-value" id="hud-hallucinated-claims">0</div>
-        <div class="card-subtext" id="hud-hallucination-rate">Rate: 0.0%</div>
-      </div>
-      <div class="dossier-card contradicted">
-        <div class="card-label">CONTRADICTIONS <span>CONFLICTS</span></div>
-        <div class="card-value" id="hud-contradictions">0</div>
-        <div class="card-subtext" id="hud-contradiction-rate">Rate: 0.0%</div>
-      </div>
     </div>
+  </header>
 
-    <!-- Workspace Tabs -->
-    <div class="eval-tabs">
-      <button class="tab-btn active" id="tab-btn-single" onclick="switchTab('single')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        QUESTION-LEVEL EVALUATION
+  <!-- Main Workstation Layout -->
+  <main class="portal-container">
+
+    <!-- Case Context Information Bar -->
+    <section class="context-bar">
+      <div>
+        <strong>Evaluation Benchmark:</strong> NIST CFReDS Data Leakage Case (60 Questions) &nbsp;|&nbsp;
+        <strong>Reference Document:</strong> leakage-answers.pdf (50 Pages Verified) &nbsp;|&nbsp;
+        <strong>Detection Engine:</strong> 5-Layer Hybrid Verification
+      </div>
+      <div>
+        <strong>Audit Database:</strong> SQLite (evaluation_audit.db)
+      </div>
+    </section>
+
+    <!-- Key Metrics Summary Cards -->
+    <section class="metrics-grid">
+      <div class="metric-panel">
+        <div class="metric-label">NIST Questions <span>Benchmark</span></div>
+        <div class="metric-value" id="hud-total-q">60</div>
+        <div class="metric-subtext">CFReDS Data Leakage Case</div>
+      </div>
+
+      <div class="metric-panel accent-teal">
+        <div class="metric-label">Overall Groundedness <span>Average</span></div>
+        <div class="metric-value" id="hud-groundedness">100.0%</div>
+        <div class="metric-subtext" id="hud-eval-count">12 Total Evaluations</div>
+      </div>
+
+      <div class="metric-panel">
+        <div class="metric-label">Grounded Claims <span>Supported</span></div>
+        <div class="metric-value" id="hud-supported-claims">0</div>
+        <div class="metric-subtext" id="hud-total-claims">Across All Claims</div>
+      </div>
+
+      <div class="metric-panel accent-muted">
+        <div class="metric-label">Hallucinated Claims <span>Unsupported</span></div>
+        <div class="metric-value" id="hud-hallucinated-claims">0</div>
+        <div class="metric-subtext" id="hud-hallucination-rate">Rate: 0.0%</div>
+      </div>
+
+      <div class="metric-panel">
+        <div class="metric-label">Contradictions <span>Conflicts</span></div>
+        <div class="metric-value" id="hud-contradictions">0</div>
+        <div class="metric-subtext" id="hud-contradiction-rate">Rate: 0.0%</div>
+      </div>
+    </section>
+
+    <!-- Workspace Tabs Navigation -->
+    <div class="tab-navigation">
+      <button type="button" class="tab-item active" id="tab-btn-single" onclick="switchTab('single')">
+        Question-Level Evaluation
       </button>
-      <button class="tab-btn" id="tab-btn-report" onclick="switchTab('report')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        FULL REPORT EVALUATION
+      <button type="button" class="tab-item" id="tab-btn-report" onclick="switchTab('report')">
+        Full Report Evaluation
       </button>
-      <button class="tab-btn" id="tab-btn-leaderboard" onclick="switchTab('leaderboard')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-        AGENT BENCHMARK LEADERBOARD
+      <button type="button" class="tab-item" id="tab-btn-leaderboard" onclick="switchTab('leaderboard')">
+        Agent Benchmark Leaderboard
       </button>
     </div>
 
     <!-- TAB 1: Single Question Evaluation -->
     <div id="tab-single-content">
-      <!-- Control Panel -->
-      <div class="control-panel">
-        <div class="control-group">
-          <label>Select NIST Question (1–60)</label>
-          <select id="select-question" onchange="onQuestionSelectChange()"></select>
-        </div>
-        <div class="control-group">
-          <label>Select Agent</label>
-          <select id="select-agent">
-            <option value="Sentinel (Gemini)">Sentinel (Gemini Cascade)</option>
-            <option value="Forensic Dispatcher">Forensic Dispatcher</option>
-            <option value="Triage Agent">Triage Agent</option>
-            <option value="Correlation Agent">Correlation Agent</option>
-            <option value="Contradiction Agent">Contradiction Agent</option>
-            <option value="Synthesis Agent">Synthesis Agent</option>
-            <option value="Custom Agent">Custom / Pasted Output</option>
-          </select>
-        </div>
-        <div class="control-group">
-          <label>Preset Test / Output</label>
-          <select id="select-preset" onchange="applyPreset()">
-            <option value="">-- Load Sample Response --</option>
-            <option value="supported">Supported Response (Ground Truth Match)</option>
-            <option value="contradicted">Contradicted Response (Deliberate Conflict)</option>
-            <option value="hallucinated">Hallucinated Response (Invented Entity)</option>
-            <option value="live_autopsy">Live Autopsy Evidence</option>
-          </select>
-        </div>
-        <button class="btn-run" onclick="runAgentAndEvaluate()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          RUN AGENT
-        </button>
-        <button class="btn-action" style="height:40px; align-self:flex-end;" onclick="evaluateCurrentText()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          EVALUATE TEXT
-        </button>
-      </div>
 
-      <!-- Dual Pane Side-by-Side -->
-      <div class="dual-pane">
-        <!-- Left: NIST Ground Truth -->
-        <div class="pane-card">
-          <div class="pane-header">
-            <h3 id="gt-card-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              NIST OFFICIAL GROUND TRUTH
-            </h3>
-            <div style="display:flex; gap:6px;">
-              <span class="tag-source" id="gt-source-doc">leakage-answers.pdf</span>
-              <span class="tag-source" id="gt-source-pages" style="background:rgba(16,185,129,0.15); border-color:rgba(16,185,129,0.3); color:var(--evidence-green);">Pages: 16, 17</span>
+      <!-- Case Evaluation Control Panel -->
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <h3>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Evaluation Setup & Input Parameters
+          </h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Select Question & Target Response</span>
+        </div>
+        <div class="portal-card-body">
+          <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr auto auto;">
+            <div class="form-group">
+              <label for="select-question">Select NIST Question (1–60)</label>
+              <select id="select-question" class="form-control" onchange="onQuestionSelectChange()"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-agent">Forensic Agent</label>
+              <select id="select-agent" class="form-control">
+                <option value="Sentinel (Gemini)">Sentinel (Gemini Cascade)</option>
+                <option value="Forensic Dispatcher">Forensic Dispatcher</option>
+                <option value="Triage Agent">Triage Agent</option>
+                <option value="Correlation Agent">Correlation Agent</option>
+                <option value="Contradiction Agent">Contradiction Agent</option>
+                <option value="Synthesis Agent">Synthesis Agent</option>
+                <option value="Custom Agent">Custom / Pasted Output</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-preset">Preset Test Response</label>
+              <select id="select-preset" class="form-control" onchange="applyPreset()">
+                <option value="">-- Load Reference Answer --</option>
+                <option value="supported">Supported Response (Ground Truth Match)</option>
+                <option value="contradicted">Contradicted Response (Deliberate Conflict)</option>
+                <option value="hallucinated">Hallucinated Response (Invented Entities)</option>
+                <option value="live_autopsy">Live Autopsy Evidence</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="justify-content: flex-end;">
+              <button type="button" class="btn btn-secondary" onclick="runAgentAndEvaluate()" style="height:37px;">
+                Run Agent
+              </button>
+            </div>
+
+            <div class="form-group" style="justify-content: flex-end;">
+              <button type="button" class="btn btn-primary" onclick="evaluateCurrentText()" style="height:37px;">
+                Evaluate Response
+              </button>
             </div>
           </div>
-          <div class="pane-scroll">
-            <div style="margin-bottom:8px; font-weight:600; color:#fff;" id="gt-question-text">Loading question...</div>
-            <div style="color:var(--text-muted); font-size:0.75rem; margin-bottom:6px; text-transform:uppercase;">Official Answer:</div>
-            <pre id="gt-answer-box">Loading ground truth...</pre>
-            <div style="color:var(--text-muted); font-size:0.75rem; margin:10px 0 6px 0; text-transform:uppercase;">Forensic Considerations & Registry Keys:</div>
-            <pre id="gt-considerations-box">Loading considerations...</pre>
-            <div class="entities-wrap" id="gt-entities-wrap"></div>
-          </div>
         </div>
+      </section>
 
-        <!-- Right: Agent Response Input / Output -->
-        <div class="pane-card">
-          <div class="pane-header">
-            <h3>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              AGENT GENERATED RESPONSE
+      <!-- Dual Pane Evidence Comparison -->
+      <section class="evidence-comparison-grid">
+        <!-- Left: NIST Official Ground Truth -->
+        <div class="evidence-pane">
+          <div class="evidence-pane-header">
+            <h3 id="gt-card-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              NIST Official Ground Truth Reference
             </h3>
-            <span class="tag-source" id="agent-claims-count">0 Claims</span>
+            <div style="display:flex; gap:6px;">
+              <span class="badge badge-neutral" id="gt-source-doc">leakage-answers.pdf</span>
+              <span class="badge badge-supported" id="gt-source-pages">Pages: 16, 17</span>
+            </div>
           </div>
-          <div class="pane-scroll">
-            <textarea id="agent-response-input" style="width:100%; height:96%; background:#05080e; border:1px solid #1e293b; color:#fff; font-family:var(--font-mono); font-size:0.8rem; padding:12px; border-radius:6px; resize:none;" placeholder="Enter or paste agent response here to evaluate..."></textarea>
+          <div class="evidence-pane-content">
+            <div style="font-weight:600; color:var(--primary); font-size:0.86rem;" id="gt-question-text">Loading question details...</div>
+            <div style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Official Reference Answer:</div>
+            <pre id="gt-answer-box">Loading ground truth...</pre>
+            <div style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-top:6px;">Forensic Considerations & Registry Locations:</div>
+            <pre id="gt-considerations-box">Loading considerations...</pre>
+            <div style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-top:6px;">Structured Entities:</div>
+            <div class="entity-tag-group" id="gt-entities-wrap"></div>
           </div>
         </div>
-      </div>
 
-      <!-- Claim-Level Evaluation Breakdown Table -->
-      <div class="section-card">
-        <div class="section-title">
-          <span>CLAIM-LEVEL VERIFICATION & TRACEABILITY</span>
-          <div id="eval-metrics-summary" style="font-size:0.8rem; font-family:var(--font-mono); color:var(--text-muted);">
-            Verdict: <span id="verdict-pill" class="status-badge badge-supported">EVALUATION READY</span>
+        <!-- Right: Agent Generated Response -->
+        <div class="evidence-pane">
+          <div class="evidence-pane-header">
+            <h3>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Agent Generated Response Under Evaluation
+            </h3>
+            <span class="badge badge-neutral" id="agent-claims-count">0 Claims</span>
+          </div>
+          <div class="evidence-pane-content" style="padding:10px;">
+            <textarea id="agent-response-input" class="form-control" style="width:100%; height:100%; resize:none; font-family:var(--font-mono); font-size:0.82rem; padding:10px;" placeholder="Enter or paste forensic agent response here to evaluate..."></textarea>
           </div>
         </div>
-        <div class="table-responsive">
-          <table class="claim-table">
-            <thead>
-              <tr>
-                <th style="width:90px;">Claim ID</th>
-                <th>Atomic Proposition</th>
-                <th style="width:110px;">Evidentiary Type</th>
-                <th style="width:160px;">Classification</th>
-                <th style="width:90px;">Confidence</th>
-                <th>Ground Truth Evidence & Rationale</th>
-              </tr>
-            </thead>
-            <tbody id="claims-table-body">
-              <tr>
-                <td colspan="6" style="text-align:center; color:var(--text-dim); padding:30px;">
-                  Select a question and click "RUN AGENT" or "EVALUATE TEXT" to inspect atomic claim verification.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      </section>
 
-      <!-- NIST 60-Question Grid Navigator -->
-      <div class="section-card">
-        <div class="section-title">
-          <span>NIST CFReDS 60-QUESTION COVERAGE MATRIX</span>
-          <span style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-dim);">Click any question to inspect</span>
+      <!-- Claim-Level Verification Table -->
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <h3>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            Atomic Claim Verification & Evidence Traceability
+          </h3>
+          <div id="eval-metrics-summary" style="font-size:0.78rem;">
+            Verdict: <span id="verdict-pill" class="badge badge-supported">EVALUATION READY</span>
+          </div>
         </div>
-        <div class="nist-grid" id="nist-matrix"></div>
-      </div>
+        <div class="portal-card-body" style="padding:0;">
+          <div class="table-responsive" style="border:none;">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th style="width:90px;">Claim ID</th>
+                  <th>Extracted Proposition</th>
+                  <th style="width:120px;">Evidentiary Type</th>
+                  <th style="width:170px;">Classification</th>
+                  <th style="width:90px;">Confidence</th>
+                  <th>Ground Truth Evidence & Rationale</th>
+                </tr>
+              </thead>
+              <tbody id="claims-table-body">
+                <tr>
+                  <td colspan="6" style="text-align:center; color:var(--text-muted); padding:36px;">
+                    Select a question and click "Evaluate Response" to inspect atomic claim verification.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 60 Question Reference Matrix Grid -->
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <h3>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            NIST CFReDS 60-Question Case Matrix
+          </h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Quick-select any question to inspect ground truth</span>
+        </div>
+        <div class="portal-card-body">
+          <div class="matrix-grid" id="nist-matrix-grid"></div>
+        </div>
+      </section>
+
     </div>
 
     <!-- TAB 2: Full Report Evaluation -->
     <div id="tab-report-content" style="display:none;">
-      <div class="section-card">
-        <div class="section-title">
-          <span>MULTI-QUESTION FORENSIC REPORT EVALUATOR</span>
-          <button class="btn-run" onclick="evaluateFullReport()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            EVALUATE FULL REPORT
-          </button>
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <h3>Multi-Section Investigation Report Audit</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Automatic Question Topic Mapping & Claim Verification</span>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
-          <div class="control-group">
-            <label>Report Title</label>
-            <input type="text" id="report-title-input" value="NIST Data Leakage Comprehensive Investigation Report" />
+        <div class="portal-card-body">
+          <div class="form-grid" style="grid-template-columns: 2fr 1fr; margin-bottom:14px;">
+            <div class="form-group">
+              <label for="report-title-input">Report Title</label>
+              <input type="text" id="report-title-input" class="form-control" value="Forensic Investigation Synthesis Report — CFReDS Data Leakage" />
+            </div>
+            <div class="form-group">
+              <label for="report-examiner-input">Primary Examiner / Agent</label>
+              <input type="text" id="report-examiner-input" class="form-control" value="Synthesis Agent" />
+            </div>
           </div>
-          <div class="control-group">
-            <label>Investigating Examiner / Agent</label>
-            <input type="text" id="report-examiner-input" value="Melwin Robinson (Sentinel AI)" />
+
+          <div class="form-group" style="margin-bottom:14px;">
+            <label for="report-text-input">Report Content (Markdown or Formatted Prose)</label>
+            <textarea id="report-text-input" class="form-control" style="height:220px; font-family:var(--font-mono); font-size:0.82rem;" placeholder="Paste multi-question forensic report here..."></textarea>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <button type="button" class="btn btn-secondary" onclick="loadSampleReport()">Load Sample Investigation Report</button>
+            <button type="button" class="btn btn-primary" onclick="evaluateReportText()">Audit Complete Report</button>
           </div>
         </div>
-        <div class="control-group">
-          <label>Full Forensic Report Content (Markdown / Text)</label>
-          <textarea id="full-report-input" style="width:100%; height:260px; background:#05080e; border:1px solid #1e293b; color:#fff; font-family:var(--font-mono); font-size:0.8rem; padding:12px; border-radius:6px;" placeholder="Paste entire multi-section forensic report here..."></textarea>
-        </div>
-      </div>
+      </section>
 
       <!-- Report Evaluation Results Container -->
-      <div id="report-results-card" class="section-card" style="display:none;">
-        <div class="section-title">
-          <span>REPORT EVALUATION AUDIT METRICS</span>
-          <span id="report-coverage-pill" class="status-badge badge-supported">COVERAGE: 0/60</span>
-        </div>
-        <div class="dossier-grid" style="margin-bottom:16px;">
-          <div class="dossier-card score">
-            <div class="card-label">QUESTIONS DETECTED</div>
-            <div class="card-value" id="rep-hud-detected">0</div>
-            <div class="card-subtext" id="rep-hud-coverage-pct">0.0% Coverage</div>
+      <div id="report-eval-results" style="display:none;">
+        <section class="metrics-grid" id="report-metrics-grid"></section>
+        <section class="portal-card">
+          <div class="portal-card-header">
+            <h3>Section-by-Section Forensic Verification</h3>
           </div>
-          <div class="dossier-card grounded">
-            <div class="card-label">GROUNDEDNESS SCORE</div>
-            <div class="card-value" id="rep-hud-groundedness">0.0%</div>
-            <div class="card-subtext" id="rep-hud-total-claims">0 Claims</div>
-          </div>
-          <div class="dossier-card hallucinated">
-            <div class="card-label">HALLUCINATION RATE</div>
-            <div class="card-value" id="rep-hud-hallucination">0.0%</div>
-            <div class="card-subtext" id="rep-hud-unsupported">0 Unsupported</div>
-          </div>
-          <div class="dossier-card contradicted">
-            <div class="card-label">CONTRADICTIONS</div>
-            <div class="card-value" id="rep-hud-contradicted">0</div>
-            <div class="card-subtext" id="rep-hud-contradiction-rate">0.0% Rate</div>
-          </div>
-        </div>
-
-        <div id="report-sections-breakdown"></div>
+          <div class="portal-card-body" id="report-question-breakdown"></div>
+        </section>
       </div>
     </div>
 
-    <!-- TAB 3: Agent Benchmark Leaderboard -->
+    <!-- TAB 3: Agent Benchmark Leaderboard & Audit History -->
     <div id="tab-leaderboard-content" style="display:none;">
-      <div class="section-card">
-        <div class="section-title">
-          <span>AGENT PERFORMANCE BENCHMARK LEADERBOARD</span>
-          <span style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-dim);">Evaluated against NIST Ground Truth</span>
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <h3>Agent Benchmark Performance Leaderboard</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Evaluation Accuracy across NIST CFReDS Benchmark</span>
         </div>
-        <div class="table-responsive">
-          <table class="claim-table">
-            <thead>
-              <tr>
-                <th>Agent Identifier</th>
-                <th>Questions Evaluated</th>
-                <th>Total Evaluations</th>
-                <th>Groundedness Score</th>
-                <th>Hallucination Rate</th>
-                <th>Contradictions</th>
-                <th>Supported Claims</th>
-                <th>Total Claims</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboard-table-body">
-              <tr><td colspan="8" style="text-align:center; padding:20px;">Loading benchmark rankings...</td></tr>
-            </tbody>
-          </table>
+        <div class="portal-card-body" style="padding:0;">
+          <div class="table-responsive" style="border:none;">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Agent Name</th>
+                  <th>Questions Audited</th>
+                  <th>Total Runs</th>
+                  <th>Groundedness Score</th>
+                  <th>Hallucination Rate</th>
+                  <th>Contradiction Rate</th>
+                  <th>Verified Claims</th>
+                </tr>
+              </thead>
+              <tbody id="agent-leaderboard-body">
+                <tr><td colspan="7" style="text-align:center; padding:24px; color:var(--text-muted);">Loading benchmark leaderboard...</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Evaluation History -->
-      <div class="section-card">
-        <div class="section-title">
-          <span>EVALUATION AUDIT TRAIL</span>
-          <span style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-dim);">SQLite Audit Log</span>
+      <!-- Audit History Table -->
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <h3>Persistent Evaluation Audit History</h3>
+          <div class="filter-group">
+            <select id="history-filter-agent" class="form-control" style="font-size:0.75rem; padding:3px 8px;" onchange="loadHistory()">
+              <option value="">All Agents</option>
+              <option value="Sentinel (Gemini)">Sentinel (Gemini)</option>
+              <option value="Forensic Dispatcher">Forensic Dispatcher</option>
+              <option value="Triage Agent">Triage Agent</option>
+              <option value="Correlation Agent">Correlation Agent</option>
+              <option value="Contradiction Agent">Contradiction Agent</option>
+              <option value="Synthesis Agent">Synthesis Agent</option>
+            </select>
+          </div>
         </div>
-        <div class="table-responsive">
-          <table class="claim-table">
-            <thead>
-              <tr>
-                <th>Evaluation ID</th>
-                <th>Timestamp</th>
-                <th>Q#</th>
-                <th>Agent</th>
-                <th>Verdict</th>
-                <th>Groundedness</th>
-                <th>Hallucination Rate</th>
-                <th>Claims</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="history-table-body">
-              <tr><td colspan="9" style="text-align:center; padding:20px;">Loading evaluation audit trail...</td></tr>
-            </tbody>
-          </table>
+        <div class="portal-card-body" style="padding:0;">
+          <div class="table-responsive" style="border:none;">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th style="width:110px;">Eval ID</th>
+                  <th style="width:60px;">Q #</th>
+                  <th>Agent</th>
+                  <th style="width:120px;">Groundedness</th>
+                  <th style="width:130px;">Verdict</th>
+                  <th style="width:140px;">Timestamp</th>
+                  <th style="width:80px; text-align:right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <tr><td colspan="7" style="text-align:center; padding:24px; color:var(--text-muted);">Loading evaluation history log...</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
 
-    <!-- Footer -->
-    <footer>
-      PROJECT SENTINEL &bull; ADAPTIVE MULTI-AGENT DIGITAL FORENSICS PLATFORM &bull; NIST CFReDS CASE BENCHMARK
-    </footer>
-  </div>
+  </main>
 
-  <!-- Detail Modal -->
-  <div id="detail-modal" class="modal-overlay">
+  <!-- Institutional Footer -->
+  <footer class="portal-footer">
+    <div>
+      <strong>DIGITAL FORENSICS INVESTIGATION SYSTEM</strong> &bull; Case: CFReDS_DataLeakage &bull; NIST Reference Evidence Evaluation Base
+    </div>
+    <div style="margin-top: 4px; color: var(--text-dim);">
+      Evaluation Database: <span style="font-family:var(--font-mono); color:var(--secondary);">evaluation_audit.db</span> &bull; For Official Investigative & Academic Verification Only
+    </div>
+  </footer>
+
+  <!-- Evaluation Detail Modal -->
+  <div class="modal-overlay" id="eval-detail-modal" onclick="closeModalOnOverlay(event)">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="modal-title">EVALUATION AUDIT RECORD</h2>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h3>Evaluation Audit Record <span id="modal-eval-id" style="color:#cbd5e1; font-family:var(--font-mono);"></span></h3>
+        <button class="modal-close" onclick="closeEvalModal()" aria-label="Close modal">&times;</button>
       </div>
-      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-body" id="modal-eval-body"></div>
     </div>
   </div>
 
   <script>
+    const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+      ? window.location.origin
+      : 'http://localhost:8080';
+
     let allQuestions = [];
-    let currentQuestionId = 3; // default to Q3 (OS Info)
-    let currentGroundTruth = null;
+    let currentQuestionId = 3;
+    let groundTruthCache = {};
+    let recentEvaluations = [];
 
     async function init() {
-      await fetchQuestions();
+      await loadQuestions();
       await fetchSummaryAndHistory();
-      renderNistMatrix();
-      await loadQuestionData(currentQuestionId);
+      renderMatrixGrid();
+      selectQuestion(currentQuestionId);
     }
 
-    async function fetchQuestions() {
-      try {
-        const res = await fetch('/api/evaluation/questions');
-        const data = await res.json();
-        allQuestions = data.questions || [];
-        const select = document.getElementById('select-question');
-        select.innerHTML = '';
-        allQuestions.forEach(q => {
-          const opt = document.createElement('option');
-          opt.value = q.question_id;
-          opt.textContent = `Q${q.question_id}. ${q.question.substring(0, 75)}...`;
-          select.appendChild(opt);
-        });
-        select.value = currentQuestionId;
-      } catch (err) {
-        console.error('Failed to load questions:', err);
+    function switchTab(tabId) {
+      document.getElementById('tab-btn-single').classList.remove('active');
+      document.getElementById('tab-btn-report').classList.remove('active');
+      document.getElementById('tab-btn-leaderboard').classList.remove('active');
+
+      document.getElementById('tab-single-content').style.display = 'none';
+      document.getElementById('tab-report-content').style.display = 'none';
+      document.getElementById('tab-leaderboard-content').style.display = 'none';
+
+      if (tabId === 'single') {
+        document.getElementById('tab-btn-single').classList.add('active');
+        document.getElementById('tab-single-content').style.display = 'block';
+      } else if (tabId === 'report') {
+        document.getElementById('tab-btn-report').classList.add('active');
+        document.getElementById('tab-report-content').style.display = 'block';
+      } else if (tabId === 'leaderboard') {
+        document.getElementById('tab-btn-leaderboard').classList.add('active');
+        document.getElementById('tab-leaderboard-content').style.display = 'block';
+        fetchSummaryAndHistory();
       }
     }
 
-    async function loadQuestionData(qid) {
-      currentQuestionId = qid;
-      document.getElementById('select-question').value = qid;
-      
+    async function loadQuestions() {
       try {
-        const res = await fetch(`/api/evaluation/ground-truth/${qid}`);
-        currentGroundTruth = await res.json();
+        const res = await fetch(API_BASE + '/api/evaluation/questions');
+        if (!res.ok) throw new Error('API ' + res.status);
+        const data = await res.json();
+        allQuestions = data.questions || [];
         
-        document.getElementById('gt-card-title').innerHTML = `
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          NIST GROUND TRUTH // Q${qid}
-        `;
-        document.getElementById('gt-question-text').textContent = currentGroundTruth.question;
-        document.getElementById('gt-answer-box').textContent = currentGroundTruth.ground_truth || 'No specific answer text.';
-        document.getElementById('gt-considerations-box').textContent = currentGroundTruth.considerations || 'N/A';
-        
-        const pages = currentGroundTruth.source_pages || [];
-        document.getElementById('gt-source-pages').textContent = `Pages: ${pages.join(', ') || 'N/A'}`;
-
-        // Entities pills
-        const entWrap = document.getElementById('gt-entities-wrap');
-        entWrap.innerHTML = '';
-        const ent = currentGroundTruth.entities || {};
-        for (const [cat, items] of Object.entries(ent)) {
-          if (items && items.length) {
-            items.slice(0, 4).forEach(item => {
-              const pill = document.createElement('span');
-              pill.className = 'entity-pill';
-              pill.textContent = `${cat}:${item}`;
-              entWrap.appendChild(pill);
-            });
-          }
-        }
-
-        // Highlight matrix box
-        document.querySelectorAll('.q-box').forEach(b => {
-          b.classList.toggle('active', parseInt(b.getAttribute('data-qid')) === qid);
+        const sel = document.getElementById('select-question');
+        sel.innerHTML = '';
+        allQuestions.forEach(function(q) {
+          const opt = document.createElement('option');
+          opt.value = q.question_id;
+          opt.innerText = 'Q' + q.question_id + '. ' + q.question;
+          sel.appendChild(opt);
+          groundTruthCache[q.question_id] = q;
         });
-
-        // Set default text for question
-        applyPreset();
       } catch (err) {
-        console.error('Error loading ground truth:', err);
+        console.warn('Error loading questions:', err);
+      }
+    }
+
+    function renderMatrixGrid() {
+      const grid = document.getElementById('nist-matrix-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      for (let i = 1; i <= 60; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'matrix-cell' + (i === currentQuestionId ? ' active' : '');
+        cell.id = 'matrix-cell-' + i;
+        cell.innerText = 'Q' + i;
+        cell.onclick = function() { selectQuestion(i); };
+        grid.appendChild(cell);
       }
     }
 
     function onQuestionSelectChange() {
       const qid = parseInt(document.getElementById('select-question').value);
-      loadQuestionData(qid);
+      selectQuestion(qid);
     }
 
-    function renderNistMatrix() {
-      const matrix = document.getElementById('nist-matrix');
-      matrix.innerHTML = '';
-      for (let i = 1; i <= 60; i++) {
-        const box = document.createElement('div');
-        box.className = `q-box ${i === currentQuestionId ? 'active' : ''}`;
-        box.setAttribute('data-qid', i);
-        box.textContent = `Q${i}`;
-        box.onclick = () => loadQuestionData(i);
-        matrix.appendChild(box);
+    async function selectQuestion(qid) {
+      currentQuestionId = qid;
+      document.getElementById('select-question').value = qid;
+
+      document.querySelectorAll('.matrix-cell').forEach(function(c) { c.classList.remove('active'); });
+      const activeCell = document.getElementById('matrix-cell-' + qid);
+      if (activeCell) activeCell.classList.add('active');
+
+      let gt = groundTruthCache[qid];
+      if (!gt) {
+        try {
+          const res = await fetch(API_BASE + '/api/evaluation/ground-truth/' + qid);
+          if (res.ok) {
+            gt = await res.json();
+            groundTruthCache[qid] = gt;
+          }
+        } catch (_) {}
       }
+
+      if (gt) {
+        document.getElementById('gt-card-title').innerHTML = 
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>' +
+          ' NIST Official Ground Truth — Q' + gt.question_id;
+        document.getElementById('gt-question-text').innerText = 'Q' + gt.question_id + '. ' + gt.question;
+        document.getElementById('gt-answer-box').innerText = gt.ground_truth || 'Refer to NIST reference documents.';
+        document.getElementById('gt-considerations-box').innerText = gt.considerations || 'No specific registry keys recorded.';
+        
+        const pages = gt.source_pages || [];
+        document.getElementById('gt-source-pages').innerText = 'Pages: ' + (pages.join(', ') || '12-50');
+
+        const entWrap = document.getElementById('gt-entities-wrap');
+        entWrap.innerHTML = '';
+        const ent = gt.entities || {};
+        let count = 0;
+        for (let cat in ent) {
+          if (ent[cat] && ent[cat].length) {
+            ent[cat].forEach(function(v) {
+              if (count < 12) {
+                const sp = document.createElement('span');
+                sp.className = 'entity-tag';
+                sp.innerText = cat + ': ' + v;
+                entWrap.appendChild(sp);
+                count++;
+              }
+            });
+          }
+        }
+        if (count === 0) {
+          entWrap.innerHTML = '<span style="font-size:0.75rem; color:var(--text-muted);">No structured entity tokens indexed.</span>';
+        }
+      }
+
+      applyPreset();
     }
 
     function applyPreset() {
       const preset = document.getElementById('select-preset').value;
       const qid = currentQuestionId;
+      const gt = groundTruthCache[qid];
       const ta = document.getElementById('agent-response-input');
 
+      if (!preset) {
+        if (gt && gt.ground_truth) {
+          ta.value = gt.ground_truth;
+        }
+        return;
+      }
+
       if (preset === 'supported') {
-        if (qid === 3) {
-          ta.value = "The suspect PC was running Windows 7 Ultimate SP1 (Build 7601). Registered Owner was informant. Installation Date was 2015-03-22 14:34:26 GMT.";
-        } else if (qid === 5) {
-          ta.value = "The computer name is INFORMANT-PC.";
-        } else if (qid === 9) {
-          ta.value = "Network interface was assigned IP 10.11.11.129 via DHCP. Subnet mask was 255.255.255.0 and default gateway was 10.11.11.2.";
-        } else if (qid === 31) {
-          ta.value = "The Google Drive synchronization account was iaman.informant.personal@gmail.com, logged on at 2015-03-23 16:05:32.";
-        } else if (qid === 1) {
-          ta.value = "PC image MD5 hash is A49D1254C873808C58E6F1BCD60B5BDE and SHA-1 is AFE5C9AB487BD47A8A9856B1371C2384D44FD785.";
-        } else {
-          ta.value = currentGroundTruth ? currentGroundTruth.ground_truth.substring(0, 200) : "Evidence corroborated by NIST ground truth.";
-        }
+        if (qid === 3) ta.value = "The installed operating system is Windows 7 Ultimate Service Pack 1, registered owner is informant, installed on 2015-03-22 14:34:26 (GMT).";
+        else if (qid === 5) ta.value = "The computer name is INFORMANT-PC.";
+        else if (qid === 9) ta.value = "The network adapter received IP address 10.11.11.129 assigned by DHCP.";
+        else if (qid === 31) ta.value = "Google Drive account was iaman.informant.personal@gmail.com synchronized on 2015-03-23.";
+        else ta.value = gt ? gt.ground_truth : "Verified forensic findings matching NIST ground truth.";
       } else if (preset === 'contradicted') {
-        if (qid === 3) {
-          ta.value = "The suspect PC was running Microsoft Windows 10 Pro 64-bit with latest security patches.";
-        } else if (qid === 9) {
-          ta.value = "The network interface was assigned IP 192.168.1.105 via DHCP.";
-        } else if (qid === 5) {
-          ta.value = "The computer name is WORKSTATION-VICTIM.";
-        } else {
-          ta.value = "The evidence shows conflicting timestamp 2026-12-31 and non-existent configuration.";
-        }
+        if (qid === 3) ta.value = "The suspect machine was running Windows 10 Enterprise 64-bit, installed on 2021-08-15.";
+        else if (qid === 5) ta.value = "The computer hostname was DESKTOP-VICTIM-99.";
+        else if (qid === 9) ta.value = "The network interface was assigned IP 192.168.1.105 via DHCP.";
+        else if (qid === 31) ta.value = "Google Drive was synchronized with malicious_hacker@darknet.ru.";
+        else ta.value = "The primary operating system was Ubuntu Linux 20.04 with ext4 filesystem.";
       } else if (preset === 'hallucinated') {
-        ta.value = "The suspect contacted external adversary shadow_hacker99@protonmail.com and transferred secret_payload_2026.zip.";
+        ta.value = "The suspect was using Tor Browser to access secret darknet portal onion-leak-99.onion and transferred 50 Bitcoin to an offshore wallet.";
       } else if (preset === 'live_autopsy') {
-        ta.value = "Live Autopsy analysis confirmed blackboard artifacts in SQLite database matching NIST reference case.";
-      } else {
-        if (qid === 3) {
-          ta.value = "The suspect PC was running Windows 7 Ultimate SP1. Registered owner is informant.";
-        } else if (qid === 5) {
-          ta.value = "The computer name is INFORMANT-PC.";
-        } else if (qid === 9) {
-          ta.value = "Network interface assigned by DHCP: IP 10.11.11.129, Subnet mask 255.255.255.0, Default gateway 10.11.11.2.";
-        }
+        ta.value = gt ? gt.ground_truth : "Executing live Autopsy extraction...";
       }
     }
 
     async function evaluateCurrentText() {
-      const qid = currentQuestionId;
       const text = document.getElementById('agent-response-input').value.trim();
       const agent = document.getElementById('select-agent').value;
-
       if (!text) {
-        alert('Please enter or select an agent response to evaluate.');
+        alert('Please enter or paste an agent response to evaluate.');
         return;
       }
 
       try {
-        const res = await fetch('/api/evaluation/evaluate', {
+        const res = await fetch(API_BASE + '/api/evaluation/evaluate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ question_id: qid, response_text: text, agent_name: agent })
+          body: JSON.stringify({
+            question_id: currentQuestionId,
+            response_text: text,
+            agent_name: agent
+          })
         });
+
+        if (!res.ok) throw new Error('Evaluation request failed: ' + res.status);
         const evalData = await res.json();
-        renderEvaluationResult(evalData);
+        renderEvaluationResults(evalData);
         await fetchSummaryAndHistory();
       } catch (err) {
-        alert('Evaluation failed: ' + err);
+        alert('Evaluation error: ' + err.message);
       }
     }
 
     async function runAgentAndEvaluate() {
-      const qid = currentQuestionId;
-      const agentSelect = document.getElementById('select-agent').value;
-      let agentId = 'sentinel';
-      if (agentSelect.includes('Dispatcher')) agentId = 'dispatcher';
-      else if (agentSelect.includes('Triage')) agentId = 'triage';
-      else if (agentSelect.includes('Correlation')) agentId = 'correlation';
-      else if (agentSelect.includes('Contradiction')) agentId = 'contradiction';
-      else if (agentSelect.includes('Synthesis')) agentId = 'synthesis';
+      const agent = document.getElementById('select-agent').value;
+      const btn = event ? event.currentTarget : null;
+      if (btn) btn.disabled = true;
 
       try {
-        const res = await fetch('/api/evaluation/run-agent', {
+        const res = await fetch(API_BASE + '/api/evaluation/run-agent', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ question_id: qid, agent_id: agentId })
+          body: JSON.stringify({
+            question_id: currentQuestionId,
+            agent_name: agent
+          })
         });
+
+        if (!res.ok) throw new Error('Agent execution error: ' + res.status);
         const evalData = await res.json();
         document.getElementById('agent-response-input').value = evalData.agent_response || '';
-        renderEvaluationResult(evalData);
+        renderEvaluationResults(evalData);
         await fetchSummaryAndHistory();
       } catch (err) {
-        alert('Agent execution failed: ' + err);
+        alert('Agent execution failed: ' + err.message);
+      } finally {
+        if (btn) btn.disabled = false;
       }
     }
 
-    function renderEvaluationResult(data) {
+    function renderEvaluationResults(data) {
       const claims = data.claims || [];
-      const m = data.metrics || {};
+      const metrics = data.metrics || {};
       
-      document.getElementById('agent-claims-count').textContent = `${claims.length} Claims`;
+      document.getElementById('agent-claims-count').innerText = claims.length + ' Claims';
       
-      // Verdict pill
-      const vPill = document.getElementById('verdict-pill');
-      vPill.textContent = `VERDICT: ${m.verdict || 'EVALUATED'} (SCORE: ${Math.round((m.groundedness_score || 0)*100)}%)`;
-      vPill.className = `status-badge ${
-        m.verdict === 'GROUNDED' ? 'badge-supported' :
-        m.verdict === 'CONTRADICTED' ? 'badge-contradicted' :
-        m.verdict === 'HALLUCINATED' ? 'badge-unsupported' : 'badge-partially-supported'
-      }`;
+      const v = metrics.verdict || 'UNVERIFIED';
+      const badgeClass = (v === 'GROUNDED' || v === 'SUPPORTED') ? 'badge-supported' :
+                         (v === 'CONTRADICTED' ? 'badge-contradicted' :
+                         (v === 'HALLUCINATED' ? 'badge-unsupported' : 'badge-partial'));
+      
+      const summaryElem = document.getElementById('eval-metrics-summary');
+      summaryElem.innerHTML = 
+        'Groundedness: <strong>' + (metrics.groundedness_score !== undefined ? (metrics.groundedness_score * 100).toFixed(1) + '%' : '100%') + '</strong> | ' +
+        'Hallucination Rate: <strong>' + (metrics.hallucination_rate !== undefined ? (metrics.hallucination_rate * 100).toFixed(1) + '%' : '0%') + '</strong> | ' +
+        'Verdict: <span id="verdict-pill" class="badge ' + badgeClass + '">' + v + '</span>';
 
-      // Claims table
       const tbody = document.getElementById('claims-table-body');
-      tbody.innerHTML = '';
-
-      if (!claims.length) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px;">No atomic claims extracted.</td></tr>';
+      if (claims.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">No atomic factual claims extracted from response.</td></tr>';
         return;
       }
 
-      claims.forEach(c => {
-        const tr = document.createElement('tr');
-        const badgeClass = 
-          c.classification === 'SUPPORTED' ? 'badge-supported' :
-          c.classification === 'PARTIALLY_SUPPORTED' ? 'badge-partially-supported' :
-          c.classification === 'CONTRADICTED' ? 'badge-contradicted' :
-          c.classification === 'UNSUPPORTED' ? 'badge-unsupported' : 'badge-undetermined';
+      let html = '';
+      claims.forEach(function(c, idx) {
+        const cls = c.classification || 'UNVERIFIED';
+        const cBadge = (cls === 'SUPPORTED') ? 'badge-supported' :
+                       (cls === 'CONTRADICTED') ? 'badge-contradicted' :
+                       (cls === 'PARTIALLY_SUPPORTED') ? 'badge-partial' : 'badge-unsupported';
 
-        tr.innerHTML = `
-          <td><span style="font-family:var(--font-mono); font-weight:700; color:var(--police-blue-light);">${c.claim_id}</span></td>
-          <td style="font-weight:500; color:#fff;">${c.claim_text}</td>
-          <td><span class="entity-pill">${c.claim_type}</span></td>
-          <td><span class="status-badge ${badgeClass}">${c.classification}</span></td>
-          <td style="font-family:var(--font-mono); font-weight:600;">${Math.round((c.confidence || 0.8)*100)}%</td>
-          <td>
-            <div style="color:var(--text-main); font-size:0.8rem;">${c.reason}</div>
-            ${c.ground_truth_evidence ? `<div class="evidence-quote">Evidence: ${c.ground_truth_evidence}</div>` : ''}
-            <span class="layer-tag">${c.layer_resolved || 'Hybrid Engine'} &bull; Source Pages: ${(c.source_pages || []).join(', ') || 'N/A'}</span>
-          </td>
-        `;
-        tbody.appendChild(tr);
+        html += '<tr>' +
+          '<td><span class="incident-id-pill">' + escapeHtml(c.claim_id || ('C' + (idx+1))) + '</span></td>' +
+          '<td class="claim-text-col">' + escapeHtml(c.claim_text || '') + '</td>' +
+          '<td><span class="badge badge-neutral">' + escapeHtml(c.claim_type || 'fact') + '</span></td>' +
+          '<td><span class="badge ' + cBadge + '">' + cls + '</span></td>' +
+          '<td style="font-family:var(--font-mono); font-size:0.75rem;">' + (c.confidence ? (c.confidence * 100).toFixed(0) + '%' : '-') + '</td>' +
+          '<td>' +
+            '<div>' + escapeHtml(c.reason || 'Verified against ground truth record.') + '</div>' +
+            (c.ground_truth_evidence ? '<div class="claim-evidence-text">Evidence: ' + escapeHtml(c.ground_truth_evidence) + '</div>' : '') +
+            '<div class="claim-layer-tag">Resolved: ' + escapeHtml(c.layer_resolved || 'Hybrid Engine') + '</div>' +
+          '</td>' +
+        '</tr>';
       });
-    }
-
-    async function evaluateFullReport() {
-      const text = document.getElementById('full-report-input').value.trim();
-      const title = document.getElementById('report-title-input').value.trim();
-      const examiner = document.getElementById('report-examiner-input').value.trim();
-
-      if (!text) {
-        alert('Please paste or write a forensic report to evaluate.');
-        return;
-      }
-
-      try {
-        const res = await fetch('/api/evaluation/evaluate-report', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ report_text: text, report_title: title, examiner: examiner })
-        });
-        const data = await res.json();
-        renderReportResult(data);
-        await fetchSummaryAndHistory();
-      } catch (err) {
-        alert('Report evaluation failed: ' + err);
-      }
-    }
-
-    function renderReportResult(data) {
-      const card = document.getElementById('report-results-card');
-      card.style.display = 'block';
-
-      const m = data.metrics || {};
-      document.getElementById('report-coverage-pill').textContent = `COVERAGE: ${data.questions_detected_count}/60 NIST QUESTIONS`;
-      document.getElementById('rep-hud-detected').textContent = data.questions_detected_count;
-      document.getElementById('rep-hud-coverage-pct').textContent = `${m.question_coverage_percentage || 0}% Coverage`;
-      document.getElementById('rep-hud-groundedness').textContent = `${Math.round((m.groundedness_score || 0)*100)}%`;
-      document.getElementById('rep-hud-total-claims').textContent = `${m.total_claims || 0} Total Claims`;
-      document.getElementById('rep-hud-hallucination').textContent = `${Math.round((m.hallucination_rate || 0)*100)}%`;
-      document.getElementById('rep-hud-unsupported').textContent = `${m.unsupported_claims || 0} Unsupported`;
-      document.getElementById('rep-hud-contradicted').textContent = `${m.contradicted_claims || 0}`;
-      document.getElementById('rep-hud-contradiction-rate').textContent = `${Math.round((m.contradiction_rate || 0)*100)}% Rate`;
-
-      const breakdownDiv = document.getElementById('report-sections-breakdown');
-      breakdownDiv.innerHTML = '<h4 style="font-family:var(--font-heading); margin:14px 0 10px 0; color:#fff;">DETECTED NIST QUESTION SECTIONS BREAKDOWN</h4>';
-
-      (data.question_breakdown || []).forEach(q => {
-        const qm = q.metrics || {};
-        const qBox = document.createElement('div');
-        qBox.style.cssText = 'background:#05080e; border:1px solid #1e293b; border-radius:6px; padding:12px; margin-bottom:10px;';
-        qBox.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <span style="font-family:var(--font-mono); font-weight:700; color:var(--police-blue-light);">[Q${q.question_id}] ${q.section_title}</span>
-            <span class="status-badge ${qm.groundedness_score >= 0.8 ? 'badge-supported' : qm.contradicted_claims > 0 ? 'badge-contradicted' : 'badge-partially-supported'}">
-              Groundedness: ${Math.round((qm.groundedness_score || 0)*100)}% (${q.claims.length} claims)
-            </span>
-          </div>
-          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;">${q.question}</div>
-          <ul style="padding-left:18px; font-size:0.78rem; color:#cbd5e1;">
-            ${q.claims.map(c => `<li><b>[${c.classification}]</b> ${c.claim_text} <i>(${c.reason})</i></li>`).join('')}
-          </ul>
-        `;
-        breakdownDiv.appendChild(qBox);
-      });
+      tbody.innerHTML = html;
     }
 
     async function fetchSummaryAndHistory() {
       try {
-        const res = await fetch('/api/evaluation/summary');
-        const stats = await res.json();
-        
-        document.getElementById('hud-groundedness').textContent = `${stats.overall_groundedness || 100}%`;
-        document.getElementById('hud-eval-count').textContent = `${stats.total_evaluations || 0} Total Evaluations`;
-        document.getElementById('hud-supported-claims').textContent = stats.grounded_claims || 0;
-        document.getElementById('hud-total-claims').textContent = `${stats.total_claims || 0} Total Claims`;
-        document.getElementById('hud-hallucinated-claims').textContent = stats.hallucinated_claims || 0;
-        document.getElementById('hud-hallucination-rate').textContent = `Rate: ${stats.overall_hallucination_rate || 0}%`;
-        document.getElementById('hud-contradictions').textContent = stats.contradicted_claims || 0;
-        document.getElementById('hud-contradiction-rate').textContent = `Rate: ${stats.overall_contradiction_rate || 0}%`;
+        const [sumRes, histRes] = await Promise.all([
+          fetch(API_BASE + '/api/evaluation/summary'),
+          fetch(API_BASE + '/api/evaluation/history?limit=25')
+        ]);
 
-        // Render leaderboard
-        const lbody = document.getElementById('leaderboard-table-body');
-        lbody.innerHTML = '';
-        (stats.agent_benchmarks || []).forEach(a => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td><b style="color:#fff;">${a.agent_name}</b></td>
-            <td>${a.questions_evaluated}/60</td>
-            <td>${a.total_evaluations}</td>
-            <td><span class="status-badge ${a.groundedness >= 80 ? 'badge-supported' : 'badge-partially-supported'}">${a.groundedness}%</span></td>
-            <td><span class="status-badge ${a.hallucination_rate < 20 ? 'badge-supported' : 'badge-unsupported'}">${a.hallucination_rate}%</span></td>
-            <td><span style="color:${a.total_contradictions > 0 ? 'var(--alert-red)' : 'var(--evidence-green)'}; font-weight:700;">${a.total_contradictions}</span></td>
-            <td>${a.total_supported}</td>
-            <td>${a.total_claims}</td>
-          `;
-          lbody.appendChild(tr);
-        });
+        if (sumRes.ok) {
+          const s = await sumRes.json();
+          document.getElementById('hud-total-q').innerText = s.total_questions || 60;
+          document.getElementById('hud-groundedness').innerText = (s.overall_groundedness || 100.0) + '%';
+          document.getElementById('hud-eval-count').innerText = (s.total_evaluations || 0) + ' Total Evaluations';
+          document.getElementById('hud-supported-claims').innerText = s.grounded_claims || 0;
+          document.getElementById('hud-total-claims').innerText = (s.total_claims || 0) + ' Total Claims';
+          document.getElementById('hud-hallucinated-claims').innerText = s.hallucinated_claims || 0;
+          document.getElementById('hud-hallucination-rate').innerText = 'Rate: ' + (s.overall_hallucination_rate || 0.0) + '%';
+          document.getElementById('hud-contradictions').innerText = s.contradicted_claims || 0;
+          document.getElementById('hud-contradiction-rate').innerText = 'Rate: ' + (s.overall_contradiction_rate || 0.0) + '%';
 
-        // Render history
-        const hbody = document.getElementById('history-table-body');
-        hbody.innerHTML = '';
-        (stats.recent_evaluations || []).forEach(e => {
-          const tr = document.createElement('tr');
-          const badgeClass = 
-            e.verdict === 'GROUNDED' ? 'badge-supported' :
-            e.verdict === 'CONTRADICTED' ? 'badge-contradicted' :
-            e.verdict === 'HALLUCINATED' ? 'badge-unsupported' : 'badge-partially-supported';
-          tr.innerHTML = `
-            <td><span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--police-blue-light);">${e.evaluation_id}</span></td>
-            <td style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim);">${e.timestamp}</td>
-            <td><b>Q${e.question_id}</b></td>
-            <td>${e.agent_name}</td>
-            <td><span class="status-badge ${badgeClass}">${e.verdict}</span></td>
-            <td><b>${Math.round((e.groundedness_score || 0)*100)}%</b></td>
-            <td>${Math.round((e.hallucination_rate || 0)*100)}%</td>
-            <td>${e.total_claims}</td>
-            <td>
-              <button class="btn-action" style="padding:4px 8px; font-size:0.7rem;" onclick="viewHistoryDetail('${e.evaluation_id}')">Inspect</button>
-            </td>
-          `;
-          hbody.appendChild(tr);
-        });
+          renderLeaderboard(s.agent_benchmarks || []);
+        }
+
+        if (histRes.ok) {
+          const h = await histRes.json();
+          recentEvaluations = h.evaluations || [];
+          renderHistoryTable(recentEvaluations);
+        }
       } catch (err) {
-        console.error('Failed to fetch summary:', err);
+        console.warn('Error fetching evaluation summary:', err);
       }
     }
 
-    async function viewHistoryDetail(evalId) {
+    function renderLeaderboard(agents) {
+      const tbody = document.getElementById('agent-leaderboard-body');
+      if (!tbody) return;
+      if (!agents.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">No agent benchmark records found.</td></tr>';
+        return;
+      }
+
+      let html = '';
+      agents.forEach(function(a) {
+        const gPct = ((a.groundedness || 1.0) * 100).toFixed(1);
+        const hPct = ((a.hallucination_rate || 0.0) * 100).toFixed(1);
+        const cPct = ((a.contradiction_rate || 0.0) * 100).toFixed(1);
+        html += '<tr>' +
+          '<td style="font-weight:600; color:var(--primary);">' + escapeHtml(a.agent_name) + '</td>' +
+          '<td>' + a.questions_evaluated + ' / 60</td>' +
+          '<td>' + a.total_evaluations + '</td>' +
+          '<td style="font-weight:700; color:var(--secondary);">' + gPct + '%</td>' +
+          '<td>' + hPct + '%</td>' +
+          '<td>' + cPct + '%</td>' +
+          '<td>' + (a.total_supported || 0) + ' / ' + (a.total_claims || 0) + '</td>' +
+        '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderHistoryTable(evals) {
+      const tbody = document.getElementById('history-table-body');
+      if (!tbody) return;
+      const agentFilter = document.getElementById('history-filter-agent').value;
+
+      const filtered = evals.filter(function(e) {
+        if (agentFilter && e.agent_name !== agentFilter) return false;
+        return true;
+      });
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">No evaluation records found matching criteria.</td></tr>';
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(function(e, idx) {
+        const v = e.verdict || 'UNVERIFIED';
+        const vBadge = (v === 'GROUNDED' || v === 'SUPPORTED') ? 'badge-supported' :
+                       (v === 'CONTRADICTED' ? 'badge-contradicted' :
+                       (v === 'HALLUCINATED' ? 'badge-unsupported' : 'badge-partial'));
+        const gPct = (e.groundedness_score !== undefined ? (e.groundedness_score > 1.0 ? e.groundedness_score : e.groundedness_score * 100).toFixed(1) : '100.0') + '%';
+
+        html += '<tr>' +
+          '<td><span class="incident-id-pill">' + escapeHtml(e.evaluation_id) + '</span></td>' +
+          '<td><strong>Q' + e.question_id + '</strong></td>' +
+          '<td>' + escapeHtml(e.agent_name) + '</td>' +
+          '<td style="font-weight:600; color:var(--secondary);">' + gPct + '</td>' +
+          '<td><span class="badge ' + vBadge + '">' + v + '</span></td>' +
+          '<td style="font-family:var(--font-mono); font-size:0.74rem; color:var(--text-secondary);">' + escapeHtml(e.timestamp) + '</td>' +
+          '<td style="text-align:right;"><button class="btn btn-secondary btn-sm" onclick="openEvalModalByIndex(' + idx + ')">Inspect</button></td>' +
+        '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function loadHistory() {
+      renderHistoryTable(recentEvaluations);
+    }
+
+    function openEvalModalByIndex(idx) {
+      const item = recentEvaluations[idx];
+      if (!item) return;
+
+      document.getElementById('modal-eval-id').innerText = '[' + item.evaluation_id + ']';
+      const body = document.getElementById('modal-eval-body');
+      
+      const claims = item.claims || [];
+      let claimsHtml = '';
+      claims.forEach(function(c) {
+        claimsHtml += '<div style="background:#F8FAFC; border:1px solid var(--border-color); border-radius:4px; padding:8px 12px; margin-bottom:6px;">' +
+          '<div style="font-weight:600; font-size:0.82rem;">' + escapeHtml(c.claim_text) + '</div>' +
+          '<div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">Status: <strong>' + escapeHtml(c.classification) + '</strong> &bull; Reason: ' + escapeHtml(c.reason) + '</div>' +
+        '</div>';
+      });
+
+      body.innerHTML = 
+        '<div class="dossier-field"><label>NIST Question</label><div class="value-box">Q' + item.question_id + '. ' + escapeHtml(item.question || ('Question #' + item.question_id)) + '</div></div>' +
+        '<div class="dossier-field"><label>Evaluated Agent Response</label><pre class="code-block">' + escapeHtml(item.agent_response) + '</pre></div>' +
+        '<div class="dossier-field"><label>NIST Official Ground Truth</label><pre class="code-block">' + escapeHtml(item.ground_truth) + '</pre></div>' +
+        '<div class="dossier-field"><label>Atomic Claims Verification (' + claims.length + ' Claims)</label><div>' + (claimsHtml || '<div class="value-box">No claim records stored.</div>') + '</div></div>';
+
+      document.getElementById('eval-detail-modal').classList.add('active');
+    }
+
+    function closeEvalModal() {
+      document.getElementById('eval-detail-modal').classList.remove('active');
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target.id === 'eval-detail-modal') closeEvalModal();
+    }
+
+    function loadSampleReport() {
+      document.getElementById('report-text-input').value = 
+        "# Forensic Investigation Synthesis Report\n\n" +
+        "## Question 3: Operating System Details\n" +
+        "The installed operating system is Windows 7 Ultimate Service Pack 1 (Build 7601), registered owner is informant, installed on 2015-03-22.\n\n" +
+        "## Question 5: Computer Hostname\n" +
+        "The computer name was identified as INFORMANT-PC.\n\n" +
+        "## Question 9: Network Interface Configuration\n" +
+        "The network interface received IP address 10.11.11.129 assigned by the DHCP server.\n\n" +
+        "## Question 31: Cloud Storage Synchronization\n" +
+        "Google Drive was synchronized with account iaman.informant.personal@gmail.com on 2015-03-23.";
+    }
+
+    async function evaluateReportText() {
+      const title = document.getElementById('report-title-input').value;
+      const examiner = document.getElementById('report-examiner-input').value;
+      const text = document.getElementById('report-text-input').value.trim();
+      if (!text) {
+        alert('Please enter or paste report text to evaluate.');
+        return;
+      }
+
       try {
-        const res = await fetch(`/api/evaluation/results/${evalId}`);
+        const res = await fetch(API_BASE + '/api/evaluation/evaluate-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            report_title: title,
+            examiner: examiner,
+            report_text: text
+          })
+        });
+
+        if (!res.ok) throw new Error('Report audit failed: ' + res.status);
         const data = await res.json();
-        
-        document.getElementById('modal-title').textContent = `EVALUATION INSPECTOR // ${data.evaluation_id}`;
-        const body = document.getElementById('modal-body');
-        body.innerHTML = `
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
-            <div><b>Question ID:</b> Q${data.question_id}</div>
-            <div><b>Agent:</b> ${data.agent_name}</div>
-            <div><b>Verdict:</b> ${data.verdict}</div>
-            <div><b>Timestamp:</b> ${data.timestamp}</div>
-          </div>
-          <div style="margin-bottom:12px;">
-            <b>Agent Response:</b>
-            <pre style="background:#05080e; padding:10px; border-radius:6px; font-size:0.78rem; margin-top:4px;">${data.agent_response}</pre>
-          </div>
-          <div style="margin-bottom:12px;">
-            <b>NIST Ground Truth:</b>
-            <pre style="background:#05080e; padding:10px; border-radius:6px; font-size:0.78rem; margin-top:4px;">${data.ground_truth}</pre>
-          </div>
-          <div>
-            <b>Claim Results (${data.claims.length}):</b>
-            <div style="margin-top:6px; max-height:220px; overflow-y:auto;">
-              ${data.claims.map(c => `
-                <div style="background:#05080e; border:1px solid #1e293b; padding:8px; border-radius:4px; margin-bottom:6px; font-size:0.78rem;">
-                  <div><b>[${c.claim_id}] [${c.classification}]</b> ${c.claim_text}</div>
-                  <div style="color:var(--text-muted); font-size:0.72rem; margin-top:2px;">Reason: ${c.reason}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
-        document.getElementById('detail-modal').classList.add('active');
+        renderReportResults(data);
       } catch (err) {
-        alert('Failed to load evaluation details: ' + err);
+        alert('Report evaluation error: ' + err.message);
       }
     }
 
-    function closeModal() {
-      document.getElementById('detail-modal').classList.remove('active');
+    function renderReportResults(data) {
+      const resDiv = document.getElementById('report-eval-results');
+      resDiv.style.display = 'block';
+
+      const m = data.metrics || {};
+      const grid = document.getElementById('report-metrics-grid');
+      grid.innerHTML = 
+        '<div class="metric-panel"><div class="metric-label">Questions Detected</div><div class="metric-value">' + (data.questions_detected_count || 0) + '</div><div class="metric-subtext">Out of 60 NIST Questions</div></div>' +
+        '<div class="metric-panel accent-teal"><div class="metric-label">Report Groundedness</div><div class="metric-value">' + ((m.groundedness_score || 1.0) * 100).toFixed(1) + '%</div><div class="metric-subtext">Verdict: ' + (m.verdict || 'SUPPORTED') + '</div></div>' +
+        '<div class="metric-panel"><div class="metric-label">Total Claims Audited</div><div class="metric-value">' + (m.total_claims || 0) + '</div><div class="metric-subtext">Supported: ' + (m.supported_claims || 0) + '</div></div>' +
+        '<div class="metric-panel accent-muted"><div class="metric-label">Hallucination Rate</div><div class="metric-value">' + ((m.hallucination_rate || 0.0) * 100).toFixed(1) + '%</div><div class="metric-subtext">Contradictions: ' + (m.contradicted_claims || 0) + '</div></div>';
+
+      const breakdown = document.getElementById('report-question-breakdown');
+      breakdown.innerHTML = '';
+      const qb = data.question_breakdown || [];
+      qb.forEach(function(q) {
+        const qm = q.metrics || {};
+        const qDiv = document.createElement('div');
+        qDiv.style.border = '1px solid var(--border-color)';
+        qDiv.style.borderRadius = '4px';
+        qDiv.style.padding = '12px';
+        qDiv.style.marginBottom = '12px';
+        qDiv.style.background = '#ffffff';
+
+        let cRows = '';
+        (q.claims || []).forEach(function(c) {
+          cRows += '<tr>' +
+            '<td><span class="incident-id-pill">' + escapeHtml(c.claim_id) + '</span></td>' +
+            '<td>' + escapeHtml(c.claim_text) + '</td>' +
+            '<td><span class="badge badge-supported">' + escapeHtml(c.classification) + '</span></td>' +
+            '<td style="font-size:0.75rem;">' + escapeHtml(c.reason) + '</td>' +
+          '</tr>';
+        });
+
+        qDiv.innerHTML = 
+          '<div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border-light); padding-bottom:6px;">' +
+            '<strong style="color:var(--primary);">Q' + q.question_id + '. ' + escapeHtml(q.question) + '</strong>' +
+            '<span class="badge badge-supported">Groundedness: ' + ((qm.groundedness_score || 1.0) * 100).toFixed(1) + '%</span>' +
+          '</div>' +
+          '<div class="table-responsive" style="border:none;"><table class="portal-table"><thead><tr><th style="width:80px;">ID</th><th>Claim</th><th style="width:120px;">Status</th><th>Evidence & Rationale</th></tr></thead><tbody>' + cRows + '</tbody></table></div>';
+        
+        breakdown.appendChild(qDiv);
+      });
     }
 
-    function switchTab(tab) {
-      document.getElementById('tab-single-content').style.display = tab === 'single' ? 'block' : 'none';
-      document.getElementById('tab-report-content').style.display = tab === 'report' ? 'block' : 'none';
-      document.getElementById('tab-leaderboard-content').style.display = tab === 'leaderboard' ? 'block' : 'none';
-
-      document.getElementById('tab-btn-single').classList.toggle('active', tab === 'single');
-      document.getElementById('tab-btn-report').classList.toggle('active', tab === 'report');
-      document.getElementById('tab-btn-leaderboard').classList.toggle('active', tab === 'leaderboard');
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
-    // Initialize on page load
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>

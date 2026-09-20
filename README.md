@@ -84,9 +84,10 @@ cp .env.example .env
 python server.py
 ```
 
-### 3. Open the Dashboards:
-* **Police Investigation Incident Audit Board:** [http://localhost:8080/](http://localhost:8080/)
-* **Interactive Forensic Chat UI:** [http://localhost:8080/chat.html](http://localhost:8080/chat.html)
+### 3. Open the Forensic Web Portals:
+* **Digital Forensics Incident & Audit Dashboard:** [http://localhost:8080/](http://localhost:8080/)
+* **Forensic Investigation Query Console:** [http://localhost:8080/chat.html](http://localhost:8080/chat.html)
+* **NIST CFReDS Hallucination Evaluation Portal:** [http://localhost:8080/evaluation.html](http://localhost:8080/evaluation.html)
 
 ---
 
@@ -99,13 +100,15 @@ python mcp_server.py "path/to/autopsy.db"
 
 ---
 
-## 5. NIST CFReDS Evaluation Suite
+## 5. NIST CFReDS Hallucination Evaluation Suite
 
-To run the automated investigation against the 60 NIST Data Leakage ground-truth questions:
+The framework includes a 5-layer automated evaluation engine benchmarked against the official 60 questions from the NIST CFReDS Data Leakage Case (`leakage-answers.pdf`).
+
+To run the automated investigation and calculate groundedness scores:
 ```bash
-# Run evaluation across specific questions or all 60
-python run_investigation.py --only 1 2 3 4 5 --out results.json
+# Run investigation and evaluate against NIST ground truth
+python run_investigation.py --only 1 2 3 4 5 --out results.json --evaluate
 
-# Format findings into a readable Markdown report
-python format_results.py results.json --out results.md
+# Format findings into a readable Markdown report with claim breakdowns
+python format_results.py results.json --out results.md --evaluate
 ```

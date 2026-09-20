@@ -3,498 +3,370 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PROJECT SENTINEL // FORENSIC INVESTIGATION CHAT</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Digital Forensics Investigation System — Forensic Query Console</title>
+  <link rel="stylesheet" href="/portal.css" />
   <style>
-    :root {
-      --bg-dark: #070a10;
-      --bg-panel: #0d121f;
-      --bg-card: #12192b;
-      --border-color: #1e2a47;
-      --police-blue: #0284c7;
-      --police-blue-light: #38bdf8;
-      --caution-amber: #f59e0b;
-      --alert-red: #ef4444;
-      --evidence-green: #10b981;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --font-mono: 'JetBrains Mono', monospace;
-      --font-heading: 'Chakra Petch', sans-serif;
-      --font-body: 'Inter', sans-serif;
+    /* Forensic Investigation Console Layout */
+    html, body {
+      height: 100%;
+      overflow: hidden;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(239, 68, 68, 0.05) 0%, transparent 40%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
     }
 
-    .police-tape {
-      background: repeating-linear-gradient(
-        -45deg,
-        #f59e0b,
-        #f59e0b 20px,
-        #111827 20px,
-        #111827 40px
-      );
-      height: 6px;
-      width: 100%;
-      flex-shrink: 0;
-    }
-
-    header {
-      background: linear-gradient(180deg, rgba(13, 18, 31, 0.98) 0%, rgba(10, 15, 26, 0.95) 100%);
-      border-bottom: 1px solid var(--border-color);
-      padding: 14px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .shield-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border: 2px solid var(--police-blue-light);
-      border-radius: 50% 50% 50% 50% / 20% 20% 80% 80%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-    }
-
-    .shield-icon svg { width: 24px; height: 24px; fill: var(--police-blue-light); }
-
-    .header-title h1 {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      letter-spacing: 1.5px;
-      color: #fff;
-    }
-
-    .header-title p {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .btn-nav {
-      background: linear-gradient(180deg, #1e293b, #0f172a);
-      border: 1px solid var(--police-blue);
-      color: var(--text-main);
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .btn-nav:hover {
-      background: #1d4ed8;
-      border-color: #3b82f6;
-      color: #fff;
-      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
-    }
-
-    .chat-container {
+    .chat-layout {
       flex: 1;
       display: flex;
       flex-direction: column;
-      max-width: 1300px;
+      max-width: 1400px;
       width: 100%;
       margin: 0 auto;
-      padding: 16px 24px;
+      padding: 16px 24px 20px;
       overflow: hidden;
     }
 
-    .quick-chips {
+    /* Preset Case Inquiries */
+    .preset-toolbar {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       margin-bottom: 12px;
       flex-shrink: 0;
     }
 
-    .quick-chips::-webkit-scrollbar { height: 4px; }
-    .quick-chips::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+    .preset-toolbar::-webkit-scrollbar {
+      height: 4px;
+    }
 
-    .chip {
-      background: var(--bg-panel);
+    .preset-toolbar::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 2px;
+    }
+
+    .preset-chip {
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      padding: 6px 14px;
-      border-radius: 9999px;
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 4px;
       white-space: nowrap;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .chip:hover {
-      border-color: var(--police-blue-light);
-      color: #fff;
-      background: rgba(2, 132, 199, 0.15);
+    .preset-chip:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
-    .messages-area {
+    /* Message Stream Area */
+    .investigation-stream {
       flex: 1;
       overflow-y: auto;
       padding-right: 8px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
+      margin-bottom: 14px;
     }
 
-    .messages-area::-webkit-scrollbar { width: 6px; }
-    .messages-area::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
-
-    .msg {
-      display: flex;
-      gap: 14px;
-      max-width: 92%;
+    .investigation-stream::-webkit-scrollbar {
+      width: 6px;
     }
 
-    .msg.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
+    .investigation-stream::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
     }
 
-    .msg.agent {
-      align-self: flex-start;
-    }
-
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .msg.agent .avatar {
-      background: linear-gradient(135deg, #0284c7, #1e40af);
-      color: #fff;
-      border: 1px solid var(--police-blue-light);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-    }
-
-    .msg.user .avatar {
-      background: linear-gradient(135deg, #475569, #334155);
-      color: #fff;
-      border: 1px solid #64748b;
-    }
-
-    .msg-content {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .bubble {
-      background: var(--bg-panel);
+    /* Investigation Entry Cards */
+    .inquiry-card {
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 16px 20px;
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--text-main);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-left: 4px solid var(--primary);
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      padding: 14px 18px;
     }
 
-    .msg.user .bubble {
-      background: #111a2e;
-      border-color: #2563eb;
-      color: #fff;
+    .inquiry-card.user {
+      border-left-color: var(--secondary);
+      background: #FAFCFC;
     }
 
-    .tool-dispatch-callout {
-      background: #05080f;
-      border: 1px solid #1e293b;
-      border-left: 4px solid var(--police-blue-light);
-      border-radius: 6px;
-      padding: 10px 14px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: #94a3b8;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 8px;
-    }
-
-    .tool-dispatch-callout .top-line {
+    .inquiry-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--police-blue-light);
-      font-weight: 600;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.75rem;
     }
 
-    .tool-dispatch-callout code {
-      color: #38bdf8;
-      background: #0b101c;
-      padding: 2px 6px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-top: 4px;
-    }
-
-    /* Markdown styling inside bubble */
-    .bubble h3 {
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
+    .inquiry-role {
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .inquiry-role.user-role {
+      color: var(--secondary);
+    }
+
+    .inquiry-timestamp {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .inquiry-body {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .inquiry-body h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 12px 0 6px 0;
+    }
+
+    .inquiry-body p {
       margin-bottom: 8px;
     }
 
-    .bubble p { margin-bottom: 8px; }
-    .bubble ul { margin-left: 20px; margin-bottom: 8px; }
-    .bubble li { margin-bottom: 4px; }
-    .bubble code { font-family: var(--font-mono); font-size: 0.8rem; background: #05080e; padding: 2px 6px; border-radius: 4px; color: #38bdf8; }
+    .inquiry-body p:last-child {
+      margin-bottom: 0;
+    }
 
-    .bubble table {
+    .inquiry-body ul {
+      margin: 8px 0 8px 20px;
+    }
+
+    .inquiry-body li {
+      margin-bottom: 4px;
+    }
+
+    .inquiry-body table {
       width: 100%;
       border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 0.82rem;
-      font-family: var(--font-mono);
+      margin: 10px 0;
+      font-size: 0.8rem;
     }
 
-    .bubble th {
-      background: #0b111e;
-      color: var(--text-muted);
-      padding: 8px 12px;
-      border: 1px solid var(--border-color);
-      text-align: left;
-    }
-
-    .bubble td {
-      padding: 8px 12px;
+    .inquiry-body table th {
+      background: var(--bg-subtle);
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      padding: 6px 10px;
       border: 1px solid var(--border-color);
     }
 
-    .bubble tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    .inquiry-body table td {
+      padding: 6px 10px;
+      border: 1px solid var(--border-light);
+      color: var(--text-main);
+    }
 
-    /* Typing indicator */
-    .typing-indicator {
+    /* Execution Indicator */
+    .execution-status {
       display: none;
       align-items: center;
-      gap: 6px;
-      padding: 12px 18px;
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      width: fit-content;
-      font-family: var(--font-mono);
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--primary-light);
+      border: 1px solid rgba(23, 54, 93, 0.2);
+      border-radius: 4px;
       font-size: 0.78rem;
-      color: var(--police-blue-light);
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
     }
 
-    .typing-indicator.active { display: flex; }
-
-    .typing-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--police-blue-light);
-      border-radius: 50%;
-      animation: blink 1.2s infinite ease-in-out;
-    }
-
-    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes blink {
-      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-      40% { opacity: 1; transform: scale(1.1); }
-    }
-
-    /* Chat Input Bar */
-    .input-bar {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 10px 14px;
+    .execution-status.active {
       display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-shrink: 0;
-      margin-top: 14px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     }
 
-    .input-bar input {
+    .status-spinner {
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(23, 54, 93, 0.3);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Console Query Input Form */
+    .query-input-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 10px 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      flex-shrink: 0;
+    }
+
+    .query-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .query-form input {
       flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-family: var(--font-mono);
+      height: 40px;
       font-size: 0.88rem;
     }
 
-    .input-bar input::placeholder { color: var(--text-dim); }
-
-    .btn-send {
-      background: #1d4ed8;
-      border: 1px solid #3b82f6;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .btn-send:hover {
-      background: #2563eb;
-      box-shadow: 0 0 14px rgba(37, 99, 235, 0.6);
-    }
-
-    .btn-send:disabled {
-      background: #334155;
-      border-color: #475569;
-      color: #94a3b8;
-      cursor: not-allowed;
+    .query-form button {
+      height: 40px;
+      padding: 0 20px;
     }
   </style>
 </head>
 <body>
-  <div class="police-tape"></div>
 
-  <header>
-    <div class="header-left">
-      <div class="shield-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.88-3.86-1.09-7-5.34-7-9.88V6.3l7-3.12zM11 7v6h2V7h-2zm0 8v2h2v-2h-2z"/>
-        </svg>
-      </div>
-      <div class="header-title">
-        <h1>PROJECT SENTINEL <span style="color:var(--police-blue-light);">// FORENSIC INVESTIGATION CHAT</span></h1>
-        <p>CASE: CFReDS_DataLeakage &bull; EXAMINER: Melwin Robinson &bull; 6,938 ARTIFACTS</p>
-      </div>
-    </div>
+  <!-- Top Metadata Ribbon -->
+  <div class="gov-top-bar">
+    <span>DIGITAL FORENSICS INVESTIGATION FRAMEWORK &bull; AUTONOMOUS EVIDENCE REASONING CONSOLE</span>
+    <span>EVIDENCE BASE: CFReDS_DataLeakage/autopsy.db (6,938 ARTIFACTS)</span>
+  </div>
 
-    <div class="header-right">
-      <a href="/evaluation.html" class="btn-nav" style="border-color:#8b5cf6; color:#c084fc;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-        </svg>
-        HALLUCINATION EVALUATOR
-      </a>
-      <a href="/" class="btn-nav">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-          <line x1="3" y1="9" x2="21" y2="9"/>
-          <line x1="9" y1="21" x2="9" y2="9"/>
-        </svg>
-        VIEW AUDIT LOGS BOARD
-      </a>
+  <!-- Primary Global Header -->
+  <header class="portal-header">
+    <div class="portal-header-inner">
+      <div class="portal-brand">
+        <div class="portal-emblem">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="portal-titles">
+          <h1>DIGITAL FORENSICS INVESTIGATION SYSTEM</h1>
+          <p>Forensic Investigation Query Console &bull; Evidence Extraction & Analysis Engine</p>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="portal-nav">
+        <a href="/">Dashboard</a>
+        <a href="/chat.html" class="active">Forensic Investigation</a>
+        <a href="/evaluation.html">Hallucination Evaluation</a>
+      </nav>
+
+      <!-- Action -->
+      <div class="portal-header-actions">
+        <a href="/" class="btn btn-secondary btn-sm">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Audit Dispatch Board
+        </a>
+      </div>
     </div>
   </header>
 
-  <div class="chat-container">
-    <!-- Quick prompt chips -->
-    <div class="quick-chips">
-      <div class="chip" onclick="usePrompt('What USB storage devices were connected to the PC?')">?? USB Devices Attached</div>
-      <div class="chip" onclick="usePrompt('Identify the partition information of PC image')">?? Partition Layout</div>
-      <div class="chip" onclick="usePrompt('What were the suspect's web search keywords?')">?? Search Keywords</div>
-      <div class="chip" onclick="usePrompt('Locate any resignation files or documents on Desktop')">?? Resignation File</div>
-      <div class="chip" onclick="usePrompt('What websites was the suspect accessing before termination?')">?? Web History</div>
-      <div class="chip" onclick="usePrompt('List all software applications installed by suspect')">?? Installed Programs</div>
-      <div class="chip" onclick="usePrompt('Examine suspect emails in Outlook OST')">?? Outlook Emails</div>
+  <!-- Main Workstation Layout -->
+  <main class="chat-layout">
+
+    <!-- Case Context Information Bar -->
+    <section class="context-bar" style="margin-bottom:12px;">
+      <div>
+        <strong>Case:</strong> CFReDS_DataLeakage &nbsp;|&nbsp;
+        <strong>Artifacts:</strong> 6,938 Blackboard Records &nbsp;|&nbsp;
+        <strong>Examiner:</strong> Melwin Robinson &nbsp;|&nbsp;
+        <strong>Reasoning Engine:</strong> Gemini Forensic Analyst Cascade
+      </div>
+      <div>
+        <strong>Tool Dispatch:</strong> FastMCP &bull; Autopsy SQLite
+      </div>
+    </section>
+
+    <!-- Preset Case Inquiries Toolbar -->
+    <div class="preset-toolbar">
+      <button type="button" class="preset-chip" onclick="usePrompt('What USB storage devices were connected to the PC?')">USB Storage Devices</button>
+      <button type="button" class="preset-chip" onclick="usePrompt('Identify the partition information of PC image')">Disk Partition Layout</button>
+      <button type="button" class="preset-chip" onclick="usePrompt('What were the suspect\'s web search keywords?')">Web Search Keywords</button>
+      <button type="button" class="preset-chip" onclick="usePrompt('Locate any resignation files or documents on Desktop')">Resignation Document Timestamps</button>
+      <button type="button" class="preset-chip" onclick="usePrompt('What websites was the suspect accessing before termination?')">Browser History</button>
+      <button type="button" class="preset-chip" onclick="usePrompt('List all software applications installed by suspect')">Installed Programs</button>
+      <button type="button" class="preset-chip" onclick="usePrompt('Examine suspect emails in Outlook OST')">Outlook OST Email Archive</button>
     </div>
 
-    <!-- Message area -->
-    <div class="messages-area" id="messages-area">
-      <div class="msg agent">
-        <div class="avatar">AG</div>
-        <div class="msg-content">
-          <div class="bubble">
-            <h3>AGENT SENTINEL READY // DIGITAL FORENSIC DISPATCH</h3>
-            <p>I am connected directly to your processed case database (<code>CFReDS_DataLeakage/autopsy.db</code>) with 6,938 blackboard artifacts.</p>
-            <p>Whenever you submit an inquiry:</p>
-            <ul>
-              <li>The query and planned Autopsy tool command are <strong>automatically logged to <code>investigation_audit.db</code></strong>.</li>
-              <li>Your companion <strong>Audit Logs Board</strong> (at <a href="/" style="color:var(--police-blue-light); text-decoration:underline;">localhost:8080/</a>) will auto-sync with the new incident in real time.</li>
-              <li>I will execute the tool against Autopsy and return the exact forensic findings right here.</li>
-            </ul>
-            <p>Click a preset chip above or type your case question below to begin!</p>
-          </div>
+    <!-- Message / Evidence Stream -->
+    <div class="investigation-stream" id="messages-area">
+      <!-- Initial System Notice Card -->
+      <div class="inquiry-card">
+        <div class="inquiry-header">
+          <span class="inquiry-role">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            Forensic Investigation System Ready
+          </span>
+          <span class="inquiry-timestamp">SYSTEM INITIALIZED</span>
+        </div>
+        <div class="inquiry-body">
+          <h3>Forensic Data Source Connected</h3>
+          <p>Connected directly to verified forensic evidence case database: <code>CFReDS_DataLeakage/autopsy.db</code> (6,938 blackboard artifacts).</p>
+          <p>When you submit a forensic case inquiry:</p>
+          <ul>
+            <li>The inquiry and planned Autopsy tool execution are <strong>automatically recorded in <code>investigation_audit.db</code></strong> for chain-of-custody compliance.</li>
+            <li>The <strong>Audit Logs Board</strong> at <a href="/" style="color:var(--primary); font-weight:600;">http://localhost:8080/</a> synchronizes with all dispatched commands in real time.</li>
+            <li>Evidence artifacts and analysis findings will be formatted and returned in this console.</li>
+          </ul>
+          <p>Select a preset inquiry above or enter a case question below to begin investigation.</p>
         </div>
       </div>
     </div>
 
-    <!-- Typing Indicator -->
-    <div class="typing-indicator" id="typing-indicator">
-      <div class="typing-dot"></div>
-      <div class="typing-dot"></div>
-      <div class="typing-dot"></div>
-      <span id="typing-text" style="margin-left:6px;">ANALYZING EVIDENCE...</span>
+    <!-- Execution Spinner Status -->
+    <div class="execution-status" id="typing-indicator">
+      <div class="status-spinner"></div>
+      <span id="typing-text">Executing Autopsy forensic query and analyzing evidence artifacts...</span>
     </div>
 
-    <!-- Input Bar -->
-    <form class="input-bar" id="chat-form" onsubmit="handleSend(event)">
-      <input type="text" id="user-input" placeholder="Type your case inquiry (e.g. Find external USB drives or search web history)..." autocomplete="off" required />
-      <button type="submit" class="btn-send" id="send-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="22" y1="2" x2="11" y2="13"/>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-        </svg>
-        SEND QUESTION
-      </button>
-    </form>
-  </div>
+    <!-- Query Input Console -->
+    <div class="query-input-panel">
+      <form class="query-form" id="chat-form" onsubmit="handleSend(event)">
+        <input type="text" id="user-input" class="form-control" placeholder="Enter forensic investigation query (e.g. Find external USB drives or search web history)..." autocomplete="off" required />
+        <button type="submit" class="btn btn-primary" id="send-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          Submit Inquiry
+        </button>
+      </form>
+    </div>
+
+  </main>
 
   <script>
     const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
@@ -529,7 +401,7 @@
           body: JSON.stringify({ message: text })
         });
 
-        if (!res.ok) throw new Error('Server returned ' + res.status);
+        if (!res.ok) throw new Error('Server returned HTTP ' + res.status);
         const data = await res.json();
         appendAgentMessage(data);
       } catch (err) {
@@ -542,45 +414,66 @@
       }
     }
 
+    function getFormattedTimestamp() {
+      const now = new Date();
+      return now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+    }
+
     function appendUserMessage(text) {
-      const msg = document.createElement('div');
-      msg.className = 'msg user';
-      msg.innerHTML = 
-        '<div class="avatar">YOU</div>' +
-        '<div class="msg-content">' +
-          '<div class="bubble">' + escapeHtml(text) + '</div>' +
-        '</div>';
-      messagesArea.appendChild(msg);
+      const card = document.createElement('div');
+      card.className = 'inquiry-card user';
+      card.innerHTML = 
+        '<div class="inquiry-header">' +
+          '<span class="inquiry-role user-role">' +
+            '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+              '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>' +
+              '<circle cx="12" cy="7" r="4"></circle>' +
+            '</svg>' +
+            'Investigator Case Inquiry' +
+          '</span>' +
+          '<span class="inquiry-timestamp">' + getFormattedTimestamp() + '</span>' +
+        '</div>' +
+        '<div class="inquiry-body" style="font-weight:500;">' + escapeHtml(text) + '</div>';
+      messagesArea.appendChild(card);
       scrollToBottom();
     }
 
     function appendAgentMessage(data) {
-      const msg = document.createElement('div');
-      msg.className = 'msg agent';
-      const formattedBody = formatMarkdown(data.response || 'No evidence returned.');
+      const card = document.createElement('div');
+      card.className = 'inquiry-card';
+      const formattedBody = formatMarkdown(data.response || 'No evidence artifacts returned.');
 
-      msg.innerHTML = 
-        '<div class="avatar">AG</div>' +
-        '<div class="msg-content">' +
-          '<div class="bubble">' + formattedBody + '</div>' +
-        '</div>';
-      messagesArea.appendChild(msg);
+      card.innerHTML = 
+        '<div class="inquiry-header">' +
+          '<span class="inquiry-role">' +
+            '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+              '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>' +
+            '</svg>' +
+            'Forensic Agent Analysis' +
+          '</span>' +
+          '<span class="inquiry-timestamp">' + getFormattedTimestamp() + '</span>' +
+        '</div>' +
+        '<div class="inquiry-body">' + formattedBody + '</div>';
+      messagesArea.appendChild(card);
       scrollToBottom();
     }
 
     function appendAgentErrorMessage(errorStr) {
-      const msg = document.createElement('div');
-      msg.className = 'msg agent';
-      msg.innerHTML = 
-        '<div class="avatar" style="background:#dc2626;">ERR</div>' +
-        '<div class="msg-content">' +
-          '<div class="bubble" style="border-color:#ef4444; color:#fca5a5;">' +
-            '<h3>DISPATCH ERROR</h3>' +
-            '<p>' + escapeHtml(errorStr) + '</p>' +
-            '<p style="font-size:0.75rem; color:#94a3b8;">Ensure server.py is running on http://localhost:8080/.</p>' +
-          '</div>' +
+      const card = document.createElement('div');
+      card.className = 'inquiry-card';
+      card.style.borderLeftColor = 'var(--status-contradicted-text)';
+      card.innerHTML = 
+        '<div class="inquiry-header">' +
+          '<span class="inquiry-role" style="color:var(--status-contradicted-text);">' +
+            'Dispatch Execution Error' +
+          '</span>' +
+          '<span class="inquiry-timestamp">' + getFormattedTimestamp() + '</span>' +
+        '</div>' +
+        '<div class="inquiry-body" style="color:var(--status-contradicted-text);">' +
+          '<p><strong>Error executing investigation query:</strong> ' + escapeHtml(errorStr) + '</p>' +
+          '<p style="font-size:0.75rem; color:var(--text-secondary);">Verify that server.py is running on http://localhost:8080/.</p>' +
         '</div>';
-      messagesArea.appendChild(msg);
+      messagesArea.appendChild(card);
       scrollToBottom();
     }
 
@@ -616,7 +509,7 @@
         let line = lines[i].trim();
         if (!line) {
           if (inTable) {
-            html.push('<div style="overflow-x:auto; margin:10px 0;"><table>' + tableRows.join('') + '</table></div>');
+            html.push('<div class="table-responsive" style="margin:10px 0;"><table class="portal-table">' + tableRows.join('') + '</table></div>');
             tableRows = [];
             inTable = false;
           }
@@ -635,7 +528,7 @@
           tableRows.push('<tr>' + rowHtml + '</tr>');
           continue;
         } else if (inTable) {
-          html.push('<div style="overflow-x:auto; margin:10px 0;"><table>' + tableRows.join('') + '</table></div>');
+          html.push('<div class="table-responsive" style="margin:10px 0;"><table class="portal-table">' + tableRows.join('') + '</table></div>');
           tableRows = [];
           inTable = false;
         }
@@ -650,7 +543,7 @@
       }
 
       if (inTable) {
-        html.push('<div style="overflow-x:auto; margin:10px 0;"><table>' + tableRows.join('') + '</table></div>');
+        html.push('<div class="table-responsive" style="margin:10px 0;"><table class="portal-table">' + tableRows.join('') + '</table></div>');
       }
 
       return html.join('');
