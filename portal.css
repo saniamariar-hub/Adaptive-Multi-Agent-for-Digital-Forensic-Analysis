@@ -335,6 +335,19 @@ body {
   gap: 12px;
 }
 
+.eval-setup-grid {
+  grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr) minmax(220px, 1fr) auto auto;
+  align-items: end;
+}
+
+.eval-setup-grid .form-group {
+  min-width: 0;
+}
+
+.eval-setup-grid .form-control {
+  width: 100%;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -648,5 +661,27 @@ pre.code-block {
   }
   .metrics-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .eval-setup-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .eval-setup-grid .form-group:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .eval-setup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eval-setup-grid .form-group:first-child {
+    grid-column: auto;
+  }
+
+  .eval-setup-grid .btn {
+    width: 100%;
   }
 }
